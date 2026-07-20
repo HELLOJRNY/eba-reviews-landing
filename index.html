@@ -5,7 +5,7 @@
   no company replies, nothing invented. Trustpilot 4.8 / 234 is VERIFIED. "10,000+" is the approved house figure.
   App Store rating intentionally not shown. Theme counts are computed live from the real reviews, not fabricated.
   House rules: no em dashes, AU English, no banned hype words, nothing fabricated.
-  Coloured-square logo mark is a stand-in for the real EBA logo asset.
+  Header uses the real EBA colour logo asset (eba-logo-colour.png, from easybusinessapp.com).
 -->
 <html lang="en-AU">
 <head>
@@ -14,21 +14,27 @@
 <title>What businesses say about Easy Business App</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<!-- Headings use EBA's real font, ITC Avant Garde Gothic Pro, via the same Adobe Fonts
+     kit the live site loads (fdo2qia). That kit is domain-licensed, so it renders on
+     easybusinessapp.com but NOT on github.io; there the stack falls back to Jost, the
+     closest free geometric match. Body stays Roboto, matching EBA. -->
+<link rel="stylesheet" href="https://use.typekit.net/fdo2qia.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--ink:#0F1A1F;--text:#202020;--muted:#5B6472;--cream:#F4EFE7;--grey:#EEEEEE;--orange:#EA580C;--orange-dark:#C2410C;--star:#F5A524;--card:#FFF;--line:rgba(15,26,31,.10)}
+  /* Real EBA brand values, read from easybusinessapp.com: primary blue #005CFF,
+     conversion green #2BB673, text #202020, white base + #EEEEEE grey sections.
+     (No cream or orange on the main site - those came from the calculator subdomain.) */
+  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Jost","Century Gothic",system-ui,sans-serif}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--cream);-webkit-font-smoothing:antialiased}
+  body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--font-head)}
   a{color:inherit;text-decoration:none}
-  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:15px 28px;background:rgba(244,239,231,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .logo{display:flex;align-items:center;gap:11px;font-weight:700;font-size:20px;color:var(--ink)}
-  .logo .mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:26px;height:26px}
-  .logo .mark span{border-radius:5px}
-  .logo .mark span:nth-child(1){background:var(--orange)}.logo .mark span:nth-child(2){background:var(--green)}
-  .logo .mark span:nth-child(3){background:var(--blue)}.logo .mark span:nth-child(4){background:#8B3BF0}
-  .logo b{font-weight:900}
+  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:15px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center}
+  .logo img{height:28px;width:auto;display:block}
   .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;border:0;padding:12px 22px;border-radius:999px;transition:background .15s,transform .15s,box-shadow .15s}
-  .btn-primary{background:var(--orange);color:#fff}.btn-primary:hover{background:var(--orange-dark);transform:translateY(-1px)}
+  .btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
   .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
   .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--ink)}
 
@@ -41,7 +47,7 @@
   .mini .s{color:var(--star);font-size:13px;letter-spacing:1px;margin-bottom:7px}
   .mini .t{font-size:13.5px;line-height:1.45;color:var(--ink);margin-bottom:9px}
   .mini .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
-  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(244,239,231,.62),rgba(244,239,231,.78));pointer-events:none}
+  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.78));pointer-events:none}
   .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1200px;margin:0 auto;padding:46px 28px;width:100%}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .hero h1{font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--ink);font-size:clamp(36px,5vw,60px);margin-bottom:14px}
@@ -69,7 +75,7 @@
   .wall-head p{color:var(--muted);font-size:16px}
 
   /* theme chips */
-  .themes{position:sticky;top:66px;z-index:40;background:rgba(244,239,231,.94);backdrop-filter:blur(8px);padding:16px 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .themes{position:sticky;top:66px;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);padding:16px 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
   .chip{display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 15px;border-radius:999px;transition:.15s;white-space:nowrap}
   .chip:hover{border-color:var(--ink)}
   .chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -104,7 +110,7 @@
   .cta-strip h3{font-size:clamp(24px,3.2vw,36px);font-weight:900;margin-bottom:10px}
   .cta-strip p{color:#DCE7FF;font-size:17px;margin-bottom:22px}
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
-  .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--orange),#FF2D8E,var(--blue),#8B3BF0)}
+  .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
   .band p{color:#B9C0CC;font-size:18px;margin:0 auto 28px;max-width:60ch}
   footer{padding:30px 28px;color:var(--muted);font-size:13px;text-align:center}
@@ -138,7 +144,7 @@
 <body>
 
 <header>
-  <a class="logo" href="#"><span class="mark"><span></span><span></span><span></span><span></span></span> Easy <b>Business App</b></a>
+  <a class="logo" href="#" aria-label="Easy Business App"><img src="eba-logo-colour.png" alt="Easy Business App"></a>
   <a class="btn btn-primary" href="#book">Book a demo</a>
 </header>
 
