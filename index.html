@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+  Easy Business App - Reviews landing page (STARTER)
+  Destination for the XU Mag "Read the reviews" CTA.
+
+  BEFORE PUBLISHING - replace placeholder data. Nothing here should be invented.
+    - Trustpilot rating 4.8 is VERIFIED (234 reviews, July 2026).
+    - [APP_STORE_RATING] and [HAPPY_COUNT] are PLACEHOLDERS - get real numbers from Mike (HubSpot / App Store).
+    - The review cards below are REAL public Trustpilot reviews used as samples, masked to first name.
+      Confirm the final set, add industry tags, and check consent for anything sourced from the
+      internal HubSpot survey (none included here - only public Trustpilot reviews).
+    - Industry tags on cards (data-industry) are PLACEHOLDERS so the filter works; set from real data.
+
+  House rules: no em dashes, Australian/British English, no banned hype words
+  (game-changing, seamless, revolutionary, innovative, leverage, amazing, excited),
+  nothing fabricated, do not negate small business owners.
+-->
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What businesses say about Easy Business App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;
+    --paper:#FFFFFF;
+    --mist:#F5F6F8;
+    --line:#E7E9EE;
+    --muted:#5B6472;
+    --blue:#1F5BFF;
+    --blue-ink:#1440C9;
+    /* EBA signature gradient: orange -> pink -> blue -> purple */
+    --grad:linear-gradient(90deg,#FF7A2F 0%,#FF2D8E 34%,#3B6BFF 68%,#8B3BF0 100%);
+    --card-shadow:0 1px 2px rgba(14,17,22,.06),0 8px 24px rgba(14,17,22,.05);
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  a{color:var(--blue-ink)}
+  .display{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1120px;margin:0 auto}
+  .logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque";font-weight:700;font-size:19px}
+  .mark{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:22px;height:22px}
+  .mark span{border-radius:4px}
+  .mark span:nth-child(1){background:#FF2D8E}.mark span:nth-child(2){background:#22C55E}
+  .mark span:nth-child(3){background:#3B6BFF}.mark span:nth-child(4){background:#8B3BF0}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-family:"Inter";
+    padding:11px 18px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-size:15px}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:var(--blue-ink)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn-white{background:#fff;color:var(--ink)}
+
+  /* Hero */
+  .hero{padding:72px 0 40px}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+  .hero h1{font-size:clamp(38px,6vw,68px);margin:0 0 20px;max-width:14ch}
+  .hero .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lede{font-size:clamp(18px,2.2vw,22px);color:var(--muted);max-width:52ch;margin:0 0 28px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* Ratings strip */
+  .ratings{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin:48px 0 8px}
+  .rating{background:#fff;padding:26px 24px;text-align:center}
+  .rating .num{font-family:"Bricolage Grotesque";font-weight:800;font-size:44px;line-height:1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .rating .lbl{font-size:14px;color:var(--muted);margin-top:8px}
+  .ph{background:var(--mist);border-radius:6px;padding:0 8px;color:var(--blue-ink);font-weight:700}
+
+  /* Wall */
+  .wall-section{padding:56px 0 24px}
+  .wall-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:22px}
+  .wall-head h2{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(26px,3.4vw,36px);margin:0}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid var(--line);
+    background:#fff;cursor:pointer;color:var(--ink);transition:.15s}
+  .chip:hover{border-color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .wall{columns:3;column-gap:20px}
+  @media(max-width:900px){.wall{columns:2}}
+  @media(max-width:600px){.wall{columns:1}.ratings{grid-template-columns:1fr}}
+  .card{break-inside:avoid;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;margin:0 0 20px;box-shadow:var(--card-shadow);position:relative}
+  .card::before{content:"";position:absolute;left:0;top:0;height:4px;width:44px;border-radius:0 0 4px 0;background:var(--grad)}
+  .stars{color:#F5A524;letter-spacing:2px;font-size:15px;margin-bottom:10px}
+  .card p{margin:0 0 16px;font-size:16px}
+  .who{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}
+  .who .name{font-weight:600}
+  .who .src{color:var(--muted);font-size:13px}
+
+  /* Switch and move band */
+  .band{background:var(--ink);color:#fff;margin-top:48px;position:relative;overflow:hidden}
+  .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--grad)}
+  .band-inner{padding:72px 24px;max-width:900px;margin:0 auto;text-align:center}
+  .band h2{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(30px,4.5vw,52px);margin:0 0 18px;letter-spacing:-.02em}
+  .band p{color:#B9C0CC;font-size:18px;margin:0 0 30px}
+  .band .btn-primary{font-size:16px;padding:14px 26px}
+
+  footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  .footer-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chip{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="logo"><span class="mark"><span></span><span></span><span></span><span></span></span> Easy Business App</div>
+    <a class="btn btn-primary" href="#book">Book a demo</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow">What businesses say</p>
+    <h1 class="display">Australian small businesses <span class="grad-text">love</span> Easy Business App.</h1>
+    <p class="lede">See why more than <span class="ph">[HAPPY_COUNT]</span> of them, and the advisors who moved them across, rate it so highly.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#book">Book a demo</a>
+      <a class="btn btn-ghost" href="#wall">Read the reviews</a>
+    </div>
+
+    <div class="ratings" aria-label="Ratings">
+      <div class="rating"><div class="num">4.8</div><div class="lbl">Trustpilot, from 234 reviews</div></div>
+      <div class="rating"><div class="num"><span class="ph">[X.X]</span></div><div class="lbl">App Store rating</div></div>
+      <div class="rating"><div class="num"><span class="ph">[HAPPY_COUNT]</span></div><div class="lbl">happy small businesses</div></div>
+    </div>
+  </section>
+
+  <section class="wall-section wrap" id="wall">
+    <div class="wall-head">
+      <h2>In their words</h2>
+      <div class="filters" role="group" aria-label="Filter by industry">
+        <button class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" aria-pressed="false" data-filter="trades">Trades</button>
+        <button class="chip" aria-pressed="false" data-filter="hospitality">Hospitality</button>
+        <button class="chip" aria-pressed="false" data-filter="allied-health">Allied health</button>
+        <button class="chip" aria-pressed="false" data-filter="retail">Retail</button>
+        <button class="chip" aria-pressed="false" data-filter="beauty">Beauty</button>
+      </div>
+    </div>
+
+    <!-- SAMPLE CARDS: real public Trustpilot reviews, masked to first name. data-industry values are PLACEHOLDERS. -->
+    <div class="wall" id="wallGrid">
+      <article class="card" data-industry="trades">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"The best small business payroll and accounting software out there. I've tried Xero and other software, but found them to be overly complex and not user-friendly."</p>
+        <div class="who"><span class="name">DJ, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="retail">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"Incredibly fast customer service. Migrating over from Xero has been an absolute breeze."</p>
+        <div class="who"><span class="name">Diane, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="allied-health">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"Easy Business App is convenient, easy to use and the support provided for any queries is excellent."</p>
+        <div class="who"><span class="name">Leigh, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="trades">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"Intuitive, reliable and compliant. Makes payment very straight forward."</p>
+        <div class="who"><span class="name">Brett, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="hospitality">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"100% value for money, and they make it easy to stay compliant with the ATO. One of the easiest invoicing, payroll and super, bank feed and reporting apps."</p>
+        <div class="who"><span class="name">JT, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="beauty">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"Excellent product and service. Immediate tech support."</p>
+        <div class="who"><span class="name">Paul, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="retail">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"I have used the Easy Business App since STP reporting was required and it is so easy to use. I needed some help and my email was replied to instantly and the issue was solved."</p>
+        <div class="who"><span class="name">BF, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="allied-health">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"They are able to assist quickly and explain any queries. Easy to use."</p>
+        <div class="who"><span class="name">Sally-Anne, [industry]</span><span class="src">Trustpilot</span></div>
+      </article>
+
+      <article class="card" data-industry="hospitality">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <p>"[ Replace with the next approved review. Keep it real, mask to first name, add an industry tag. ]</p>
+        <div class="who"><span class="name">[Name], [industry]</span><span class="src">[Source]</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band" id="book">
+    <div class="band-inner">
+      <h2 class="display">Who will you switch and move to Easy Business App?</h2>
+      <p>Payroll from $14.95 a month for a four-employee business. Every module is free to try for 30 days.</p>
+      <a class="btn btn-primary" href="#">Book a demo</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>Easy Business App</div>
+    <div>Australian accounting software for micro and small businesses.</div>
+  </div>
+</footer>
+
+<script>
+  // Industry filter. data-industry tags are placeholders until real data is set.
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('#wallGrid .card');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.setAttribute('aria-pressed','false'));
+    chip.setAttribute('aria-pressed','true');
+    const f = chip.dataset.filter;
+    cards.forEach(card => {
+      card.style.display = (f === 'all' || card.dataset.industry === f) ? '' : 'none';
+    });
+  }));
+</script>
+</body>
+</html>
