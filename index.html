@@ -30,9 +30,9 @@
   body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
   h1,h2,h3{font-family:var(--font-head)}
   a{color:inherit;text-decoration:none}
-  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:11px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:9px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .logo{display:flex;align-items:center}
-  .logo img{height:48px;width:auto;display:block}
+  .logo img{height:54px;width:auto;display:block}
   @media(max-width:600px){.logo img{height:34px}} /* smaller on phones so the header button keeps its own line */
   .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;border:0;padding:12px 22px;border-radius:999px;transition:background .15s,transform .15s,box-shadow .15s}
   .btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
@@ -49,7 +49,7 @@
   .mini .t{font-size:13.5px;line-height:1.45;color:var(--ink);margin-bottom:9px}
   .mini .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
   .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.52));pointer-events:none}
-  .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;max-width:1200px;margin:0 auto;padding:72px 48px;width:100%}
+  .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;max-width:1200px;margin:0 auto;padding:104px 56px;width:100%}
   /* Soft white backing behind the headline text column only, so the copy stays readable
      while the conveyor reviews still show around and beside it. Radial fade = no hard box;
      confined to this column, so the hero pile in the other column is untouched. */
@@ -63,9 +63,9 @@
   .mentioned{font-size:16px;color:var(--muted);margin-bottom:18px;min-height:24px}
   .mentioned .rot{display:inline-block;font-weight:900;color:var(--blue);transition:opacity .35s ease,transform .35s ease}
   .mentioned .rot.swap{opacity:0;transform:translateY(6px)}
-  .hero p.lede{font-size:clamp(16px,1.8vw,19px);color:var(--muted);max-width:46ch;margin-bottom:22px;line-height:1.5}
+  .hero p.lede{font-size:clamp(16px,1.8vw,19px);color:var(--muted);max-width:46ch;margin-bottom:26px;line-height:1.5}
   .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
   .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 20px;text-align:center;box-shadow:0 1px 2px rgba(15,26,31,.05)}
   .stat .num{font-size:28px;font-weight:900;color:var(--blue);line-height:1}
   .stat .num .star{color:var(--star);font-size:22px}
@@ -114,11 +114,14 @@
   .rev.green .src{color:rgba(255,255,255,.85)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:#FFF0B8}.rev.green .more{color:#E4FFF1}
   .rev.hide{display:none}
 
-  .cta-strip{background:linear-gradient(120deg,var(--blue),#3B6BFF);color:#fff;text-align:center;border-radius:20px;padding:26px 34px;margin:26px auto;max-width:1180px;box-shadow:0 12px 30px rgba(0,92,255,.18)}
-  .cta-strip h3{font-size:clamp(19px,2.2vw,27px);font-weight:800;letter-spacing:-.01em;line-height:1.22;margin:0 auto 16px;max-width:34ch}
-  .cta-strip .btn{animation:softpulse 3s ease-in-out infinite}
+  .cta-strip{background:linear-gradient(120deg,var(--blue),#3B6BFF);color:#fff;border-radius:16px;padding:20px 30px;margin:22px auto;max-width:1180px;box-shadow:0 10px 26px rgba(0,92,255,.18);display:flex;align-items:center;justify-content:space-between;gap:26px}
+  .cta-copy{text-align:left;min-width:0}
+  .cta-strip h3{font-size:clamp(18px,2vw,25px);font-weight:800;letter-spacing:-.01em;line-height:1.2;margin:0}
+  .cta-sub{font-size:14px;color:#DCE7FF;line-height:1.35;margin:5px 0 0}
+  .cta-strip .btn{flex:none;animation:softpulse 3s ease-in-out infinite}
   .cta-strip .btn:hover{animation:none;transform:translateY(-2px) scale(1.02)}
   @keyframes softpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+  @media(max-width:640px){.cta-strip{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 22px}}
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
   .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
@@ -139,7 +142,7 @@
   :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
 
   @media(max-width:860px){
-    .hero-inner{grid-template-columns:1fr;gap:24px;text-align:center;padding:52px 20px}
+    .hero-inner{grid-template-columns:1fr;gap:24px;text-align:center;padding:64px 20px}
     .hero p.lede,.mentioned{margin-left:auto;margin-right:auto}
     .hero-cta,.stats{justify-content:center}
     .pile{height:380px;order:2}
@@ -193,7 +196,10 @@
 </section>
 
 <div class="cta-strip">
-  <h3>Switch and move your clients to software they will love using</h3>
+  <div class="cta-copy">
+    <h3>Switch and move your clients to software they will love using</h3>
+    <p class="cta-sub">More than 10,000 small businesses already run on Easy Business App.</p>
+  </div>
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
 </div>
 
@@ -202,18 +208,16 @@
 </section>
 
 <div class="cta-strip">
-  <h3>Move your clients across to Easy Business App</h3>
+  <div class="cta-copy">
+    <h3>Move your clients across to Easy Business App</h3>
+    <p class="cta-sub">Rated 4.8 on Trustpilot, and built for Australian small businesses.</p>
+  </div>
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall3"></div>
 </section>
-
-<div class="cta-strip">
-  <h3>Give your clients software they love</h3>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
-</div>
 
 <section class="band" id="book">
   <h2>Who will you switch and move to Easy Business App?</h2>
@@ -279,7 +283,7 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k
 
 /* wall */
 function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'">'+(r.stars?'<div class="stars">'+stars(r.stars)+'</div>':'')+'<div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
-const t1=Math.ceil(data.length/3),t2=Math.ceil(data.length*2/3);
+const t1=Math.round(data.length*0.22),t2=Math.round(data.length*0.48);
 document.getElementById('wall1').innerHTML=data.slice(0,t1).map((r,i)=>card(r,i)).join('');
 document.getElementById('wall2').innerHTML=data.slice(t1,t2).map((r,i)=>card(r,i+t1)).join('');
 document.getElementById('wall3').innerHTML=data.slice(t2).map((r,i)=>card(r,i+t2)).join('');
