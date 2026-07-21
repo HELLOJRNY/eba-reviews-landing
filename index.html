@@ -294,7 +294,7 @@ document.getElementById('wall3').innerHTML=data.slice(t2).map((r,i)=>card(r,i+t2
 /* theme chips + filtering */
 const themesBar=document.getElementById('themes');
 themesBar.innerHTML='<button class="chip active" data-t="all">All reviews <span class="c">'+data.length+'</span></button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+' <span class="c">'+counts[t.key]+'</span></button>').join('');
-themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});});
+themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.cta-strip').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
 
 /* flood-in reveal */
 const cards=[...document.querySelectorAll('.rev')];
