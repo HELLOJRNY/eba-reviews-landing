@@ -30,9 +30,10 @@
   body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
   h1,h2,h3{font-family:var(--font-head)}
   a{color:inherit;text-decoration:none}
-  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:15px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:11px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .logo{display:flex;align-items:center}
-  .logo img{height:28px;width:auto;display:block}
+  .logo img{height:48px;width:auto;display:block}
+  @media(max-width:600px){.logo img{height:34px}} /* smaller on phones so the header button keeps its own line */
   .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;border:0;padding:12px 22px;border-radius:999px;transition:background .15s,transform .15s,box-shadow .15s}
   .btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
   .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
@@ -47,7 +48,7 @@
   .mini .s{color:var(--star);font-size:13px;letter-spacing:1px;margin-bottom:7px}
   .mini .t{font-size:13.5px;line-height:1.45;color:var(--ink);margin-bottom:9px}
   .mini .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
-  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.78));pointer-events:none}
+  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.52));pointer-events:none}
   .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1200px;margin:0 auto;padding:46px 28px;width:100%}
   /* Soft white backing behind the headline text column only, so the copy stays readable
      while the conveyor reviews still show around and beside it. Radial fade = no hard box;
@@ -56,8 +57,9 @@
   .hero-copy::before{content:"";position:absolute;z-index:-1;inset:-32px -30px -32px -44px;pointer-events:none;
     background:radial-gradient(130% 120% at 42% 50%, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.45) 80%, rgba(255,255,255,0) 100%)}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-  .hero h1{font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--ink);font-size:clamp(46px,6.5vw,80px);margin-bottom:14px}
+  .hero h1{font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(32px,4.6vw,58px);margin-bottom:14px}
   .hero h1 .lv{color:var(--blue)}
+  .hero h1 .brandline{display:block;white-space:nowrap} /* keep "Easy Business App" together on its own line */
   .mentioned{font-size:16px;color:var(--muted);margin-bottom:18px;min-height:24px}
   .mentioned .rot{display:inline-block;font-weight:900;color:var(--blue);transition:opacity .35s ease,transform .35s ease}
   .mentioned .rot.swap{opacity:0;transform:translateY(6px)}
@@ -160,7 +162,7 @@
   <div class="hero-inner">
     <div class="hero-copy">
       <p class="eyebrow">What businesses say</p>
-      <h1>Australian small businesses <span class="lv">love</span> Easy Business App</h1>
+      <h1>Australian small businesses <span class="lv">love</span> <span class="brandline">Easy Business App</span></h1>
       <p class="mentioned">Most mentioned in their reviews: <span class="rot" id="rot">easy to use</span></p>
       <p class="lede">Thousands of them run their books on Easy Business App. Here is what they say, in their own words.</p>
       <div class="hero-cta">
