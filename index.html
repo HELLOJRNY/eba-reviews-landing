@@ -38,7 +38,7 @@
   .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
   .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--ink)}
 
-  .hero{position:relative;overflow:hidden;min-height:94vh;display:flex;align-items:center;background:#fff}
+  .hero{position:relative;overflow:hidden;min-height:94vh;display:flex;align-items:center}
   .conveyor{position:absolute;inset:0;z-index:0;display:flex;gap:16px;justify-content:center;padding:0 14px;pointer-events:none}
   .cvcol{flex:1 1 0;max-width:320px;overflow:hidden}
   .cvtrack{display:flex;flex-direction:column;gap:16px;animation:flow linear infinite;will-change:transform}
@@ -47,8 +47,14 @@
   .mini .s{color:var(--star);font-size:13px;letter-spacing:1px;margin-bottom:7px}
   .mini .t{font-size:13.5px;line-height:1.45;color:var(--ink);margin-bottom:9px}
   .mini .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
-  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,.91));pointer-events:none}
+  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.78));pointer-events:none}
   .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1200px;margin:0 auto;padding:46px 28px;width:100%}
+  /* Soft white backing behind the headline text column only, so the copy stays readable
+     while the conveyor reviews still show around and beside it. Radial fade = no hard box;
+     confined to this column, so the hero pile in the other column is untouched. */
+  .hero-copy{position:relative}
+  .hero-copy::before{content:"";position:absolute;z-index:-1;inset:-32px -30px -32px -44px;pointer-events:none;
+    background:radial-gradient(130% 120% at 42% 50%, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.45) 80%, rgba(255,255,255,0) 100%)}
   .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
   .hero h1{font-weight:900;line-height:1.02;letter-spacing:-.02em;color:var(--ink);font-size:clamp(46px,6.5vw,80px);margin-bottom:14px}
   .hero h1 .lv{color:var(--blue)}
@@ -83,22 +89,22 @@
   .chip.active .c{opacity:.95}
   @media(max-width:720px){.themes{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}}
 
-  .wall-section{padding:14px 20px 10px;max-width:1500px;margin:0 auto}
-  .wall{columns:5;column-gap:18px}
-  @media(max-width:1400px){.wall{columns:4}}
-  @media(max-width:1050px){.wall{columns:3}}
-  @media(max-width:720px){.wall{columns:2}}
-  @media(max-width:460px){.wall{columns:1}}
-  .rev{break-inside:avoid;margin:0 0 18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(15,26,31,.05);cursor:pointer;position:relative;opacity:0;transform:translateY(26px) scale(.98);transition:opacity .5s ease,transform .5s ease,box-shadow .18s ease}
+  .wall-section{padding:14px 20px 10px;max-width:1180px;margin:0 auto}
+  .wall{columns:3;column-gap:22px}
+  @media(max-width:980px){.wall{columns:2}}
+  @media(max-width:640px){.wall{columns:1}}
+  .rev{break-inside:avoid;margin:0 0 22px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 2px 10px rgba(15,26,31,.05);cursor:pointer;position:relative;opacity:0;transform:translateY(26px) scale(.98);transition:opacity .5s ease,transform .5s ease,box-shadow .18s ease}
   .rev.in{opacity:1;transform:translateY(0) scale(1)}
   .rev:hover{box-shadow:0 12px 30px rgba(15,26,31,.14);transform:translateY(-3px)}
   .rev .stars{color:var(--star);font-size:15px;letter-spacing:1px;margin-bottom:10px}
-  .rev .q{font-size:15px;line-height:1.5;color:var(--ink);margin-bottom:14px}
+  .rev .q{font-size:17px;line-height:1.55;color:var(--ink);margin-bottom:16px}
   .rev .q .hl{background:rgba(0,92,255,.11);color:var(--blue-dark);font-weight:700;border-radius:4px;padding:0 3px}
   .rev .who{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .rev .name{font-weight:700;font-size:14px;color:var(--ink)}
   .rev .src{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
   .rev .src .tp{width:9px;height:9px;border-radius:2px;background:var(--green);display:inline-block}
+  .tp-logo{display:inline-block;width:65px;height:16px;background:url(trustpilot-logo-black.svg) left center/contain no-repeat;flex:none}
+  .rev.blue .src .tp-logo,.rev.green .src .tp-logo{background-image:url(trustpilot-logo-white.svg)}
   .rev .more{font-size:12px;font-weight:600;color:var(--blue);margin-top:10px;display:inline-block}
   .rev.blue{background:var(--blue);border-color:var(--blue)}.rev.blue .q,.rev.blue .name{color:#fff}
   .rev.blue .src{color:rgba(255,255,255,.8)}.rev.blue .src .tp{background:#fff}.rev.blue .stars{color:#FFD75E}.rev.blue .more{color:#CFE0FF}
@@ -152,7 +158,7 @@
   <div class="conveyor" id="conveyor" aria-hidden="true"></div>
   <div class="veil"></div>
   <div class="hero-inner">
-    <div>
+    <div class="hero-copy">
       <p class="eyebrow">What businesses say</p>
       <h1>Australian small businesses <span class="lv">love</span> Easy Business App</h1>
       <p class="mentioned">Most mentioned in their reviews: <span class="rot" id="rot">easy to use</span></p>
@@ -248,13 +254,14 @@ function miniCard(r){return '<div class="mini"><div class="s">'+stars(r.stars)+'
 /* hero pile */
 const featured=data.filter(r=>r.stars===5&&r.quote.length>=90&&r.quote.length<=280);
 const pileEl=document.getElementById('pile');const PILE_MAX=4;let pile=[];let fIdx=0;
-function pcardHTML(r){return '<div class="s">'+stars(r.stars)+'</div><div class="t">\u201C'+highlight(esc(r.quote))+'\u201D</div><div class="nm">'+esc(r.name)+'</div><div class="src">'+esc(r.source)+'</div>';}
+function srcLabel(s){return s==='Trustpilot'?'<span class="tp-logo" role="img" aria-label="Trustpilot"></span>':esc(s);}
+function pcardHTML(r){return '<div class="s">'+stars(r.stars)+'</div><div class="t">\u201C'+highlight(esc(r.quote))+'\u201D</div><div class="nm">'+esc(r.name)+'</div><div class="src">'+srcLabel(r.source)+'</div>';}
 function renderPile(){const n=pile.length;pile.forEach((it,i)=>{const ft=n-1-i;it.el.style.zIndex=i;it.el.style.opacity=ft>=PILE_MAX?0:1;it.el.style.transform='translate(-50%,'+(ft*-18)+'px) rotate('+((i%2?1:-1)*(ft*1.4))+'deg) scale('+(1-ft*0.045)+')';});}
 function addToPile(){if(!featured.length)return;const r=featured[fIdx%featured.length];fIdx++;const el=document.createElement('div');el.className='pcard';el.dataset.i=data.indexOf(r);el.innerHTML=pcardHTML(r);el.style.opacity='0';el.style.transform='translate(-50%,-150px) rotate(7deg) scale(1.02)';pileEl.appendChild(el);pile.push({el});requestAnimationFrame(()=>requestAnimationFrame(renderPile));if(pile.length>PILE_MAX+1){const old=pile.shift();old.el.style.opacity='0';old.el.style.transform='translate(-50%,60px) rotate(-5deg) scale(.88)';setTimeout(()=>old.el.remove(),650);}}
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k<PILE_MAX;k++)setTimeout(addToPile,k*260);setInterval(addToPile,9000);}else{for(let k=0;k<PILE_MAX;k++)addToPile();}
 
 /* wall */
-function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'"><div class="stars">'+stars(r.stars)+'</div><div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src"><span class="tp"></span>'+esc(r.source)+'</span></div></div>';}
+function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'"><div class="stars">'+stars(r.stars)+'</div><div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
 const half=Math.ceil(data.length/2);
 document.getElementById('wall1').innerHTML=data.slice(0,half).map((r,i)=>card(r,i)).join('');
 document.getElementById('wall2').innerHTML=data.slice(half).map((r,i)=>card(r,i+half)).join('');
@@ -271,7 +278,7 @@ if('IntersectionObserver' in window){let n=0;const io=new IntersectionObserver((
 /* modal */
 const overlay=document.getElementById('overlay');
 const mS=document.getElementById('mStars'),mQ=document.getElementById('mQuote'),mN=document.getElementById('mName'),mSr=document.getElementById('mSrc');
-function openModal(i){const r=window.__R[i];if(!r)return;mS.innerHTML=stars(r.stars);mQ.textContent='\u201C'+r.quote+'\u201D';mN.textContent=r.name;mSr.textContent=r.source;overlay.classList.add('open');document.body.style.overflow='hidden';}
+function openModal(i){const r=window.__R[i];if(!r)return;mS.innerHTML=stars(r.stars);mQ.textContent='\u201C'+r.quote+'\u201D';mN.textContent=r.name;mSr.innerHTML=srcLabel(r.source);overlay.classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('click',e=>{const c=e.target.closest('[data-i]');if(c)openModal(+c.dataset.i);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.key==='Enter'||e.key===' ')&&document.activeElement&&document.activeElement.classList.contains('rev')){e.preventDefault();openModal(+document.activeElement.dataset.i);}});
