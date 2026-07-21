@@ -114,9 +114,18 @@
   .rev.green .src{color:rgba(255,255,255,.85)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:#FFF0B8}.rev.green .more{color:#E4FFF1}
   .rev.hide{display:none}
 
-  .cta-strip{background:linear-gradient(120deg,var(--blue),#3B6BFF);color:#fff;text-align:center;border-radius:22px;padding:44px 28px;margin:26px auto;max-width:1460px}
-  .cta-strip h3{font-size:clamp(24px,3.2vw,36px);font-weight:900;margin-bottom:10px}
-  .cta-strip p{color:#DCE7FF;font-size:17px;margin-bottom:22px}
+  .cta-strip{background:linear-gradient(120deg,var(--blue),#3B6BFF);color:#fff;text-align:center;border-radius:24px;padding:56px 44px;margin:34px auto;max-width:1180px;box-shadow:0 22px 55px rgba(0,92,255,.22)}
+  .cta-strip h3{font-size:clamp(26px,3.4vw,40px);font-weight:900;letter-spacing:-.01em;line-height:1.12;margin:0 auto 22px;max-width:24ch}
+  .cta-quote{max-width:60ch;margin:0 auto 24px}
+  .cq-label{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#CFE0FF;margin-bottom:10px}
+  .cq-body{transition:opacity .45s ease}
+  .cq-body.fade{opacity:0}
+  .cq-text{font-size:clamp(17px,2vw,21px);line-height:1.5;font-weight:500}
+  .cq-name{font-size:14px;color:#DCE7FF;margin-top:8px}
+  .cta-fine{font-size:13.5px;color:#DCE7FF;margin-top:14px}
+  .cta-trust{display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;font-size:13.5px;color:#EAF1FF;margin-top:12px}
+  .cta-trust .ct-stars{color:var(--star);letter-spacing:1px}
+  .cta-strip .tp-logo{background-image:url(trustpilot-logo-white.svg)}
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
   .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
@@ -191,14 +200,36 @@
 </section>
 
 <div class="cta-strip">
-  <h3>Join more than 10,000 small businesses</h3>
-  <p>See why they switched and moved to Easy Business App.</p>
+  <h3>Switch and move your clients to software they will actually use</h3>
+  <div class="cta-quote"><div class="cq-label">What their clients say:</div><div class="cq-body"><div class="cq-text"></div><div class="cq-name"></div></div></div>
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+  <div class="cta-fine">Free to try for 30 days. Move clients across with support from our team.</div>
+  <div class="cta-trust"><span class="ct-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8 stars from 234 Trustpilot reviews <span class="tp-logo" role="img" aria-label="Trustpilot"></span></div>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall2"></div>
 </section>
+
+<div class="cta-strip">
+  <h3>Move your clients across, with migration support from our team</h3>
+  <div class="cta-quote"><div class="cq-label">What their clients say:</div><div class="cq-body"><div class="cq-text"></div><div class="cq-name"></div></div></div>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+  <div class="cta-fine">Free to try for 30 days. Move clients across with support from our team.</div>
+  <div class="cta-trust"><span class="ct-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8 stars from 234 Trustpilot reviews <span class="tp-logo" role="img" aria-label="Trustpilot"></span></div>
+</div>
+
+<section class="wall-section">
+  <div class="wall" id="wall3"></div>
+</section>
+
+<div class="cta-strip">
+  <h3>Give your clients software they love, and get your time back at BAS and tax time</h3>
+  <div class="cta-quote"><div class="cq-label">What their clients say:</div><div class="cq-body"><div class="cq-text"></div><div class="cq-name"></div></div></div>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+  <div class="cta-fine">Free to try for 30 days. Move clients across with support from our team.</div>
+  <div class="cta-trust"><span class="ct-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8 stars from 234 Trustpilot reviews <span class="tp-logo" role="img" aria-label="Trustpilot"></span></div>
+</div>
 
 <section class="band" id="book">
   <h2>Who will you switch and move to Easy Business App?</h2>
@@ -264,9 +295,27 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k
 
 /* wall */
 function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'"><div class="stars">'+stars(r.stars)+'</div><div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
-const half=Math.ceil(data.length/2);
-document.getElementById('wall1').innerHTML=data.slice(0,half).map((r,i)=>card(r,i)).join('');
-document.getElementById('wall2').innerHTML=data.slice(half).map((r,i)=>card(r,i+half)).join('');
+const t1=Math.ceil(data.length/3),t2=Math.ceil(data.length*2/3);
+document.getElementById('wall1').innerHTML=data.slice(0,t1).map((r,i)=>card(r,i)).join('');
+document.getElementById('wall2').innerHTML=data.slice(t1,t2).map((r,i)=>card(r,i+t1)).join('');
+document.getElementById('wall3').innerHTML=data.slice(t2).map((r,i)=>card(r,i+t2)).join('');
+
+/* rotating five-star client quote inside each advisor callout (fades every 7s) */
+(function(){
+  const pool=data.filter(r=>r.stars===5&&r.quote.length>=60&&r.quote.length<=230);
+  const nodes=[...document.querySelectorAll('.cta-quote')];
+  if(!pool.length||!nodes.length)return;
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const step=Math.max(1,Math.floor(pool.length/nodes.length));
+  nodes.forEach((node,k)=>{
+    let i=(k*step)%pool.length;
+    const body=node.querySelector('.cq-body'),txt=node.querySelector('.cq-text'),nm=node.querySelector('.cq-name');
+    function show(){const r=pool[i%pool.length];txt.textContent='“'+r.quote+'”';nm.textContent=r.name;}
+    show();
+    if(reduce)return;
+    setInterval(()=>{body.classList.add('fade');setTimeout(()=>{i++;show();body.classList.remove('fade');},450);},7000);
+  });
+})();
 
 /* theme chips + filtering */
 const themesBar=document.getElementById('themes');
