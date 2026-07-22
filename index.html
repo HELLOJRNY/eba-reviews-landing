@@ -260,8 +260,8 @@
   .calc-sub{color:var(--muted);font-size:16px;max-width:62ch;margin:0 auto}
   .calc-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:34px;text-align:left}
   .calc-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 32px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
-  .calc-card label{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:24px}
-  .calc-card label:last-child{margin-bottom:0}
+  .calc-card label,.calc-field{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:24px}
+  .calc-card label:last-child,.calc-field:last-child{margin-bottom:0}
   .calc-out{float:right;font-weight:900;color:var(--blue);font-size:18px}
   .calc-card input[type=range]{width:100%;margin-top:12px;accent-color:var(--blue)}
   .calc-presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -273,8 +273,9 @@
   .cr-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px}
   .cr-brand img{border-radius:7px;flex:none}
   .cr-lbl{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--band-muted);line-height:1.4}
-  .calc-check{display:flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;margin-top:10px;color:var(--ink)}
-  .calc-check input{accent-color:var(--blue);width:17px;height:17px}
+  .calc-check{display:flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;margin-top:10px;margin-bottom:0;color:var(--ink);cursor:pointer;min-height:32px}
+  .calc-check input{accent-color:var(--blue);width:20px;height:20px;flex:none}
+  .calc-money input{font-size:16px} /* 16px+ stops iOS Safari auto-zooming on focus */
   .cr-num{font-family:var(--font-head);font-size:clamp(40px,5vw,58px);font-weight:900;line-height:1.05}
   .cr-sub{color:var(--band-muted);font-size:15px;margin-bottom:18px}
   @media(max-width:860px){.calc-grid{grid-template-columns:1fr}.calc-result{align-items:center;text-align:center}}
@@ -409,9 +410,9 @@
         <label>Clients you would move <span class="calc-out" id="cClientsOut">20</span>
           <input type="range" id="cClients" min="1" max="250" value="20" aria-describedby="cTotal">
         </label>
-        <label>Where are they now?
+        <div class="calc-field">Where are they now?
           <span class="calc-presets" id="cPresets"></span>
-        </label>
+        </div>
         <label for="cNow">What each pays now, a month
           <span class="calc-money">$<input type="number" id="cNow" value="78" min="0" step="1" inputmode="decimal"></span>
           <small id="cNowNote">Xero Grow list price, July 2026. Plans and add-ons vary, so adjust to what your clients actually pay.</small>
@@ -420,11 +421,11 @@
           <input type="range" id="cEmp" min="0" max="10" value="4">
           <small id="cEmpNote">Easy Payslip Starter, $14.95 a month for up to 4 employees.</small>
         </label>
-        <label>Modules your clients need
-          <span class="calc-check"><input type="checkbox" id="cInv"> Easy Invoicing Pro, $10.95 a month</span>
-          <span class="calc-check"><input type="checkbox" id="cCf"> Easy Cashflow Pro, $10.95 a month</span>
+        <div class="calc-field">Modules your clients need
+          <label class="calc-check"><input type="checkbox" id="cInv"> Easy Invoicing Pro, $10.95 a month</label>
+          <label class="calc-check"><input type="checkbox" id="cCf"> Easy Cashflow Pro, $10.95 a month</label>
           <small>Easy Reports is free, and Invoicing and Cashflow both have free tiers. Prices from easybusinessapp.com/pricing, July 2026.</small>
-        </label>
+        </div>
       </div>
       <div class="calc-result">
         <div class="cr-brand"><img src="favicon.png" alt="Easy Business App" width="32" height="32"><span class="cr-lbl">Estimated savings by switching your clients to Easy Business App</span></div>
