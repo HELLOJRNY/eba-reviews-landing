@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!--
   Easy Business App - Reviews landing page (destination for the XU Mag "Read the reviews" CTA)
+  AUDIENCE: accountants and bookkeepers who refer EBA to their small business clients.
+  The review wall is the proof; the framing, CTAs and closing band speak to the advisor.
   DATA: REVIEWS = 230 real Trustpilot reviews (4-5 star only), verbatim, first name as shown,
   no company replies, nothing invented. Trustpilot 4.8 / 234 is VERIFIED. "10,000+" is the approved house figure.
   App Store rating intentionally not shown. Theme counts are computed live from the real reviews, not fabricated.
@@ -11,7 +13,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What businesses say about Easy Business App</title>
+<title>What your clients say about Easy Business App | For accountants and bookkeepers</title>
+<meta name="description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App to their Australian small business clients.">
+<!-- Share previews. og:url / og:image are absolute per the OG spec; update the base URL if the page moves off github.io. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="What your clients say about Easy Business App">
+<meta property="og:description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App to their small business clients.">
+<meta property="og:url" content="https://hellojrny.github.io/eba-reviews-landing/">
+<meta property="og:image" content="https://hellojrny.github.io/eba-reviews-landing/eba-logo-colour.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What your clients say about Easy Business App">
+<meta name="twitter:description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App.">
+<!-- favicon.png is the EBA brand mark cropped from eba-logo-colour.png (128x128, transparent) -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Easy Business App",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "url": "https://easybusinessapp.com",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "234"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
@@ -25,17 +55,23 @@
   /* Real EBA brand values, read from easybusinessapp.com: primary blue #005CFF,
      conversion green #2BB673, text #202020, white base + #EEEEEE grey sections.
      (No cream or orange on the main site - those came from the calculator subdomain.) */
-  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Jost","Century Gothic",system-ui,sans-serif}
+  /* --green-deep is a darkened green for solid fills with white text so they pass WCAG AA;
+     --green stays for accents, gradients and the Trustpilot dot. */
+  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--green-deep:#1E7C4F;--green-deeper:#196843;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--star-soft:#FFD75E;--star-softer:#FFF0B8;--blue-tint:#CFE0FF;--green-tint:#E4FFF1;--band-muted:#B9C0CC;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Jost","Century Gothic",system-ui,sans-serif}
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  @media(max-width:720px){body{padding-bottom:74px}} /* room for the sticky mobile CTA bar */
   h1,h2,h3{font-family:var(--font-head)}
   a{color:inherit;text-decoration:none}
   header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .logo{display:flex;align-items:center}
   .logo img{height:64px;width:auto;display:block}
   @media(max-width:860px){.logo img{height:44px}} /* smaller on phones so the header button keeps its own line */
+  header .btn{white-space:nowrap}
+  @media(max-width:480px){.logo img{height:36px}header .btn{font-size:13px;padding:9px 14px}} /* "Book a partner demo" fits beside the logo on small phones */
   .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;border:0;padding:12px 22px;border-radius:999px;transition:background .15s,transform .15s,box-shadow .15s}
-  .btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px)}
+  .btn-primary{background:var(--green-deep);color:#fff}.btn-primary:hover{background:var(--green-deeper);transform:translateY(-1px)}
   .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
   .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--ink)}
 
@@ -78,6 +114,7 @@
   .pcard .nm{font-weight:900;font-size:14px;color:var(--ink)}
   .pcard .src{font-size:12px;color:var(--muted);margin-top:2px}
   .pcard .hl{background:rgba(0,92,255,.12);color:var(--blue-dark);font-weight:700;border-radius:4px;padding:0 3px}
+  .pile-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;font-size:13px;color:var(--muted);white-space:nowrap;background:rgba(255,255,255,.9);padding:5px 14px;border-radius:999px;border:1px solid var(--line)}
 
   .wall-head{text-align:center;padding:52px 24px 6px}
   .wall-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:8px}
@@ -110,27 +147,32 @@
   .rev.blue .src .tp-logo,.rev.green .src .tp-logo{background-image:url(trustpilot-logo-white.svg)}
   .rev .more{font-size:12px;font-weight:600;color:var(--blue);margin-top:10px;display:inline-block}
   .rev.blue{background:var(--blue);border-color:var(--blue)}.rev.blue .q,.rev.blue .name{color:#fff}
-  .rev.blue .src{color:rgba(255,255,255,.8)}.rev.blue .src .tp{background:#fff}.rev.blue .stars{color:#FFD75E}.rev.blue .more{color:#CFE0FF}
-  .rev.green{background:var(--green);border-color:var(--green)}.rev.green .q,.rev.green .name{color:#fff}
-  .rev.green .src{color:rgba(255,255,255,.85)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:#FFF0B8}.rev.green .more{color:#E4FFF1}
+  .rev.blue .src{color:rgba(255,255,255,.95)}.rev.blue .src .tp{background:#fff}.rev.blue .stars{color:var(--star-soft)}.rev.blue .more{color:var(--blue-tint)}
+  .rev.green{background:var(--green-deep);border-color:var(--green-deep)}.rev.green .q,.rev.green .name{color:#fff}
+  .rev.green .src{color:rgba(255,255,255,.95)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:var(--star-softer)}.rev.green .more{color:var(--green-tint)}
   .rev.hide{display:none}
 
-  /* Advisor testimonial callout cards: native, full wall width, prominent, on brand */
-  .advisor-card{max-width:1180px;margin:44px auto;padding:0 20px}
-  .ac-inner{position:relative;overflow:hidden;display:flex;align-items:center;gap:40px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:40px 52px 40px 56px;box-shadow:0 20px 48px rgba(15,26,31,.13)}
-  .ac-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(180deg,var(--blue),var(--green))}
-  .ac-photo{flex:none;width:180px;height:180px;border-radius:22px;object-fit:cover;box-shadow:0 10px 26px rgba(15,26,31,.16)}
+  /* Advisor testimonial modules: used exactly twice (Amy after the hero, Zak after the wall).
+     Sized as full CTA modules, not skinny inline cards. */
+  .advisor-card{max-width:1180px;margin:56px auto;padding:0 24px}
+  .ac-inner{position:relative;overflow:hidden;display:flex;align-items:center;gap:48px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:52px 60px 52px 68px;box-shadow:0 24px 60px rgba(15,26,31,.14)}
+  .ac-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,var(--blue),var(--green))}
+  .ac-photo{flex:none;width:200px;height:200px;border-radius:24px;object-fit:cover;box-shadow:0 10px 26px rgba(15,26,31,.18)}
   .ac-copy{min-width:0}
-  .ac-line{margin:0 0 12px;font-size:14px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--blue)}
-  .ac-quote{margin:0 0 18px;font-size:clamp(21px,2vw,27px);line-height:1.4;font-weight:600;color:var(--ink)}
-  .ac-name{margin:0 0 22px;font-size:15px;font-weight:600;color:var(--muted)}
-  .ac-btn{transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
+  .ac-line{margin:0 0 14px;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+  .ac-quote{margin:0 0 16px;font-size:clamp(22px,2.6vw,31px);line-height:1.35;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .ac-name{margin:0 0 24px;font-size:15px;font-weight:600;color:var(--muted)}
+  .ac-btn{font-size:17px;padding:16px 34px;transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
   .ac-btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
   @keyframes softpulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+  @media(max-width:860px){
+    .ac-inner{gap:30px;padding:38px 34px 38px 42px}
+    .ac-photo{width:150px;height:150px}
+  }
   @media(max-width:640px){
-    .advisor-card{padding:0 14px;margin:32px auto}
-    .ac-inner{flex-direction:column;text-align:center;gap:22px;padding:32px 24px}
-    .ac-photo{width:140px;height:140px}
+    .advisor-card{padding:0 14px;margin:34px auto}
+    .ac-inner{flex-direction:column;text-align:center;gap:20px;padding:32px 24px}
+    .ac-photo{width:132px;height:132px}
   }
 
   /* What people love key-stats strip */
@@ -145,8 +187,97 @@
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
   .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
-  .band p{color:#B9C0CC;font-size:18px;margin:0 auto 28px;max-width:60ch}
+  .band p{color:var(--band-muted);font-size:18px;margin:0 auto 28px;max-width:60ch}
   footer{padding:30px 28px;color:var(--muted);font-size:13px;text-align:center}
+
+  /* stars draw in left-to-right as each card reveals */
+  .rev .stars{clip-path:inset(-2px 100% -2px 0)}
+  .rev.in .stars{clip-path:inset(-2px 0 -2px 0);transition:clip-path .55s ease .12s}
+
+  /* filter bar flashes once when "Read the reviews" lands, to teach the filtering */
+  .themes.flash{animation:barpulse 1.3s ease}
+  @keyframes barpulse{0%,100%{background:rgba(255,255,255,.94)}45%{background:rgba(0,92,255,.10)}}
+
+  /* contextual CTA strip shown while a filter is active */
+  .filtercta{display:none;justify-content:center;max-width:1180px;margin:18px auto 0;padding:0 24px}
+  .filtercta.show{display:flex}
+  .fc-inner{display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:14px;padding:14px 24px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .fc-inner p{margin:0;font-size:15px;color:var(--ink)}
+  .fc-inner strong{color:var(--blue);font-weight:900}
+
+  /* slim CTA bars between review sections */
+  .ctabar{max-width:1180px;margin:6px auto 30px;padding:0 24px}
+  .ctabar-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 26px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .ctabar-inner p{margin:0;font-size:15.5px;color:var(--ink);font-weight:500}
+  @media(max-width:640px){.ctabar-inner{justify-content:center;text-align:center}}
+
+  .showmore{text-align:center;padding:4px 24px 10px}
+
+  /* bottom-right savings popup (desktop/tablet; phones have the sticky CTA bar instead) */
+  .savepop{position:fixed;right:22px;bottom:22px;z-index:65;max-width:330px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(15,26,31,.22);padding:22px 24px 20px;opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;overflow:hidden}
+  .savepop::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
+  .savepop.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .savepop h3{font-size:18px;font-weight:900;color:var(--ink);margin:2px 0 8px;letter-spacing:-.01em}
+  .savepop p{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
+  .savepop .close{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink);line-height:1}
+  @media(max-width:720px){.savepop{display:none}}
+
+  /* sticky mobile CTA */
+  .mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s ease}
+  .mobile-cta .btn{width:100%;font-size:16px;padding:14px}
+  .mobile-cta.show{transform:translateY(0)}
+  @media(min-width:721px){.mobile-cta{display:none}}
+
+  /* modal prev/next */
+  .mnav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--ink);box-shadow:0 4px 14px rgba(15,26,31,.18)}
+  .mnav:hover{border-color:var(--ink)}
+  .mnav.prev{left:-56px}.mnav.next{right:-56px}
+  @media(max-width:760px){.mnav.prev{left:8px}.mnav.next{right:8px}}
+
+  /* four-module story: sits directly above the calculator */
+  .modules{max-width:1180px;margin:64px auto 0;padding:0 24px}
+  .mod-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+  .mod-copy h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:12px}
+  .mod-lede{color:var(--muted);font-size:17px;line-height:1.55;margin-bottom:14px}
+  .mod-save{color:var(--ink);font-size:17px;line-height:1.5;margin-bottom:22px}
+  .mod-save strong{color:var(--blue)}
+  .mod-logos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mod-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(15,26,31,.05)}
+  .mod-item img{height:30px;width:auto;display:block;margin-bottom:8px}
+  .mod-item span{font-size:13.5px;color:var(--muted);line-height:1.4;display:block}
+  .mod-img{width:100%;height:auto;border-radius:16px}
+  @media(max-width:860px){
+    .mod-grid{grid-template-columns:1fr;gap:26px}
+    .mod-img{max-width:480px;margin:0 auto}
+    .modules{margin-top:44px}
+  }
+  @media(max-width:480px){.mod-logos{grid-template-columns:1fr}}
+
+  /* savings calculator */
+  .calc{background:var(--grey);padding:60px 24px;margin-top:44px}
+  .calc-inner{max-width:1080px;margin:0 auto;text-align:center}
+  .calc h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:10px}
+  .calc-sub{color:var(--muted);font-size:16px;max-width:62ch;margin:0 auto}
+  .calc-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:34px;text-align:left}
+  .calc-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 32px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .calc-card label{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:24px}
+  .calc-card label:last-child{margin-bottom:0}
+  .calc-out{float:right;font-weight:900;color:var(--blue);font-size:18px}
+  .calc-card input[type=range]{width:100%;margin-top:12px;accent-color:var(--blue)}
+  .calc-presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .calc-money{display:flex;align-items:center;gap:6px;margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700;color:var(--ink)}
+  .calc-money input{border:0;outline:none;font:inherit;font-weight:700;width:100%;color:var(--ink);background:transparent}
+  .calc-card small{display:block;margin-top:8px;color:var(--muted);font-weight:400;font-size:13px;line-height:1.4}
+  .calc-result{background:var(--ink);color:#fff;border-radius:20px;padding:36px 34px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;position:relative;overflow:hidden}
+  .calc-result::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
+  .cr-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .cr-brand img{border-radius:7px;flex:none}
+  .cr-lbl{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--band-muted);line-height:1.4}
+  .calc-check{display:flex;align-items:center;gap:9px;font-weight:500;font-size:14.5px;margin-top:10px;color:var(--ink)}
+  .calc-check input{accent-color:var(--blue);width:17px;height:17px}
+  .cr-num{font-family:var(--font-head);font-size:clamp(40px,5vw,58px);font-weight:900;line-height:1.05}
+  .cr-sub{color:var(--band-muted);font-size:15px;margin-bottom:18px}
+  @media(max-width:860px){.calc-grid{grid-template-columns:1fr}.calc-result{align-items:center;text-align:center}}
 
   .overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,26,31,.55);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
   .overlay.open{display:flex;animation:fadein .2s ease}
@@ -171,16 +302,18 @@
     .themes{top:64px}
   }
   @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
     .cvtrack{animation:none}.pcard{transition:none}.mentioned .rot{transition:none}.ac-btn{animation:none}
     .rev{opacity:1;transform:none;transition:box-shadow .18s ease}.overlay.open,.modal{animation:none}
+    .rev .stars{clip-path:none;transition:none}.themes.flash{animation:none}.mobile-cta{transition:none}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <a class="logo" href="#" aria-label="Easy Business App"><img src="eba-logo-colour.png" alt="Easy Business App"></a>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a demo</a>
+  <a class="logo" href="https://easybusinessapp.com" target="_blank" rel="noopener" aria-label="Easy Business App"><img src="eba-logo-colour.png" alt="Easy Business App"></a>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
 </header>
 
 <section class="hero">
@@ -188,52 +321,161 @@
   <div class="veil"></div>
   <div class="hero-inner">
     <div class="hero-copy">
-      <p class="eyebrow">What businesses say</p>
-      <h1>Australian small businesses <span class="lv">love</span> <span class="brandline">Easy Business App</span></h1>
+      <p class="eyebrow">For accountants and bookkeepers</p>
+      <h1>Software your clients will actually <span class="lv">love</span></h1>
       <p class="mentioned">Most mentioned in their reviews: <span class="rot" id="rot">easy to use</span></p>
-      <p class="lede">Thousands of them run their books on Easy Business App. Here is what they say, in their own words.</p>
+      <p class="lede">Accounting software built for micro and small businesses. Thousands of them run their books on Easy Business App. Before you recommend it to your clients, read what they say, in their own words.</p>
       <div class="hero-cta">
-        <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a demo</a>
-        <a class="btn btn-ghost" href="#wall">Read all the reviews</a>
+        <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+        <a class="btn btn-ghost" href="#wall" id="readReviews">Read the reviews</a>
       </div>
       <div class="stats">
-        <div class="stat"><div class="num">4.8<span class="star">&#9733;</span></div><div class="lbl">Trustpilot, 234 reviews</div></div>
-        <div class="stat"><div class="num">10,000+</div><div class="lbl">small businesses</div></div>
-        <div class="stat"><div class="num">90%</div><div class="lbl">of reviews are five stars</div></div>
+        <div class="stat"><div class="num"><span class="cu" data-target="4.8" data-dec="1">4.8</span><span class="star">&#9733;</span></div><div class="lbl">Trustpilot, 234 reviews</div></div>
+        <div class="stat"><div class="num"><span class="cu" data-target="10000" data-comma="1" data-suffix="+">10,000+</span></div><div class="lbl">small businesses</div></div>
+        <div class="stat"><div class="num"><span class="cu" data-target="90" data-suffix="%">90%</span></div><div class="lbl">of reviews are five stars</div></div>
       </div>
     </div>
-    <div class="pile" id="pile" aria-hidden="true"></div>
+    <div class="pile" id="pile" aria-hidden="true"><span class="pile-hint">Tap the card for another review</span></div>
   </div>
 </section>
 
+<!-- Featured advisor proof, lifted above the wall so the advisor story leads -->
+<div class="advisor-card">
+  <div class="ac-inner">
+    <img class="ac-photo" src="amy-headshot.png" width="280" height="280" alt="Amy L. FCPA, Practice Owner, NSW">
+    <div class="ac-copy">
+      <p class="ac-line">Advisors are already moving their clients across</p>
+      <blockquote class="ac-quote">&ldquo;I&rsquo;ve already moved 250 clients onto Easy Business App and with the money I&rsquo;m saving I&rsquo;ve hired more staff to grow my practice.&rdquo;</blockquote>
+      <div class="ac-name">Amy L. FCPA, Practice Owner, NSW</div>
+      <a class="btn btn-primary ac-btn" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+    </div>
+  </div>
+</div>
+
 <div class="wall-head" id="wall">
   <h2>Read them for yourself</h2>
-  <p>Every review is real. Filter by what people talk about, or tap any review to read it in full.</p>
+  <p>Every review is real and shown word for word. This is what your clients can expect. Filter by what people talk about, or tap any review to read it in full.</p>
 </div>
 
 <div class="lovestrip" id="lovestrip"></div>
 
 <div class="themes" id="themes"></div>
 
+<!-- contextual CTA shown while a filter is active: highest-intent moment on the page -->
+<div class="filtercta" id="filtercta" aria-live="polite">
+  <div class="fc-inner">
+    <p id="fcText"></p>
+    <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+  </div>
+</div>
+
 <div id="wallzone"></div>
 
+<!-- Four-module story. Copy and the "up to $1,000 a year per client compared to Xero" claim
+     mirror easybusinessapp.com/accountants (July 2026); module logos and the confused-user
+     image are EBA's own assets from that page. -->
+<section class="modules" id="modules">
+  <div class="mod-grid">
+    <div class="mod-copy">
+      <h2>Only pay for the modules they need</h2>
+      <p class="mod-lede">Easy Business App is designed specifically for micro and small businesses and their accountants. It comes as four simple modules. If a client only needs payslips, that is fine. Invoicing too? Covered. Just a bank feed? That is Easy Cashflow. And Easy Reports is free for everyone.</p>
+      <p class="mod-save">Save up to <strong>$1,000 a year per client</strong> compared to Xero. Check it against your own numbers below.</p>
+      <div class="mod-logos">
+        <div class="mod-item"><img src="module-payslip.png" alt="Easy Payslip"><span>Payroll, STP and super, from $14.95 a month</span></div>
+        <div class="mod-item"><img src="module-invoicing.png" alt="Easy Invoicing"><span>Quotes and invoices, free tier or $10.95 a month</span></div>
+        <div class="mod-item"><img src="module-cashflow.png" alt="Easy Cashflow"><span>Bank feeds and expenses, free tier or $10.95 a month</span></div>
+        <div class="mod-item"><img src="module-reports.png" alt="Easy Reports"><span>P&amp;L, BAS and balance sheet, completely free</span></div>
+      </div>
+    </div>
+    <img class="mod-img" src="confused-user.png" width="1000" height="707" loading="lazy" alt="A confused software user surrounded by speech bubbles: How do I do that in Xero, again? More than $1,000 a year for accounting software!? I sent you 87 emails and a spreadsheet.">
+  </div>
+</section>
+
+<!-- Savings calculator. Preset prices are vendor list prices (AUD, inc GST) checked July 2026:
+     Xero AU: Ignite $37, Grow $78 (xero.com/au/pricing-plans, via stackpick.com.au + pp.tax July 2026 update)
+     MYOB AU: Business Pro $70 full price, payroll +$3/employee/month (myob.com/au/pricing)
+     QuickBooks AU: Simple Start $33, Essentials $55 (quickbooks.intuit.com/au/pricing)
+     Presets only pre-fill the editable field and are labelled as list prices to re-check.
+     EBA side mirrors easybusinessapp.com/pricing (checked July 2026):
+       Easy Payslip: Starter $14.95 (up to 4 employees), Standard $19.95 (up to 6), Unlimited $29.95
+       Easy Invoicing Pro $10.95, Easy Cashflow Pro $10.95, Easy Reports free
+     Re-check all prices whenever vendors change them. -->
+<section class="calc" id="calculator">
+  <div class="calc-inner">
+    <h2>What could switching save?</h2>
+    <p class="calc-sub">How are you managing all this today? Pick where your clients are now, or enter your own numbers, and compare it with Easy Business App. Estimates only.</p>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <label>Clients you would move <span class="calc-out" id="cClientsOut">20</span>
+          <input type="range" id="cClients" min="1" max="250" value="20" aria-describedby="cTotal">
+        </label>
+        <label>Where are they now?
+          <span class="calc-presets" id="cPresets"></span>
+        </label>
+        <label for="cNow">What each pays now, a month
+          <span class="calc-money">$<input type="number" id="cNow" value="78" min="0" step="1" inputmode="decimal"></span>
+          <small id="cNowNote">Xero Grow list price, July 2026. Plans and add-ons vary, so adjust to what your clients actually pay.</small>
+        </label>
+        <label>Employees per client, typically <span class="calc-out" id="cEmpOut">4</span>
+          <input type="range" id="cEmp" min="0" max="10" value="4">
+          <small id="cEmpNote">Easy Payslip Starter, $14.95 a month for up to 4 employees.</small>
+        </label>
+        <label>Modules your clients need
+          <span class="calc-check"><input type="checkbox" id="cInv"> Easy Invoicing Pro, $10.95 a month</span>
+          <span class="calc-check"><input type="checkbox" id="cCf"> Easy Cashflow Pro, $10.95 a month</span>
+          <small>Easy Reports is free, and Invoicing and Cashflow both have free tiers. Prices from easybusinessapp.com/pricing, July 2026.</small>
+        </label>
+      </div>
+      <div class="calc-result">
+        <div class="cr-brand"><img src="favicon.png" alt="Easy Business App" width="32" height="32"><span class="cr-lbl">Estimated savings by switching your clients to Easy Business App</span></div>
+        <div class="cr-num" id="cTotal">$0</div>
+        <div class="cr-sub" id="cPer"></div>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- remaining review sections continue below the calculator -->
+<div id="wallzone2"></div>
+
+<div id="zakslot"></div>
+
 <section class="band" id="book">
-  <h2>Who will you switch and move to Easy Business App?</h2>
-  <p>Payroll from $14.95 a month for a four-employee business.</p>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+  <h2>Which clients will you move first?</h2>
+  <!-- TODO for Trent: confirm what a partner demo actually covers (migration help, partner
+       pricing, onboarding support) and add one sentence about it here. Nothing invented. -->
+  <p>Payroll from $14.95 a month for a four-employee business. Book a partner demo and see it end to end before you put your name to it.</p>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a partner demo</a>
 </section>
 
 <footer>Easy Business App. Australian accounting software for micro and small businesses.</footer>
 
-<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+<!-- bottom-right savings popup: appears after the reader is into the reviews,
+     hides while the calculator is on screen, stays dismissed for the session -->
+<div class="savepop" id="savepop" role="complementary" aria-label="Savings calculator shortcut">
+  <button class="close" id="spClose" aria-label="Dismiss">&times;</button>
+  <h3>How much could you save?</h3>
+  <p>Find out what switching clients off Xero to Easy Business App could save, with your own numbers.</p>
+  <a class="btn btn-blue" href="#calculator" id="spCta" style="font-size:15px;padding:12px 22px">Calculate my savings</a>
+</div>
+
+<!-- sticky CTA on phones, shown once the hero scrolls out of view -->
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="mQuote">
   <div class="modal" id="modal">
     <button class="close" id="closeBtn" aria-label="Close">&times;</button>
+    <button class="mnav prev" id="mPrev" aria-label="Previous review">&#8249;</button>
+    <button class="mnav next" id="mNext" aria-label="Next review">&#8250;</button>
     <div class="stars" id="mStars"></div>
     <div class="q" id="mQuote"></div>
     <div class="name" id="mName"></div>
     <div class="src" id="mSrc"></div>
     <div class="m-cta">
-      <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" id="mCta">Book a demo</a>
+      <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" id="mCta">Book a partner demo</a>
       <button class="btn btn-ghost" id="mClose2">Close</button>
     </div>
   </div>
@@ -276,52 +518,92 @@ const pileEl=document.getElementById('pile');const PILE_MAX=4;let pile=[];let fI
 function srcLabel(s){return s==='Trustpilot'?'<span class="tp-logo" role="img" aria-label="Trustpilot"></span>':esc(s);}
 function pcardHTML(r){return '<div class="s">'+stars(r.stars)+'</div><div class="t">\u201C'+highlight(esc(r.quote))+'\u201D</div><div class="nm">'+esc(r.name)+'</div><div class="src">'+srcLabel(r.source)+'</div>';}
 function renderPile(){const n=pile.length;pile.forEach((it,i)=>{const ft=n-1-i;it.el.style.zIndex=i;it.el.style.opacity=ft>=PILE_MAX?0:1;it.el.style.transform='translate(-50%,'+(ft*-18)+'px) rotate('+((i%2?1:-1)*(ft*1.4))+'deg) scale('+(1-ft*0.045)+')';});}
-function addToPile(){if(!featured.length)return;const r=featured[fIdx%featured.length];fIdx++;const el=document.createElement('div');el.className='pcard';el.dataset.i=data.indexOf(r);el.innerHTML=pcardHTML(r);el.style.opacity='0';el.style.transform='translate(-50%,-150px) rotate(7deg) scale(1.02)';pileEl.appendChild(el);pile.push({el});requestAnimationFrame(()=>requestAnimationFrame(renderPile));if(pile.length>PILE_MAX+1){const old=pile.shift();old.el.style.opacity='0';old.el.style.transform='translate(-50%,60px) rotate(-5deg) scale(.88)';setTimeout(()=>old.el.remove(),650);}}
-if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k<PILE_MAX;k++)setTimeout(addToPile,k*260);setInterval(addToPile,9000);}else{for(let k=0;k<PILE_MAX;k++)addToPile();}
+function addToPile(){if(!featured.length)return;const r=featured[fIdx%featured.length];fIdx++;const el=document.createElement('div');el.className='pcard';el.innerHTML=pcardHTML(r);el.style.opacity='0';el.style.transform='translate(-50%,-150px) rotate(7deg) scale(1.02)';pileEl.appendChild(el);pile.push({el});requestAnimationFrame(()=>requestAnimationFrame(renderPile));if(pile.length>PILE_MAX+1){const old=pile.shift();old.el.style.opacity='0';old.el.style.transform='translate(-50%,60px) rotate(-5deg) scale(.88)';setTimeout(()=>old.el.remove(),650);}}
+/* Tap the stack to deal the next card yourself; otherwise it deals on a timer.
+   Every tap resets the timer so the auto-deal never fights the user. */
+const pileMotionOK=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pileTimer=null;
+function startPileTimer(){if(!pileMotionOK)return;if(pileTimer)clearInterval(pileTimer);pileTimer=setInterval(addToPile,9000);}
+function dealNext(){const top=pile[pile.length-1];if(top){pile.pop();top.el.style.transform='translate(calc(-50% + 260px),-60px) rotate(12deg) scale(.96)';top.el.style.opacity='0';setTimeout(()=>top.el.remove(),600);}addToPile();startPileTimer();}
+pileEl.addEventListener('click',e=>{if(e.target.closest('.pcard'))dealNext();});
+if(pileMotionOK){for(let k=0;k<PILE_MAX;k++)setTimeout(addToPile,k*260);startPileTimer();}else{for(let k=0;k<PILE_MAX;k++)addToPile();}
 
 /* wall */
 function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'">'+(r.stars?'<div class="stars">'+stars(r.stars)+'</div>':'')+'<div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
-/* Advisor callout cards: exactly four distinct, native, one per quarter of the wall */
-var ADVISORS=[
-  {photo:'amy-headshot.png',line:'Advisors are switching and moving their clients across',quote:'I’ve already moved 250 clients onto Easy Business App and with the money I’m saving I’ve hired more staff to grow my practice.',name:'Amy L. FCPA, Practice Owner, NSW'},
-  {photo:'zak-headshot.png',line:'See why advisors recommend it to their clients',quote:'My clients don’t want bells and whistles. They want fast, easy, and affordable. That’s what Easy Business App gives them.',name:'Zak M., BAS Agent, WA'},
-  {photo:'amy-headshot.png',line:'Built for a growing practice',quote:'It’s faster for my team, cleaner for compliance, and far more scalable than what we used before.',name:'Amy L. FCPA, Practice Owner, NSW'},
-  {photo:'zak-headshot.png',line:'The right fit for small business clients',quote:'My clients don’t want complex software they’ll never fully use. They want something fast, simple and affordable.',name:'Zak M., BAS Agent, WA'}
-];
-function advisorCard(c){
+/* Advisor callout cards: native, alternating Amy/Zak, inserted through the wall */
+function advisorCard(which){
+  var A={photo:'amy-headshot.png',line:'Advisors are switching and moving their clients across',quote:'I’ve already moved 250 clients onto Easy Business App and with the money I’m saving I’ve hired more staff to grow my practice.',name:'Amy L. FCPA, Practice Owner, NSW'};
+  var Z={photo:'zak-headshot.png',line:'See why advisors recommend it to their clients',quote:'My clients don’t want bells and whistles. They want fast, easy, and affordable. That’s what Easy Business App gives them.',name:'Zak M., BAS Agent, WA'};
+  var c=which==='amy'?A:Z;
   return '<div class="advisor-card"><div class="ac-inner">'
-    +'<img class="ac-photo" src="'+c.photo+'" width="670" height="670" loading="lazy" alt="'+c.name+'">'
+    +'<img class="ac-photo" src="'+c.photo+'" width="280" height="280" loading="lazy" alt="'+c.name+'">'
     +'<div class="ac-copy">'
     +'<p class="ac-line">'+c.line+'</p>'
     +'<blockquote class="ac-quote">“'+c.quote+'”</blockquote>'
     +'<div class="ac-name">'+c.name+'</div>'
-    +'<a class="btn btn-primary ac-btn" href="#book-a-demo">Book a demo</a>'
+    +'<a class="btn btn-primary ac-btn" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>'
     +'</div></div></div>';
 }
+/* Wall: paginated in sections of 30 so the page is not one long unbroken scroll.
+   A slim CTA bar sits before each later section. Advisor modules appear exactly twice:
+   Amy above the wall (static HTML), Zak in #zakslot after the calculator. */
+var SECTION_SIZE=30, wallSections=[], ctaBars=[], shownSections=1, activeTheme='all';
+var DEMO_URL='https://meetings.hubspot.com/grajah/demo';
+function updatePagination(){
+  wallSections.forEach(function(el,i){el.style.display=(activeTheme!=='all'||i<shownSections)?'':'none';});
+  ctaBars.forEach(function(el){el.style.display=(activeTheme==='all'&&(+el.dataset.sec)<shownSections)?'':'none';});
+  var wrap=document.querySelector('.showmore'); if(!wrap) return;
+  var remaining=data.length-Math.min(shownSections*SECTION_SIZE,data.length);
+  wrap.style.display=(activeTheme==='all'&&remaining>0)?'':'none';
+  if(remaining>0)document.getElementById('showMore').textContent='Show more reviews ('+remaining+' more)';
+}
 (function(){
-  var zone=document.getElementById('wallzone'); if(!zone) return;
-  var N=data.length, html='';
-  function block(a,b){ return (b>a) ? '<section class="wall-section"><div class="wall">'+data.slice(a,b).map(function(r,i){return card(r,a+i);}).join('')+'</div></section>' : ''; }
-  /* four roughly equal quarters, one full-width callout in the middle of each; none at the very bottom */
-  for(var q=0;q<4;q++){
-    var qs=Math.round(q*N/4), qe=Math.round((q+1)*N/4), mid=Math.round((qs+qe)/2);
-    html+=block(qs,mid)+advisorCard(ADVISORS[q])+block(mid,qe);
+  var zone=document.getElementById('wallzone'),zone2=document.getElementById('wallzone2'); if(!zone||!zone2) return;
+  var nsec=Math.ceil(data.length/SECTION_SIZE);
+  /* first section sits above the calculator; the rest continue below it */
+  zone.innerHTML='<section class="wall-section" data-sec="0"><div class="wall">'+data.slice(0,SECTION_SIZE).map(function(r,i){return card(r,i);}).join('')+'</div></section>';
+  var html='';
+  for(var s=1;s<nsec;s++){
+    /* no CTA bar before the first section here: it would sit right under the calculator's own CTA */
+    if(s>1){html+='<div class="ctabar" data-sec="'+s+'"><div class="ctabar-inner"><p>See Easy Business App live before you recommend it.</p><a class="btn btn-blue" href="'+DEMO_URL+'" target="_blank" rel="noopener">Book a partner demo</a></div></div>';}
+    html+='<section class="wall-section" data-sec="'+s+'"><div class="wall">'+data.slice(s*SECTION_SIZE,(s+1)*SECTION_SIZE).map(function(r,i){return card(r,s*SECTION_SIZE+i);}).join('')+'</div></section>';
   }
-  zone.innerHTML=html;
+  html+='<div class="showmore"><button class="btn btn-ghost" id="showMore">Show more reviews</button></div>';
+  zone2.innerHTML=html;
+  wallSections=[].slice.call(document.querySelectorAll('#wallzone .wall-section, #wallzone2 .wall-section'));
+  ctaBars=[].slice.call(zone2.querySelectorAll('.ctabar'));
+  document.getElementById('showMore').addEventListener('click',function(){shownSections++;updatePagination();});
+  document.getElementById('zakslot').innerHTML=advisorCard('zak');
+  updatePagination();
 })();
 
 /* "What people love": top themes by live count from the real reviews, plus a sell line */
 (function(){
   var el=document.getElementById('lovestrip'); if(!el) return;
   var top=THEMES.slice().sort(function(a,b){return counts[b.key]-counts[a.key];}).slice(0,4);
-  el.innerHTML='<div class="love-head">What people love</div><div class="love-stats">'+top.map(function(t){return '<div class="love-stat"><span class="ls-num">'+counts[t.key]+'</span><span class="ls-lbl">'+t.label+'</span></div>';}).join('')+'</div><p class="love-sell">If you want easy-to-use software with great support that is quick to respond, so do the thousands of businesses below.</p>';
+  el.innerHTML='<div class="love-head">What people love</div><div class="love-stats">'+top.map(function(t){return '<div class="love-stat"><span class="ls-num cu" data-target="'+counts[t.key]+'">'+counts[t.key]+'</span><span class="ls-lbl">'+t.label+'</span></div>';}).join('')+'</div><p class="love-sell">Your clients want software that is easy to use, with support that is quick to respond. So do the thousands of businesses below.</p>';
 })();
 
 
 /* theme chips + filtering */
 const themesBar=document.getElementById('themes');
-themesBar.innerHTML='<button class="chip active" data-t="all">All reviews</button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+'</button>').join('');
-themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.advisor-card').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
+themesBar.innerHTML='<button class="chip active" data-t="all">All reviews <span class="c">'+data.length+'</span></button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+' <span class="c">'+counts[t.key]+'</span></button>').join('');
+const filterCta=document.getElementById('filtercta');
+themesBar.addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  [...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');
+  activeTheme=b.dataset.t;
+  const all=activeTheme==='all';
+  document.querySelectorAll('.rev').forEach(el=>{const show=all||el.dataset.themes.split(' ').indexOf(activeTheme)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});
+  document.querySelectorAll('.advisor-card').forEach(cs=>{cs.style.display=all?'':'none';});
+  if(all){filterCta.classList.remove('show');}
+  else{
+    const t=THEMES.find(t=>t.key===activeTheme);
+    document.getElementById('fcText').innerHTML='<strong>'+counts[t.key]+'</strong> reviews mention &ldquo;'+t.label+'&rdquo;. See it for yourself, live.';
+    filterCta.classList.add('show');
+  }
+  updatePagination();
+});
 
 /* flood-in reveal */
 const cards=[...document.querySelectorAll('.rev')];
@@ -330,14 +612,132 @@ if('IntersectionObserver' in window){let n=0;const io=new IntersectionObserver((
 /* modal */
 const overlay=document.getElementById('overlay');
 const mS=document.getElementById('mStars'),mQ=document.getElementById('mQuote'),mN=document.getElementById('mName'),mSr=document.getElementById('mSrc');
-function openModal(i){const r=window.__R[i];if(!r)return;mS.innerHTML=stars(r.stars);mQ.textContent='\u201C'+r.quote+'\u201D';mN.textContent=r.name;mSr.innerHTML=srcLabel(r.source);overlay.classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
+let lastFocus=null,mList=[],mPos=0;
+function fillModal(r){mS.innerHTML=stars(r.stars);mQ.textContent='\u201C'+r.quote+'\u201D';mN.textContent=r.name;mSr.innerHTML=srcLabel(r.source);}
+/* prev/next steps through the reviews currently visible under the active filter */
+function modalStep(d){if(!mList.length)return;mPos=(mPos+d+mList.length)%mList.length;fillModal(window.__R[mList[mPos]]);}
+function openModal(i){const r=window.__R[i];if(!r)return;
+  mList=[...document.querySelectorAll('.rev:not(.hide)')].map(el=>+el.dataset.i);
+  mPos=mList.indexOf(i);if(mPos<0){mList=[i];mPos=0;}
+  fillModal(r);overlay.classList.add('open');document.body.style.overflow='hidden';lastFocus=document.activeElement;document.getElementById('closeBtn').focus();}
+function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';if(lastFocus&&lastFocus.focus){lastFocus.focus();lastFocus=null;}}
+/* keep Tab inside the modal while it is open */
+document.addEventListener('keydown',e=>{if(e.key!=='Tab'||!overlay.classList.contains('open'))return;const f=overlay.querySelectorAll('button, a[href]');if(!f.length)return;const first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});
 document.addEventListener('click',e=>{const c=e.target.closest('[data-i]');if(c)openModal(+c.dataset.i);});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.key==='Enter'||e.key===' ')&&document.activeElement&&document.activeElement.classList.contains('rev')){e.preventDefault();openModal(+document.activeElement.dataset.i);}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();
+  if(overlay.classList.contains('open')){if(e.key==='ArrowLeft')modalStep(-1);if(e.key==='ArrowRight')modalStep(1);}
+  if((e.key==='Enter'||e.key===' ')&&document.activeElement&&document.activeElement.classList.contains('rev')){e.preventDefault();openModal(+document.activeElement.dataset.i);}});
+document.getElementById('mPrev').addEventListener('click',()=>modalStep(-1));
+document.getElementById('mNext').addEventListener('click',()=>modalStep(1));
 overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
 document.getElementById('closeBtn').addEventListener('click',closeModal);
 document.getElementById('mClose2').addEventListener('click',closeModal);
 document.getElementById('mCta').addEventListener('click',closeModal);
+
+/* count-up stats when they scroll into view */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmtVal(el,v){
+    const dec=+(el.dataset.dec||0);let s=v.toFixed(dec);
+    if(el.dataset.comma)s=Number(s).toLocaleString('en-AU',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+    return s+(el.dataset.suffix||'');
+  }
+  function countUp(el){
+    const target=parseFloat(el.dataset.target);
+    if(reduce||!('requestAnimationFrame' in window)){el.textContent=fmtVal(el,target);return;}
+    const t0=performance.now(),dur=900;
+    (function step(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);el.textContent=fmtVal(el,target*e);if(p<1)requestAnimationFrame(step);})(t0);
+  }
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es,obs)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);obs.unobserve(e.target);}});},{threshold:.6});
+    document.querySelectorAll('.cu').forEach(el=>io.observe(el));
+  }
+})();
+
+/* "Read the reviews": after the smooth scroll lands, flash the filter bar once to teach it */
+document.getElementById('readReviews').addEventListener('click',function(){
+  setTimeout(function(){const tb=document.getElementById('themes');tb.classList.add('flash');setTimeout(function(){tb.classList.remove('flash');},1400);},650);
+});
+
+/* bottom-right savings popup: shows once the reader is ~1.5 screens in, hides while the
+   calculator itself is visible, and a dismiss lasts the whole session */
+(function(){
+  const pop=document.getElementById('savepop');if(!pop)return;
+  let dismissed=false;
+  try{dismissed=sessionStorage.getItem('eba-savepop')==='1';}catch(e){}
+  if(dismissed)return;
+  let calcVisible=false,scrolledEnough=false;
+  function sync(){pop.classList.toggle('show',scrolledEnough&&!calcVisible&&!dismissed);}
+  window.addEventListener('scroll',function(){if(!scrolledEnough&&window.scrollY>window.innerHeight*1.5){scrolledEnough=true;sync();}},{passive:true});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{es.forEach(e=>{calcVisible=e.isIntersecting;sync();});},{threshold:.15}).observe(document.getElementById('calculator'));
+  }
+  function dismiss(){dismissed=true;sync();try{sessionStorage.setItem('eba-savepop','1');}catch(e){}}
+  document.getElementById('spClose').addEventListener('click',dismiss);
+  document.getElementById('spCta').addEventListener('click',function(){pop.classList.remove('show');});
+})();
+
+/* sticky mobile CTA appears once the hero is scrolled away */
+(function(){
+  const bar=document.getElementById('mobileCta'),hero=document.querySelector('.hero');
+  if(!bar||!hero||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(es=>{es.forEach(e=>bar.classList.toggle('show',!e.isIntersecting));},{threshold:0}).observe(hero);
+})();
+
+/* savings calculator: client-side estimate. Presets pre-fill the editable "pays now" field
+   with vendor list prices; the EBA side mirrors easybusinessapp.com/pricing module tiers
+   (both checked July 2026 - see the comment on the calc section). */
+(function(){
+  const c=document.getElementById('cClients'),n=document.getElementById('cNow');
+  if(!c)return;
+  const out=document.getElementById('cClientsOut'),tot=document.getElementById('cTotal'),per=document.getElementById('cPer');
+  const emp=document.getElementById('cEmp'),empOut=document.getElementById('cEmpOut'),empNote=document.getElementById('cEmpNote');
+  const inv=document.getElementById('cInv'),cf=document.getElementById('cCf');
+  function payslipTier(e){
+    if(e===0)return {price:0,note:'No payroll module. Easy Reports is free, and Invoicing and Cashflow have free tiers.'};
+    if(e<=4)return {price:14.95,note:'Easy Payslip Starter, $14.95 a month for up to 4 employees.'};
+    if(e<=6)return {price:19.95,note:'Easy Payslip Standard, $19.95 a month for up to 6 employees.'};
+    return {price:29.95,note:'Easy Payslip Unlimited, $29.95 a month for unlimited employees.'};
+  }
+  function ebaMonthly(){
+    return payslipTier(+emp.value).price+(inv.checked?10.95:0)+(cf.checked?10.95:0);
+  }
+  const PRESETS=[
+    {label:'Xero Grow',v:78,note:'Xero Grow list price, July 2026.'},
+    {label:'Xero Ignite',v:37,note:'Xero Ignite list price, July 2026.'},
+    {label:'MYOB Pro',v:70,note:'MYOB Business Pro full list price, July 2026. Payroll is an extra $3 per employee a month.'},
+    {label:'QuickBooks Essentials',v:55,note:'QuickBooks Online Essentials list price, July 2026.'},
+    {label:'Custom',v:null,note:'Enter what your clients actually pay, including add-ons.'}
+  ];
+  const wrap=document.getElementById('cPresets'),note=document.getElementById('cNowNote');
+  wrap.innerHTML=PRESETS.map((p,i)=>'<button type="button" class="chip'+(i===0?' active':'')+'" data-p="'+i+'">'+p.label+(p.v?' $'+p.v:'')+'</button>').join('');
+  function setActive(i){[...wrap.children].forEach((b,k)=>b.classList.toggle('active',k===i));}
+  wrap.addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    const p=PRESETS[+b.dataset.p];setActive(+b.dataset.p);
+    note.textContent=p.note+(p.v?' Plans and add-ons vary, so adjust to what your clients actually pay.':'');
+    if(p.v!=null){n.value=p.v;upd();}else{n.focus();n.select();}
+  });
+  n.addEventListener('input',()=>{ /* manual edits switch to Custom */
+    const i=PRESETS.findIndex(p=>p.v===+n.value);
+    setActive(i>-1?i:PRESETS.length-1);
+  });
+  function upd(){
+    const clients=+c.value,now=+n.value||0,eba=ebaMonthly();
+    const tier=payslipTier(+emp.value);
+    empOut.textContent=emp.value+(+emp.value>=10?'+':'');
+    empNote.textContent=tier.note;
+    const diff=Math.max(0,now-eba);
+    out.textContent=clients+(clients>=250?'+':'');
+    tot.textContent='$'+Math.round(diff*12*clients).toLocaleString('en-AU');
+    per.textContent=diff>0
+      ?('a year. $'+now.toFixed(2)+' now vs $'+eba.toFixed(2)+' on Easy Business App, per client each month.')
+      :'a year. Adjust the numbers above to compare.';
+  }
+  [c,n,emp].forEach(el=>el.addEventListener('input',upd));
+  [inv,cf].forEach(el=>el.addEventListener('change',upd));
+  upd();
+})();
 </script>
 </body>
 </html>
