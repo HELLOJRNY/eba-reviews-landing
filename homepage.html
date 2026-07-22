@@ -50,7 +50,13 @@
   .hero{position:relative;overflow:hidden;padding:72px 28px 40px;background:
     radial-gradient(900px 480px at 85% -10%, rgba(0,92,255,.08), transparent 60%),
     radial-gradient(700px 420px at -10% 110%, rgba(43,182,115,.08), transparent 60%)}
-  .hero-inner{position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  /* brand-mark motif: the EBA mark tiled as a faint angled watermark, drifting slowly
+     (echoes the tile pattern EBA uses on its blog artwork) */
+  .hero::before{content:"";position:absolute;inset:-45%;z-index:0;pointer-events:none;
+    background:url(favicon.png) 0 0/96px repeat;opacity:.04;filter:grayscale(1);
+    transform:rotate(-10deg);animation:drift 90s linear infinite}
+  @keyframes drift{from{background-position:0 0}to{background-position:960px 480px}}
+  .hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:rgba(0,92,255,.08);padding:8px 16px;border-radius:999px;margin-bottom:22px}
   .hero h1{font-weight:900;line-height:1.04;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,64px);margin-bottom:20px}
   .hero h1 .rot-wrap{color:var(--blue);display:inline-block;min-width:5.2ch}
@@ -71,12 +77,12 @@
   .float img{height:34px;width:auto;display:block;margin-bottom:8px}
   .float .fl-sub{font-size:12.5px;color:var(--muted)}
   .float .fl-price{font-size:13px;font-weight:900;color:var(--blue);margin-top:6px}
-  .f1{top:6%;left:4%;animation-delay:0s}
-  .f2{top:0%;right:8%;animation-delay:1.2s}
-  .f3{bottom:26%;left:0%;animation-delay:2.1s}
-  .f4{bottom:32%;right:2%;animation-delay:.6s}
+  .f1{top:4%;left:4%;animation-delay:0s}
+  .f2{top:0%;right:6%;animation-delay:1.2s}
+  .f3{bottom:4%;left:2%;animation-delay:2.1s}
+  .f4{bottom:8%;right:4%;animation-delay:.6s}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  .hero-review{position:absolute;left:50%;top:42%;transform:translateX(-50%);width:min(340px,90%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:0 26px 60px rgba(15,26,31,.2);z-index:2}
+  .hero-review{position:absolute;left:50%;top:31%;transform:translateX(-50%);width:min(330px,86%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:0 26px 60px rgba(15,26,31,.2);z-index:2}
   .hero-review .stars{color:var(--star);font-size:17px;letter-spacing:2px;margin-bottom:10px}
   .hero-review .q{font-size:15.5px;line-height:1.5;margin-bottom:12px;font-weight:500}
   .hero-review .nm{font-weight:900;font-size:13px}
@@ -91,6 +97,33 @@
   .sb{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 30px;text-align:center;box-shadow:0 2px 10px rgba(15,26,31,.05);min-width:170px}
   .sb .n{font-family:var(--font-head);font-size:32px;font-weight:900;color:var(--blue);line-height:1}
   .sb .l{font-size:13.5px;color:var(--muted);margin-top:7px}
+
+  /* credential badges: quiet until hovered */
+  .creds{display:flex;gap:38px;justify-content:center;align-items:center;flex-wrap:wrap;padding:0 24px 58px;max-width:1000px;margin:0 auto}
+  .creds img{height:60px;width:auto;filter:grayscale(.45);opacity:.85;transition:filter .25s,opacity .25s,transform .25s}
+  .creds img:hover{filter:none;opacity:1;transform:translateY(-4px)}
+  .creds .big{height:84px}
+  .creds .wide{height:42px}
+  @media(max-width:640px){.creds{gap:22px}.creds img{height:46px}.creds .big{height:64px}.creds .wide{height:32px}}
+
+  /* product showcase */
+  .showcase{padding-top:20px}
+  .shot{max-width:920px;margin:0 auto}
+  .shot img{width:100%;height:auto;filter:drop-shadow(0 34px 60px rgba(15,26,31,.18));animation:bob 9s ease-in-out infinite}
+
+  /* human spotlight */
+  .spot{background:var(--grey-soft)}
+  .spot-grid{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:18px;align-items:stretch}
+  .spot-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .25s,box-shadow .25s}
+  .spot-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(15,26,31,.1)}
+  .spot-card .face{width:92px;height:92px;border-radius:50%;object-fit:cover;margin-bottom:14px;box-shadow:0 8px 20px rgba(15,26,31,.15)}
+  .spot-card .stars{color:var(--star);font-size:15px;letter-spacing:2px;margin-bottom:10px}
+  .spot-card blockquote{font-size:16.5px;font-weight:600;line-height:1.5;margin-bottom:12px}
+  .spot-card .who{font-size:13px;color:var(--muted)}
+  .spot-card.scene-card{padding:0;overflow:hidden;justify-content:flex-start}
+  .spot-card .scene{width:100%;height:270px;object-fit:cover;display:block}
+  .spot-card .cap{padding:18px 24px;font-size:14.5px;color:var(--muted);line-height:1.5}
+  @media(max-width:980px){.spot-grid{grid-template-columns:1fr}.spot-card .scene{height:220px}}
 
   /* section scaffolding */
   section{padding:72px 28px}
@@ -186,7 +219,7 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .float{animation:none}.marquee{animation:none}.rv{opacity:1;transform:none;transition:none}
-    .hero h1 .rot{transition:none}
+    .hero h1 .rot{transition:none}.hero::before{animation:none}.shot img{animation:none}
   }
 </style>
 </head>
@@ -246,6 +279,15 @@
   <div class="sb rv"><div class="n">ISO 27001</div><div class="l">certified, data stored in Australia</div></div>
 </div>
 
+<!-- credential badges: EBA's real award and rating artwork -->
+<div class="creds rv">
+  <img class="big" src="badge-csia.png" alt="CSIA Service Excellence Award winner 2025">
+  <img src="badge-appstore.png" alt="Rated 4.8 stars on the App Store">
+  <img src="badge-play.png" alt="Rated on Google Play">
+  <img src="badge-reviews.png" alt="4.8 star customer reviews">
+  <img class="wide" src="badge-iso.png" alt="ISO 27001 certified">
+</div>
+
 <section id="modules">
   <div class="wrap">
     <div class="sec-head rv">
@@ -287,6 +329,17 @@
   </div>
 </section>
 
+<section class="showcase">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">One account, every device</div>
+      <h2>Runs anywhere your business does</h2>
+      <p>Web, iPhone, iPad and Android. Start an invoice at the desk and send it from the ute.</p>
+    </div>
+    <div class="shot rv"><img src="product-screens.png" width="1200" height="1200" loading="lazy" alt="Easy Business App running on a laptop, phone and tablet, showing invoicing and Single Touch Payroll"></div>
+  </div>
+</section>
+
 <section class="pillars" id="difference">
   <div class="wrap">
     <div class="sec-head rv">
@@ -312,6 +365,35 @@
   <div class="mq-row"><div class="marquee rev2" id="mq2"></div></div>
   <div class="mq-cta rv">
     <a class="btn btn-blue" href="https://eba-reviews-landing.vercel.app" target="_blank" rel="noopener">Read all 234 reviews</a>
+  </div>
+</section>
+
+<!-- human spotlight: real EBA customers. Sarah's quote is from the EBA homepage;
+     Careway Cleaning's is verbatim from Trustpilot (photo filename confirms the pairing). -->
+<section class="spot">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Real businesses</div>
+      <h2>Run by people like you</h2>
+    </div>
+    <div class="spot-grid">
+      <div class="spot-card rv">
+        <img class="face" src="human-sarah.jpg" alt="Sarah, founder of Proof of Concept Creatives">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>&ldquo;A founder&rsquo;s dream&rdquo;</blockquote>
+        <div class="who">Sarah, Proof of Concept Creatives</div>
+      </div>
+      <div class="spot-card scene-card rv">
+        <img class="scene" src="human-mechanic.jpg" alt="A mechanic in his workshop checking Easy Business App on his phone">
+        <div class="cap">From the workshop to the ute, 10,000+ Australian small businesses run their books on Easy.</div>
+      </div>
+      <div class="spot-card rv">
+        <img class="face" src="human-mehdi.jpg" alt="Mehdi, Careway Cleaning">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>&ldquo;Im extremely happy with Easy Business and wholeheartedly recommend it to anyone looking for a great accounting system.&rdquo;</blockquote>
+        <div class="who">Careway Cleaning, Trustpilot</div>
+      </div>
+    </div>
   </div>
 </section>
 
