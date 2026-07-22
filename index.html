@@ -115,14 +115,14 @@
   .rev.green .src{color:rgba(255,255,255,.85)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:#FFF0B8}.rev.green .more{color:#E4FFF1}
   .rev.hide{display:none}
 
-  .cta-strip{background:linear-gradient(120deg,var(--blue),#3B6BFF);color:#fff;border-radius:16px;padding:20px 30px;margin:22px auto;max-width:1180px;box-shadow:0 10px 26px rgba(0,92,255,.18);display:flex;align-items:center;justify-content:space-between;gap:26px}
-  .cta-copy{text-align:left;min-width:0}
-  .cta-strip h3{font-size:clamp(18px,2vw,25px);font-weight:800;letter-spacing:-.01em;line-height:1.2;margin:0}
-  .cta-sub{font-size:16px;color:#DCE7FF;line-height:1.4;margin:6px 0 0}
-  .cta-strip .btn{flex:none;transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
-  .cta-strip .btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
+  /* Advisor testimonial image cards (their own advertisement within the wall) */
+  .advisor-card{max-width:1040px;margin:44px auto;padding:0 24px;text-align:center}
+  .ac-img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 18px 44px rgba(15,26,31,.18)}
+  .ac-line{margin:24px auto 16px;max-width:42ch;font-size:clamp(18px,2.1vw,24px);font-weight:800;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
+  .ac-btn{transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
+  .ac-btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
   @keyframes softpulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
-  @media(max-width:640px){.cta-strip{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 22px}}
+  @media(max-width:640px){.advisor-card{padding:0 12px;margin:32px auto}.ac-img{border-radius:14px}}
 
   /* What people love key-stats strip */
   .lovestrip{max-width:1180px;margin:0 auto;padding:4px 24px 2px;text-align:center}
@@ -133,22 +133,6 @@
   .ls-lbl{display:block;font-size:13px;color:var(--muted);margin-top:6px}
   .love-sell{max-width:64ch;margin:18px auto 0;color:var(--ink);font-size:16px;line-height:1.5}
 
-  /* Distinct callout variants (each reads like its own small ad) */
-  .cta-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
-  .cta-strip.green{background:linear-gradient(120deg,var(--green),#1FA867)}
-  .cta-strip.green .btn{background:#fff;color:var(--green);border-color:#fff}
-  .cta-strip.green .btn:hover{background:#EAFBF3}
-  .cta-strip.ink{background:linear-gradient(120deg,#0F1A1F,#26384A)}
-  .cta-strip.green .cta-sub,.cta-strip.ink .cta-sub{color:rgba(255,255,255,.9)}
-
-  /* Advisor testimonial blocks (stand apart from the customer review cards) */
-  .advisor-quote{max-width:1000px;margin:26px auto;background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:18px;padding:30px 34px;display:flex;gap:26px;align-items:center;box-shadow:0 12px 32px rgba(15,26,31,.08)}
-  .aq-photo{flex:none;width:96px;height:96px;border-radius:50%;background:var(--grey);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted)}
-  .aq-body{min-width:0}
-  .aq-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
-  .aq-text{font-size:clamp(18px,2.1vw,22px);line-height:1.45;color:var(--ink);font-weight:500;margin:0 0 12px}
-  .aq-name{font-size:14px;color:var(--muted);font-weight:600}
-  @media(max-width:640px){.advisor-quote{flex-direction:column;text-align:center;align-items:center}}
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
   .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
@@ -178,7 +162,7 @@
     .themes{top:64px}
   }
   @media (prefers-reduced-motion:reduce){
-    .cvtrack{animation:none}.pcard{transition:none}.mentioned .rot{transition:none}.cta-strip .btn{animation:none}
+    .cvtrack{animation:none}.pcard{transition:none}.mentioned .rot{transition:none}.ac-btn{animation:none}
     .rev{opacity:1;transform:none;transition:box-shadow .18s ease}.overlay.open,.modal{animation:none}
   }
 </style>
@@ -226,58 +210,25 @@
   <div class="wall" id="wall1"></div>
 </section>
 
-<div class="cta-strip">
-  <div class="cta-copy">
-    <span class="cta-tag">Switch and move</span>
-    <h3>Switch and move your clients across to Easy Business App</h3>
-    <p class="cta-sub">More than 10,000 Australian small businesses already run on it.</p>
-  </div>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
-</div>
-
-<div class="advisor-quote">
-  <div class="aq-photo">[HEADSHOT]</div>
-  <div class="aq-body">
-    <span class="aq-tag">Trusted by advisors</span>
-    <blockquote class="aq-text">[AMY TESTIMONIAL QUOTE TBC]</blockquote>
-    <div class="aq-name">[Name, title, firm]</div>
-  </div>
+<div class="advisor-card">
+  <img class="ac-img" src="amy.png" width="1800" height="942" loading="lazy" alt="Amy says: I have already moved 250 clients onto Easy Business and with the money I am saving I have hired more staff to grow my practice. It is faster for my team, cleaner for compliance, and far more scalable than what we used before. Amy L. FCPA, Practice Owner, NSW.">
+  <p class="ac-line">Advisors are switching and moving their clients across.</p>
+  <a class="btn btn-primary ac-btn" href="#book-a-demo">Book a demo</a>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall2"></div>
 </section>
 
-<div class="cta-strip green">
-  <div class="cta-copy">
-    <span class="cta-tag">All your modules</span>
-    <h3>Payroll, invoicing, bills and reports in one app</h3>
-    <p class="cta-sub">Payroll, STP, Payday Super, Invoicing, Bank Feeds, AI Receipt Snapping, Bills and Reports, all in one place.</p>
-  </div>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+<div class="advisor-card">
+  <img class="ac-img" src="zak.png" width="1800" height="942" loading="lazy" alt="Zak says: My clients do not want bells and whistles. They want fast, easy, and affordable. That is what Easy Business App gives them. Zak M., BAS Agent, WA.">
+  <p class="ac-line">See why advisors recommend it to their clients.</p>
+  <a class="btn btn-primary ac-btn" href="#book-a-demo">Book a demo</a>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall3"></div>
 </section>
-
-<div class="cta-strip ink">
-  <div class="cta-copy">
-    <span class="cta-tag">Real support</span>
-    <h3>Real human support, based in Sydney</h3>
-    <p class="cta-sub">Speak to a real person on our Sydney-based team when you need a hand.</p>
-  </div>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
-</div>
-
-<div class="advisor-quote">
-  <div class="aq-photo">[HEADSHOT]</div>
-  <div class="aq-body">
-    <span class="aq-tag">Trusted by advisors</span>
-    <blockquote class="aq-text">[ZACH TESTIMONIAL QUOTE TBC]</blockquote>
-    <div class="aq-name">[Name, title, firm]</div>
-  </div>
-</div>
 
 <section class="wall-section">
   <div class="wall" id="wall4"></div>
@@ -364,7 +315,7 @@ document.getElementById('wall4').innerHTML=data.slice(t3).map((r,i)=>card(r,i+t3
 /* theme chips + filtering */
 const themesBar=document.getElementById('themes');
 themesBar.innerHTML='<button class="chip active" data-t="all">All reviews</button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+'</button>').join('');
-themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.cta-strip,.advisor-quote').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
+themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.advisor-card').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
 
 /* flood-in reveal */
 const cards=[...document.querySelectorAll('.rev')];
