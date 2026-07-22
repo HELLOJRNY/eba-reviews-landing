@@ -115,22 +115,22 @@
   .rev.green .src{color:rgba(255,255,255,.85)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:#FFF0B8}.rev.green .more{color:#E4FFF1}
   .rev.hide{display:none}
 
-  /* Advisor testimonial callout cards: native, styled to match the page */
-  .advisor-card{max-width:1040px;margin:34px auto;padding:0 24px}
-  .ac-inner{position:relative;overflow:hidden;display:flex;align-items:center;gap:30px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 34px 28px 40px;box-shadow:0 16px 40px rgba(15,26,31,.12)}
-  .ac-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--blue),var(--green))}
-  .ac-photo{flex:none;width:140px;height:140px;border-radius:18px;object-fit:cover;box-shadow:0 8px 20px rgba(15,26,31,.16)}
+  /* Advisor testimonial callout cards: native, full wall width, prominent, on brand */
+  .advisor-card{max-width:1180px;margin:44px auto;padding:0 20px}
+  .ac-inner{position:relative;overflow:hidden;display:flex;align-items:center;gap:40px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:40px 52px 40px 56px;box-shadow:0 20px 48px rgba(15,26,31,.13)}
+  .ac-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(180deg,var(--blue),var(--green))}
+  .ac-photo{flex:none;width:180px;height:180px;border-radius:22px;object-fit:cover;box-shadow:0 10px 26px rgba(15,26,31,.16)}
   .ac-copy{min-width:0}
-  .ac-line{margin:0 0 10px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
-  .ac-quote{margin:0 0 14px;font-size:clamp(18px,1.7vw,22px);line-height:1.45;font-weight:600;color:var(--ink)}
-  .ac-name{margin:0 0 18px;font-size:14px;font-weight:600;color:var(--muted)}
+  .ac-line{margin:0 0 12px;font-size:14px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--blue)}
+  .ac-quote{margin:0 0 18px;font-size:clamp(21px,2vw,27px);line-height:1.4;font-weight:600;color:var(--ink)}
+  .ac-name{margin:0 0 22px;font-size:15px;font-weight:600;color:var(--muted)}
   .ac-btn{transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
   .ac-btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
   @keyframes softpulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
   @media(max-width:640px){
-    .advisor-card{padding:0 14px;margin:26px auto}
-    .ac-inner{flex-direction:column;text-align:center;gap:18px;padding:26px 22px}
-    .ac-photo{width:118px;height:118px}
+    .advisor-card{padding:0 14px;margin:32px auto}
+    .ac-inner{flex-direction:column;text-align:center;gap:22px;padding:32px 24px}
+    .ac-photo{width:140px;height:140px}
   }
 
   /* What people love key-stats strip */
@@ -281,11 +281,14 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k
 
 /* wall */
 function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'">'+(r.stars?'<div class="stars">'+stars(r.stars)+'</div>':'')+'<div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
-/* Advisor callout cards: native, alternating Amy/Zak, inserted through the wall */
-function advisorCard(which){
-  var A={photo:'amy-headshot.png',line:'Advisors are switching and moving their clients across',quote:'I’ve already moved 250 clients onto Easy Business App and with the money I’m saving I’ve hired more staff to grow my practice.',name:'Amy L. FCPA, Practice Owner, NSW'};
-  var Z={photo:'zak-headshot.png',line:'See why advisors recommend it to their clients',quote:'My clients don’t want bells and whistles. They want fast, easy, and affordable. That’s what Easy Business App gives them.',name:'Zak M., BAS Agent, WA'};
-  var c=which==='amy'?A:Z;
+/* Advisor callout cards: exactly four distinct, native, one per quarter of the wall */
+var ADVISORS=[
+  {photo:'amy-headshot.png',line:'Advisors are switching and moving their clients across',quote:'I’ve already moved 250 clients onto Easy Business App and with the money I’m saving I’ve hired more staff to grow my practice.',name:'Amy L. FCPA, Practice Owner, NSW'},
+  {photo:'zak-headshot.png',line:'See why advisors recommend it to their clients',quote:'My clients don’t want bells and whistles. They want fast, easy, and affordable. That’s what Easy Business App gives them.',name:'Zak M., BAS Agent, WA'},
+  {photo:'amy-headshot.png',line:'Built for a growing practice',quote:'It’s faster for my team, cleaner for compliance, and far more scalable than what we used before.',name:'Amy L. FCPA, Practice Owner, NSW'},
+  {photo:'zak-headshot.png',line:'The right fit for small business clients',quote:'My clients don’t want complex software they’ll never fully use. They want something fast, simple and affordable.',name:'Zak M., BAS Agent, WA'}
+];
+function advisorCard(c){
   return '<div class="advisor-card"><div class="ac-inner">'
     +'<img class="ac-photo" src="'+c.photo+'" width="670" height="670" loading="lazy" alt="'+c.name+'">'
     +'<div class="ac-copy">'
@@ -297,11 +300,12 @@ function advisorCard(which){
 }
 (function(){
   var zone=document.getElementById('wallzone'); if(!zone) return;
-  var CHUNK=6, html='', ci=0;
-  for(var s=0;s<data.length;s+=CHUNK){
-    var slice=data.slice(s,s+CHUNK);
-    html+='<section class="wall-section"><div class="wall">'+slice.map(function(r,i){return card(r,s+i);}).join('')+'</div></section>';
-    if(s+CHUNK<data.length){ html+=advisorCard(ci%2===0?'amy':'zak'); ci++; }
+  var N=data.length, html='';
+  function block(a,b){ return (b>a) ? '<section class="wall-section"><div class="wall">'+data.slice(a,b).map(function(r,i){return card(r,a+i);}).join('')+'</div></section>' : ''; }
+  /* four roughly equal quarters, one full-width callout in the middle of each; none at the very bottom */
+  for(var q=0;q<4;q++){
+    var qs=Math.round(q*N/4), qe=Math.round((q+1)*N/4), mid=Math.round((qs+qe)/2);
+    html+=block(qs,mid)+advisorCard(ADVISORS[q])+block(mid,qe);
   }
   zone.innerHTML=html;
 })();
