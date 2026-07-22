@@ -162,14 +162,14 @@
   .save-sub{font-size:13.5px;color:var(--muted);margin-bottom:20px}
   @media(max-width:920px){.save .wrap{grid-template-columns:1fr}}
 
-  /* advisor band */
-  .adv .wrap{display:flex;align-items:center;gap:44px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:44px 52px;box-shadow:0 18px 50px rgba(15,26,31,.1);position:relative;overflow:hidden}
-  .adv .wrap::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(180deg,var(--blue),var(--green))}
-  .adv img{width:150px;height:150px;border-radius:20px;object-fit:cover;flex:none}
-  .adv .k{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-  .adv blockquote{font-size:clamp(19px,2vw,25px);font-weight:700;line-height:1.4;letter-spacing:-.01em;margin-bottom:12px}
-  .adv .who{font-size:14px;color:var(--muted);margin-bottom:18px}
-  @media(max-width:760px){.adv .wrap{flex-direction:column;text-align:center;padding:34px 26px}}
+  /* advisor callout: secondary strip only, the homepage speaks to business owners */
+  .adv{padding-top:0}
+  .adv .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:18px;padding:22px 30px;box-shadow:0 4px 18px rgba(15,26,31,.07)}
+  .adv .adv-left{display:flex;align-items:center;gap:18px;min-width:0}
+  .adv img{width:56px;height:56px;border-radius:14px;object-fit:cover;flex:none}
+  .adv .k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+  .adv p{font-size:15px;color:var(--muted);line-height:1.45;margin:0;max-width:56ch}
+  @media(max-width:760px){.adv .wrap{flex-direction:column;text-align:center}.adv .adv-left{flex-direction:column}}
 
   /* final CTA */
   .final{text-align:center;background:
@@ -334,15 +334,17 @@
   </div>
 </section>
 
+<!-- secondary audience callout: routes advisors to the dedicated partner page -->
 <section class="adv" id="advisors">
   <div class="wrap rv">
-    <img src="amy-headshot.png" alt="Amy L. FCPA, Practice Owner, NSW">
-    <div>
-      <div class="k">For accountants and bookkeepers</div>
-      <blockquote>&ldquo;I&rsquo;ve already moved 250 clients onto Easy Business App and with the money I&rsquo;m saving I&rsquo;ve hired more staff to grow my practice.&rdquo;</blockquote>
-      <div class="who">Amy L. FCPA, Practice Owner, NSW</div>
-      <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+    <div class="adv-left">
+      <img src="amy-headshot.png" alt="Amy L. FCPA, Practice Owner, NSW">
+      <div>
+        <div class="k">Accountant or bookkeeper?</div>
+        <p>Advisors like Amy have already moved hundreds of clients across. See what your clients say and what switching saves them.</p>
+      </div>
     </div>
+    <a class="btn btn-blue" href="https://eba-reviews-landing.vercel.app" target="_blank" rel="noopener">For accountants and bookkeepers &#8594;</a>
   </div>
 </section>
 
