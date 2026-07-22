@@ -53,9 +53,9 @@
   /* brand-mark motif: the EBA mark tiled as a faint angled watermark, drifting slowly
      (echoes the tile pattern EBA uses on its blog artwork) */
   .hero::before{content:"";position:absolute;inset:-45%;z-index:0;pointer-events:none;
-    background:url(favicon.png) 0 0/96px repeat;opacity:.04;filter:grayscale(1);
+    background:url(motif-tile.png) 0 0/180px repeat;opacity:.05;filter:grayscale(1);
     transform:rotate(-10deg);animation:drift 90s linear infinite}
-  @keyframes drift{from{background-position:0 0}to{background-position:960px 480px}}
+  @keyframes drift{from{background-position:0 0}to{background-position:900px 540px}}
   .hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:rgba(0,92,255,.08);padding:8px 16px;border-radius:999px;margin-bottom:22px}
   .hero h1{font-weight:900;line-height:1.04;letter-spacing:-.025em;font-size:clamp(38px,4.6vw,64px);margin-bottom:20px}
