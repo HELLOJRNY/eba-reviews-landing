@@ -123,6 +123,32 @@
   .cta-strip .btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
   @keyframes softpulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
   @media(max-width:640px){.cta-strip{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 22px}}
+
+  /* What people love key-stats strip */
+  .lovestrip{max-width:1180px;margin:0 auto;padding:4px 24px 2px;text-align:center}
+  .love-head{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .love-stats{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .love-stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:118px;box-shadow:0 1px 2px rgba(15,26,31,.05)}
+  .ls-num{display:block;font-size:30px;font-weight:900;color:var(--blue);line-height:1}
+  .ls-lbl{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+  .love-sell{max-width:64ch;margin:18px auto 0;color:var(--ink);font-size:16px;line-height:1.5}
+
+  /* Distinct callout variants (each reads like its own small ad) */
+  .cta-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+  .cta-strip.green{background:linear-gradient(120deg,var(--green),#1FA867)}
+  .cta-strip.green .btn{background:#fff;color:var(--green);border-color:#fff}
+  .cta-strip.green .btn:hover{background:#EAFBF3}
+  .cta-strip.ink{background:linear-gradient(120deg,#0F1A1F,#26384A)}
+  .cta-strip.green .cta-sub,.cta-strip.ink .cta-sub{color:rgba(255,255,255,.9)}
+
+  /* Advisor testimonial blocks (stand apart from the customer review cards) */
+  .advisor-quote{max-width:1000px;margin:26px auto;background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:18px;padding:30px 34px;display:flex;gap:26px;align-items:center;box-shadow:0 12px 32px rgba(15,26,31,.08)}
+  .aq-photo{flex:none;width:96px;height:96px;border-radius:50%;background:var(--grey);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--muted)}
+  .aq-body{min-width:0}
+  .aq-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .aq-text{font-size:clamp(18px,2.1vw,22px);line-height:1.45;color:var(--ink);font-weight:500;margin:0 0 12px}
+  .aq-name{font-size:14px;color:var(--muted);font-weight:600}
+  @media(max-width:640px){.advisor-quote{flex-direction:column;text-align:center;align-items:center}}
   .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
   .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
@@ -177,7 +203,7 @@
         <a class="btn btn-ghost" href="#wall">Read all the reviews</a>
       </div>
       <div class="stats">
-        <div class="stat"><div class="num">4.8<span class="star">&#9733;</span></div><div class="lbl">From 234 Trustpilot reviews</div></div>
+        <div class="stat"><div class="num">4.8</div><div class="lbl">stars from [REVIEW COUNT TBC - likely 1,500+] reviews</div></div>
         <div class="stat"><div class="num">10,000+</div><div class="lbl">small businesses</div></div>
         <div class="stat"><div class="num">90%</div><div class="lbl">of reviews are five stars</div></div>
       </div>
@@ -191,6 +217,8 @@
   <p>Every review is real. Filter by what people talk about, or tap any review to read it in full.</p>
 </div>
 
+<div class="lovestrip" id="lovestrip"></div>
+
 <div class="themes" id="themes"></div>
 
 <section class="wall-section">
@@ -199,26 +227,59 @@
 
 <div class="cta-strip">
   <div class="cta-copy">
-    <h3>Switch and move your clients to software they will love using</h3>
-    <p class="cta-sub">More than 10,000 small businesses already run on Easy Business App.</p>
+    <span class="cta-tag">Switch and move</span>
+    <h3>Switch and move your clients across to Easy Business App</h3>
+    <p class="cta-sub">More than 10,000 Australian small businesses already run on it.</p>
   </div>
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+</div>
+
+<div class="advisor-quote">
+  <div class="aq-photo">[HEADSHOT]</div>
+  <div class="aq-body">
+    <span class="aq-tag">Trusted by advisors</span>
+    <blockquote class="aq-text">[AMY TESTIMONIAL QUOTE TBC]</blockquote>
+    <div class="aq-name">[Name, title, firm]</div>
+  </div>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall2"></div>
 </section>
 
-<div class="cta-strip">
+<div class="cta-strip green">
   <div class="cta-copy">
-    <h3>Move your clients across to Easy Business App</h3>
-    <p class="cta-sub">Rated 4.8 on Trustpilot, and built for Australian small businesses.</p>
+    <span class="cta-tag">All your modules</span>
+    <h3>Payroll, invoicing, bills and reports in one app</h3>
+    <p class="cta-sub">Payroll, STP, Payday Super, Invoicing, Bank Feeds, AI Receipt Snapping, Bills and Reports, all in one place.</p>
   </div>
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
 </div>
 
 <section class="wall-section">
   <div class="wall" id="wall3"></div>
+</section>
+
+<div class="cta-strip ink">
+  <div class="cta-copy">
+    <span class="cta-tag">Real support</span>
+    <h3>Real human support, based in Sydney</h3>
+    <p class="cta-sub">Speak to a real person on our Sydney-based team when you need a hand.</p>
+  </div>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a demo</a>
+</div>
+
+<div class="advisor-quote">
+  <div class="aq-photo">[HEADSHOT]</div>
+  <div class="aq-body">
+    <span class="aq-tag">Trusted by advisors</span>
+    <blockquote class="aq-text">[ZACH TESTIMONIAL QUOTE TBC]</blockquote>
+    <div class="aq-name">[Name, title, firm]</div>
+  </div>
+</div>
+
+<section class="wall-section">
+  <div class="wall" id="wall4"></div>
 </section>
 
 <section class="band" id="book">
@@ -285,16 +346,24 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let k=0;k
 
 /* wall */
 function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'">'+(r.stars?'<div class="stars">'+stars(r.stars)+'</div>':'')+'<div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
-const t1=Math.round(data.length*0.22),t2=Math.round(data.length*0.48);
+const t1=Math.round(data.length*0.18),t2=Math.round(data.length*0.37),t3=Math.round(data.length*0.55);
 document.getElementById('wall1').innerHTML=data.slice(0,t1).map((r,i)=>card(r,i)).join('');
 document.getElementById('wall2').innerHTML=data.slice(t1,t2).map((r,i)=>card(r,i+t1)).join('');
-document.getElementById('wall3').innerHTML=data.slice(t2).map((r,i)=>card(r,i+t2)).join('');
+document.getElementById('wall3').innerHTML=data.slice(t2,t3).map((r,i)=>card(r,i+t2)).join('');
+document.getElementById('wall4').innerHTML=data.slice(t3).map((r,i)=>card(r,i+t3)).join('');
+
+/* "What people love": top themes by live count from the real reviews, plus a sell line */
+(function(){
+  var el=document.getElementById('lovestrip'); if(!el) return;
+  var top=THEMES.slice().sort(function(a,b){return counts[b.key]-counts[a.key];}).slice(0,4);
+  el.innerHTML='<div class="love-head">What people love</div><div class="love-stats">'+top.map(function(t){return '<div class="love-stat"><span class="ls-num">'+counts[t.key]+'</span><span class="ls-lbl">'+t.label+'</span></div>';}).join('')+'</div><p class="love-sell">If you want easy-to-use software with great support that is quick to respond, so do the thousands of businesses below.</p>';
+})();
 
 
 /* theme chips + filtering */
 const themesBar=document.getElementById('themes');
-themesBar.innerHTML='<button class="chip active" data-t="all">All reviews <span class="c">'+data.length+'</span></button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+' <span class="c">'+counts[t.key]+'</span></button>').join('');
-themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.cta-strip').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
+themesBar.innerHTML='<button class="chip active" data-t="all">All reviews</button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+'</button>').join('');
+themesBar.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;[...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');const t=b.dataset.t;document.querySelectorAll('.rev').forEach(el=>{const show=(t==='all')||el.dataset.themes.split(' ').indexOf(t)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});document.querySelectorAll('.cta-strip,.advisor-quote').forEach(function(cs){cs.style.display=(t==='all')?'':'none';});});
 
 /* flood-in reveal */
 const cards=[...document.querySelectorAll('.rev')];
