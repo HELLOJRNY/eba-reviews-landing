@@ -47,17 +47,17 @@
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <!-- Headings use EBA's real font, ITC Avant Garde Gothic Pro, via the same Adobe Fonts
      kit the live site loads (fdo2qia). That kit is domain-licensed, so it renders on
-     easybusinessapp.com but NOT on github.io; there the stack falls back to Jost, the
-     closest free geometric match. Body stays Roboto, matching EBA. -->
+     easybusinessapp.com but NOT on github.io; there the stack falls back to Roboto,
+     the EBA body font. Only EBA brand fonts are used: Avant Garde headings, Roboto body. -->
 <link rel="stylesheet" href="https://use.typekit.net/fdo2qia.css">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   /* Real EBA brand values, read from easybusinessapp.com: primary blue #005CFF,
      conversion green #2BB673, text #202020, white base + #EEEEEE grey sections.
      (No cream or orange on the main site - those came from the calculator subdomain.) */
   /* --green-deep is a darkened green for solid fills with white text so they pass WCAG AA;
      --green stays for accents, gradients and the Trustpilot dot. */
-  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--green-deep:#1E7C4F;--green-deeper:#196843;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--star-soft:#FFD75E;--star-softer:#FFF0B8;--blue-tint:#CFE0FF;--green-tint:#E4FFF1;--band-muted:#B9C0CC;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Jost","Century Gothic",system-ui,sans-serif}
+  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--green-deep:#1E7C4F;--green-deeper:#196843;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--star-soft:#FFD75E;--star-softer:#FFF0B8;--blue-tint:#CFE0FF;--green-tint:#E4FFF1;--band-muted:#B9C0CC;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Roboto",system-ui,sans-serif}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
@@ -311,80 +311,98 @@
   }
 
   /* ================= modules.html (advisor page), scoped to this file only ================= */
-  /* one restrained motion language: gentle fade + rise as sections enter */
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+  /* soft EDM-style grey-to-white gradient that drifts slowly behind the whole page */
+  body{background:linear-gradient(140deg,#F5F8FC 0%,#FFFFFF 46%,#ECF1F7 100%);background-attachment:fixed;background-size:220% 220%;animation:bgdrift 24s ease-in-out infinite}
+  @keyframes bgdrift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+  /* one restrained motion language: gentle fade + rise as elements enter */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
-  .section{max-width:1120px;margin:0 auto;padding:74px 24px}
-  .section-head{text-align:center;max-width:760px;margin:0 auto 40px}
+  .section{max-width:1120px;margin:0 auto;padding:78px 24px}
+  .section-head{text-align:center;max-width:760px;margin:0 auto 42px}
   .section-head h2{font-family:var(--font-head);font-size:clamp(27px,3.4vw,42px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:12px}
   .section-head p{color:var(--muted);font-size:17px;line-height:1.55}
+  .section-cta{text-align:center;margin-top:38px}
 
-  /* ---- HERO: tight floating module cluster on a clean, glowing white ---- */
-  .mhero{position:relative;overflow:hidden;background:#fff}
-  .mhero::before{content:"";position:absolute;top:-15%;right:-8%;width:75%;height:130%;pointer-events:none;z-index:0;
-    background:radial-gradient(closest-side, rgba(0,92,255,.13), rgba(0,92,255,0) 70%)}
+  /* ---- HERO: bigger, tighter cluster that pops in then floats and gently orbits ---- */
+  .mhero{position:relative;overflow:hidden;background:transparent}
+  .mhero::before{content:"";position:absolute;top:-16%;right:-8%;width:78%;height:135%;pointer-events:none;z-index:0;
+    background:radial-gradient(closest-side, rgba(0,92,255,.12), rgba(0,92,255,0) 70%)}
   .mhero-accent{position:absolute;top:0;left:0;right:0;height:3px;z-index:3;
     background:linear-gradient(90deg,#FF4D4D,#FF9A00,#C026D3,#005CFF,#2BB673)}
-  .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:64px 40px;min-height:72vh}
+  .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:66px 40px;min-height:74vh}
   .mhero-copy .eyebrow{margin-bottom:16px}
   .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.06;letter-spacing:-.02em;color:var(--ink);font-size:clamp(33px,4vw,53px);margin-bottom:18px}
   .mhero-copy p.sub{font-size:clamp(17px,1.8vw,20px);color:var(--muted);max-width:50ch;line-height:1.6;margin-bottom:28px}
   .mhero-cta{display:flex;gap:14px;flex-wrap:wrap}
   .mhero-cta .btn{font-size:17px;padding:16px 34px}
-  /* the cluster: four equal tiles, gathered close together */
-  .mstage{position:relative;height:380px}
-  .mtile{position:absolute;will-change:transform}
-  .mtile-in{display:flex;align-items:center;justify-content:center;width:168px;height:70px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 40px rgba(15,26,31,.13);will-change:transform;animation:mdrift 7s ease-in-out infinite}
-  .mtile-in img{height:24px;max-width:124px;width:auto;object-fit:contain;display:block}
-  .mtile.p1{top:5%;left:16%}
-  .mtile.p2{top:5%;left:50%}
-  .mtile.p3{top:48%;left:16%}
-  .mtile.p4{top:48%;left:50%}
-  .mtile.p1 .mtile-in{animation-duration:6.6s;animation-delay:-.3s}
-  .mtile.p2 .mtile-in{animation-duration:7.8s;animation-delay:-1.5s}
-  .mtile.p3 .mtile-in{animation-duration:7.2s;animation-delay:-.9s}
-  .mtile.p4 .mtile-in{animation-duration:8.2s;animation-delay:-2.1s}
-  @keyframes mdrift{0%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-12px) rotate(1.3deg)}100%{transform:translateY(0) rotate(-1.2deg)}}
+  .mstage{position:relative;height:420px;animation:morbit 26s ease-in-out infinite;transform-origin:56% 50%}
+  .mtile{position:absolute;opacity:0;animation:mpop .62s cubic-bezier(.2,.9,.3,1.4) forwards}
+  .mtile-in{display:flex;align-items:center;justify-content:center;width:198px;height:90px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 46px rgba(15,26,31,.14);animation:mfloat 7s ease-in-out infinite}
+  .mtile-in img{height:30px;max-width:150px;width:auto;object-fit:contain;display:block}
+  .mtile.p1{top:4%;left:8%}
+  .mtile.p2{top:4%;left:47%}
+  .mtile.p3{top:50%;left:8%}
+  .mtile.p4{top:50%;left:47%}
+  .mtile.p1{animation-delay:.15s}.mtile.p1 .mtile-in{animation-duration:6.6s;animation-delay:-.3s}
+  .mtile.p2{animation-delay:.30s}.mtile.p2 .mtile-in{animation-duration:7.9s;animation-delay:-1.6s}
+  .mtile.p3{animation-delay:.45s}.mtile.p3 .mtile-in{animation-duration:7.2s;animation-delay:-.9s}
+  .mtile.p4{animation-delay:.60s}.mtile.p4 .mtile-in{animation-duration:8.3s;animation-delay:-2.2s}
+  @keyframes mpop{0%{opacity:0;transform:scale(.34)}60%{opacity:1;transform:scale(1.09)}100%{opacity:1;transform:scale(1)}}
+  @keyframes mfloat{0%{transform:translateY(0) rotate(-1.3deg)}50%{transform:translateY(-11px) rotate(1.3deg)}100%{transform:translateY(0) rotate(-1.3deg)}}
+  @keyframes morbit{0%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}100%{transform:rotate(-2deg)}}
 
-  /* ---- MODULES: payroll featured, then a tidy grid; one clean card style ---- */
-  .modlead{display:flex;align-items:center;gap:34px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 36px;box-shadow:0 10px 30px rgba(15,26,31,.07);position:relative;overflow:hidden;margin-bottom:18px}
-  .modlead::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--blue),var(--green))}
-  .modlead-mark{flex:none}
-  .modlead-mark img{height:38px;width:auto;display:block}
-  .modtag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
-  .modlead h3{font-family:var(--font-head);font-size:23px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:6px}
-  .modlead p{font-size:16.5px;color:var(--muted);line-height:1.5;margin-bottom:8px;max-width:62ch}
+  /* ---- MODULES: product mockup with payroll lead, then colour-accented cards ---- */
+  .mod-hero{display:grid;grid-template-columns:1.02fr .98fr;gap:46px;align-items:center;margin-bottom:30px}
+  .mod-hero-media img{width:100%;height:auto;display:block;filter:drop-shadow(0 26px 54px rgba(15,26,31,.16))}
+  .mod-hero-logo{height:30px;width:auto;display:block;margin-bottom:14px}
+  .mod-hero-copy .modtag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#F5325B;margin-bottom:8px}
+  .mod-hero-copy h3{font-family:var(--font-head);font-size:clamp(24px,2.6vw,30px);font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:8px}
+  .mod-hero-copy p{font-size:17px;color:var(--muted);line-height:1.55;margin-bottom:8px;max-width:52ch}
   .modgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .modcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:0 4px 16px rgba(15,26,31,.05);transition:transform .2s ease,box-shadow .2s ease}
-  .modcard:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(15,26,31,.12)}
+  .modcard{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px 24px;box-shadow:0 6px 20px rgba(15,26,31,.06);transition:transform .2s ease,box-shadow .2s ease}
+  .modcard::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--accent,#005CFF)}
+  .modcard:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(15,26,31,.13)}
   .modcard-logo{height:30px;display:flex;align-items:center;margin-bottom:14px}
   .modcard-logo img{height:24px;width:auto;display:block}
   .modcard h3{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:7px}
   .modcard p{font-size:15px;color:var(--muted);line-height:1.5;margin:0}
   .modsub{margin-top:10px !important;font-size:13.5px !important;line-height:1.45 !important}
-  .mp{color:var(--blue);font-weight:700}
-  .mp.free{color:var(--green-deep)}
+  .mp{color:var(--blue);font-weight:700}.mp.free{color:var(--green-deep)}
   .modnote2{text-align:center;max-width:66ch;margin:30px auto 0;font-size:16px;color:var(--muted);line-height:1.5}
-  .section-cta{text-align:center;margin-top:34px}
+  .modgrid2 .modcard:nth-child(2){transition-delay:.09s}
+  .modgrid2 .modcard:nth-child(3){transition-delay:.18s}
 
-  /* ---- WHY: flows on plain white, shared card style, no grey box ---- */
-  .why-lede{text-align:center;max-width:66ch;margin:0 auto 34px;color:var(--muted);font-size:17px;line-height:1.6}
-  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-  .why-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:0 4px 16px rgba(15,26,31,.05)}
-  .why-card h3{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:9px}
-  .why-card p{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
+  /* ---- WHY: illustration beside a clean, un-boxed list ---- */
+  .why-two{display:grid;grid-template-columns:.92fr 1.08fr;gap:50px;align-items:center}
+  .why-media img{width:100%;height:auto;display:block;filter:drop-shadow(0 20px 44px rgba(15,26,31,.12))}
+  .why-lede{color:var(--muted);font-size:17px;line-height:1.6;margin-bottom:22px}
+  .why-list{list-style:none;display:grid;gap:20px}
+  .why-list li{display:flex;gap:16px;align-items:flex-start}
+  .wl-mark{flex:none;width:14px;height:14px;border-radius:5px;margin-top:5px;background:var(--c,var(--blue));box-shadow:0 0 0 5px color-mix(in srgb,var(--c,var(--blue)) 16%, transparent)}
+  .why-list h3{font-family:var(--font-head);font-size:17.5px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
+  .why-list p{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
+  .why-list li:nth-child(2){transition-delay:.08s}
+  .why-list li:nth-child(3){transition-delay:.16s}
+  .why-list li:nth-child(4){transition-delay:.24s}
 
-  /* ---- SOCIAL PROOF: drifting reviews dimmed behind two advisor cards ---- */
+  /* ---- SOCIAL PROOF: drifting reviews behind; smaller cards that pop in on scroll ---- */
   .proofsec{position:relative;overflow:hidden}
-  .proofsec .conveyor{opacity:.5;z-index:0}
-  .proof-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.74),rgba(255,255,255,.86));pointer-events:none}
+  .proofsec .conveyor{opacity:.42;z-index:0}
+  .proof-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(247,249,252,.62),rgba(247,249,252,.78));pointer-events:none}
   .proof-inner{position:relative;z-index:2}
-  .trust-strip{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
-  .proof-inner .advisor-card{margin:22px auto}
-  .proof-inner .advisor-card .ac-inner{background:#fff}
+  .trust-strip{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:38px}
+  .t-card{position:relative;max-width:720px;margin:22px auto;opacity:0;transform:translateY(28px) scale(.95);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.9,.3,1.25)}
+  .t-card.show{opacity:1;transform:none}
+  .t-card.gone{display:none}
+  .t-card .ac-inner{padding:30px 34px;gap:28px}
+  .t-card .ac-photo{width:122px;height:122px;border-radius:18px}
+  .t-card .ac-quote{font-size:clamp(17px,1.9vw,22px);margin-bottom:12px}
+  .t-close{position:absolute;top:12px;right:14px;z-index:4;background:var(--grey);border:0;width:30px;height:30px;border-radius:50%;font-size:17px;line-height:1;cursor:pointer;color:var(--ink)}
+  .t-close:hover{background:#e2e6ec}
 
-  /* ---- timed CTA: the only appearing element; slides in bottom-right after 8s ---- */
+  /* ---- timed CTA: the only appearing element ---- */
   .timed-cta{position:fixed;right:22px;bottom:22px;z-index:80;max-width:330px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 24px 20px;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;overflow:hidden}
   .timed-cta::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .timed-cta.show{opacity:1;transform:none;pointer-events:auto}
@@ -393,23 +411,30 @@
   .tc-text{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
   .timed-cta .btn{font-size:15px;padding:12px 22px}
 
+  @media(max-width:900px){
+    .mod-hero,.why-two{grid-template-columns:1fr;gap:26px}
+    .why-media{max-width:440px;margin:0 auto}
+    .modgrid2{grid-template-columns:1fr}
+  }
   @media(max-width:860px){
-    .mhero-inner{grid-template-columns:1fr;gap:16px;text-align:center;padding:52px 20px 26px;min-height:0}
+    .mhero-inner{grid-template-columns:1fr;gap:16px;text-align:center;padding:54px 20px 28px;min-height:0}
     .mhero-copy p.sub,.mhero-cta{margin-left:auto;margin-right:auto}
     .mhero-cta{justify-content:center}
-    .mstage{height:320px;order:2}
-    .modlead{flex-direction:column;text-align:center;gap:16px;padding:28px 22px}
-    .modlead p{margin-left:auto;margin-right:auto}
-    .modgrid2{grid-template-columns:1fr}
+    .mstage{height:330px;order:2}
+    .mod-hero-copy{text-align:center}.mod-hero-copy p{margin-left:auto;margin-right:auto}.mod-hero-logo{margin-left:auto;margin-right:auto}
   }
   @media(max-width:520px){
     .timed-cta{left:14px;right:14px;max-width:none}
-    .mtile-in{width:150px;height:62px}.mtile-in img{height:21px;max-width:110px}
-    .mtile.p1{left:6%}.mtile.p2{left:50%}.mtile.p3{left:6%}.mtile.p4{left:50%}
+    .mtile-in{width:164px;height:78px}.mtile-in img{height:25px;max-width:124px}
+    .mtile.p1{left:2%}.mtile.p2{left:50%}.mtile.p3{left:2%}.mtile.p4{left:50%}
   }
   @media (prefers-reduced-motion:reduce){
+    body{animation:none}
+    .mstage{animation:none}
+    .mtile{opacity:1;animation:none;transform:none}
     .mtile-in{animation:none}
     .reveal{opacity:1;transform:none;transition:none}
+    .t-card{opacity:1;transform:none;transition:none}
     .timed-cta{transition:none;transform:none}
   }
 </style>
@@ -421,7 +446,7 @@
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
 </header>
 
-<!-- HERO: a tight, gently drifting cluster of the four modules on clean glowing white -->
+<!-- HERO: bigger, tighter module cluster that pops in then floats over a soft drifting gradient -->
 <section class="mhero">
   <div class="mhero-accent" aria-hidden="true"></div>
   <div class="mhero-inner">
@@ -443,16 +468,17 @@
   </div>
 </section>
 
-<!-- MODULES: payroll first and most prominent, then three clean cards; extras folded into sub-lines -->
+<!-- MODULES: payroll lead shown on the real product, then three colour-accented cards -->
 <section class="section" id="modules">
   <div class="section-head reveal">
     <h2>All the modules a small business actually needs</h2>
     <p>Pay only for the modules your clients use. Reports are always free, and most modules start from $10.95 a month.</p>
   </div>
 
-  <div class="modlead reveal">
-    <div class="modlead-mark"><img src="module-payslip.png" alt="Easy Payslip"></div>
-    <div>
+  <div class="mod-hero">
+    <div class="mod-hero-media reveal"><img src="product-screens.png" alt="Easy Business App on laptop, phone and tablet showing invoicing and Single Touch Payroll" loading="lazy"></div>
+    <div class="mod-hero-copy reveal">
+      <img class="mod-hero-logo" src="module-payslip.png" alt="Easy Payslip">
       <span class="modtag">Start with payroll</span>
       <h3>Payroll</h3>
       <p>Pay staff, lodge STP and Payday Super, built for small teams.</p>
@@ -461,19 +487,19 @@
   </div>
 
   <div class="modgrid2">
-    <div class="modcard reveal">
+    <div class="modcard reveal" style="--accent:#005CFF">
       <div class="modcard-logo"><img src="module-cashflow.png" alt="Easy Cashflow"></div>
       <h3>Bank Feeds</h3>
       <p>Connects the bank so every cent in and out lands in the books.</p>
       <p class="modsub"><span class="mp">From $10.95 a month.</span> Snap a receipt and it files itself, no typing.</p>
     </div>
-    <div class="modcard reveal">
+    <div class="modcard reveal" style="--accent:#2BB673">
       <div class="modcard-logo"><img src="module-invoicing.png" alt="Easy Invoicing"></div>
       <h3>Invoicing</h3>
       <p>Send invoices and quotes, take card payments, chase what is overdue.</p>
       <p class="modsub"><span class="mp">Free tier or $10.95 a month.</span></p>
     </div>
-    <div class="modcard reveal">
+    <div class="modcard reveal" style="--accent:#C026D3">
       <div class="modcard-logo"><img src="module-reports.png" alt="Easy Reports"></div>
       <h3>Reports</h3>
       <p>Turns that data into P&amp;L, balance sheet and BAS you can read any day.</p>
@@ -485,22 +511,27 @@
   <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
 </section>
 
-<!-- WHY IT IS THE EASY SWITCH FOR ADVISORS: one merged section, flowing on white -->
+<!-- WHY: the pain of oversized software, shown with EBA's own illustration, beside a clean list -->
 <section class="section">
   <div class="section-head reveal">
     <h2>Why it is the easy switch for advisors</h2>
   </div>
-  <p class="why-lede reveal">Clients get pushed onto software that is too big, too complex and too dear for the size of their business. Easy Business App is built and priced for micro and small businesses, so it fits how your clients actually work, and it makes your job easier too.</p>
-  <div class="why-grid">
-    <div class="why-card reveal"><h3>Clients love it, so you get better data</h3><p>When clients enjoy the software they keep it up to date. That means better quality data, less chasing, and a smoother run into BAS and tax time.</p></div>
-    <div class="why-card reveal"><h3>Real, Sydney-based support</h3><p>Human support on chat and phone, based in Sydney, so when a client gets stuck they call Easy Business App, not you.</p></div>
-    <div class="why-card reveal"><h3>Built for your practice</h3><p>A dedicated Partner Manager and one advisor portal to manage every client in one place.</p></div>
-    <div class="why-card reveal"><h3>Priced for small business</h3><p>Made for the four-employees-or-fewer clients the big platforms are too dear for, so the move is an easy one to recommend.</p></div>
+  <div class="why-two">
+    <div class="why-media reveal"><img src="confused-user.png" alt="A small business client overwhelmed by software that is too hard and too expensive" loading="lazy"></div>
+    <div class="why-body">
+      <p class="why-lede reveal">Clients get pushed onto software that is too big, too complex and too dear for the size of their business. Easy Business App is built and priced for micro and small businesses, so it fits how your clients actually work, and it makes your job easier too.</p>
+      <ul class="why-list">
+        <li class="reveal" style="--c:#F5325B"><span class="wl-mark" aria-hidden="true"></span><div><h3>Clients love it, so you get better data</h3><p>When clients enjoy the software they keep it up to date. That means better quality data, less chasing, and a smoother run into BAS and tax time.</p></div></li>
+        <li class="reveal" style="--c:#005CFF"><span class="wl-mark" aria-hidden="true"></span><div><h3>Real, Sydney-based support</h3><p>Human support on chat and phone, based in Sydney, so when a client gets stuck they call Easy Business App, not you.</p></div></li>
+        <li class="reveal" style="--c:#2BB673"><span class="wl-mark" aria-hidden="true"></span><div><h3>Built for your practice</h3><p>A dedicated Partner Manager and one advisor portal to manage every client in one place.</p></div></li>
+        <li class="reveal" style="--c:#C026D3"><span class="wl-mark" aria-hidden="true"></span><div><h3>Priced for small business</h3><p>Made for the four-employees-or-fewer clients the big platforms are too dear for, so the move is an easy one to recommend.</p></div></li>
+      </ul>
+    </div>
   </div>
   <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
 </section>
 
-<!-- SOCIAL PROOF: drifting reviews dimmed in the background, two advisor cards in front -->
+<!-- SOCIAL PROOF: drifting reviews behind; Amy then Zak pop in on scroll, each dismissible -->
 <section class="section proofsec" id="proof">
   <div class="conveyor" id="proofFlow" aria-hidden="true"></div>
   <div class="proof-veil" aria-hidden="true"></div>
@@ -513,7 +544,8 @@
       <div class="stat"><div class="num">Thousands</div><div class="lbl">of reviews</div></div>
       <div class="stat"><div class="num"><span class="cu" data-target="10000" data-comma="1" data-suffix="+">10,000+</span></div><div class="lbl">small businesses</div></div>
     </div>
-    <div class="advisor-card reveal">
+    <div class="t-card advisor-card" id="tAmy">
+      <button class="t-close" type="button" aria-label="Dismiss">&times;</button>
       <div class="ac-inner">
         <img class="ac-photo" src="amy-headshot.png" width="280" height="280" alt="Amy L. FCPA, Practice Owner, NSW">
         <div class="ac-copy">
@@ -522,7 +554,8 @@
         </div>
       </div>
     </div>
-    <div class="advisor-card reveal">
+    <div class="t-card advisor-card" id="tZak">
+      <button class="t-close" type="button" aria-label="Dismiss">&times;</button>
       <div class="ac-inner">
         <img class="ac-photo" src="zak-headshot.png" width="280" height="280" alt="Zak M., BAS Agent, WA">
         <div class="ac-copy">
@@ -556,9 +589,8 @@
 <script>
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-/* drifting reviews behind the social-proof section (same effect as the reviews page,
-   dimmed via .proofsec .conveyor + .proof-veil; reduced-motion stops .cvtrack via shared CSS).
-   Short verbatim 5-star reviews, first name as shown. */
+/* drifting reviews behind the social-proof section (same effect as the reviews page, dimmed;
+   reduced-motion stops .cvtrack via the shared CSS). Short verbatim 5-star reviews. */
 var PROOF=[
   {n:'Wendy Wu',q:'Easy to use! Simple and user friendly!'},
   {n:'Tracy',q:'Support has been outstanding!'},
@@ -600,7 +632,7 @@ function pmini(r){return '<div class="mini"><div class="s">&#9733;&#9733;&#9733;
   }
 })();
 
-/* count-up numbers in the trust strip (reused from the reviews page) */
+/* count-up numbers in the trust strip */
 (function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function fmtVal(el,v){var dec=+(el.dataset.dec||0);var s=v.toFixed(dec);if(el.dataset.comma)s=Number(s).toLocaleString('en-AU',{minimumFractionDigits:dec,maximumFractionDigits:dec});return s+(el.dataset.suffix||'');}
@@ -614,6 +646,21 @@ function pmini(r){return '<div class="mini"><div class="s">&#9733;&#9733;&#9733;
   if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in');});return;}
   var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.08});
   els.forEach(function(e){io.observe(e);});
+})();
+
+/* testimonials pop in as the user scrolls to each; small close (x) dismisses for the session */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.t-card'));if(!cards.length)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!('IntersectionObserver' in window)||reduce){cards.forEach(function(c){c.classList.add('show');});}
+  else{
+    var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px',threshold:0.25});
+    cards.forEach(function(c){io.observe(c);});
+  }
+  cards.forEach(function(c){
+    var x=c.querySelector('.t-close');
+    if(x)x.addEventListener('click',function(){c.classList.add('gone');});
+  });
 })();
 
 /* the only appearing element: a single timed Book a demo, bottom-right after 8s, once per visit */
