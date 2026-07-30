@@ -380,12 +380,13 @@
   .why-lede{color:var(--muted);font-size:17px;line-height:1.6;margin-bottom:22px}
   .why-list{list-style:none;display:grid;gap:20px}
   .why-list li{display:flex;gap:16px;align-items:flex-start}
-  .wl-mark{flex:none;width:14px;height:14px;border-radius:5px;margin-top:5px;background:var(--c,var(--blue));box-shadow:0 0 0 5px color-mix(in srgb,var(--c,var(--blue)) 16%, transparent)}
+  .wl-ico{flex:none;width:44px;height:44px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:var(--tint,var(--blue-tint))}
+  .wl-ico svg{width:24px;height:24px;fill:none;stroke:var(--c,var(--blue));stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .why-list h3{font-family:var(--font-head);font-size:17.5px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
   .why-list p{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
-  .why-list li:nth-child(2){transition-delay:.08s}
-  .why-list li:nth-child(3){transition-delay:.16s}
-  .why-list li:nth-child(4){transition-delay:.24s}
+  /* four points reveal one after another as the section scrolls in (JS-staggered) */
+  .wq{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+  .wq.in{opacity:1;transform:none}
 
   /* ---- SOCIAL PROOF: drifting reviews behind; smaller cards that pop in on scroll ---- */
   .proofsec{position:relative;overflow:hidden}
@@ -433,7 +434,7 @@
     .mstage{animation:none}
     .mtile{opacity:1;animation:none;transform:none}
     .mtile-in{animation:none}
-    .reveal{opacity:1;transform:none;transition:none}
+    .reveal,.wq{opacity:1;transform:none;transition:none}
     .t-card{opacity:1;transform:none;transition:none}
     .timed-cta{transition:none;transform:none}
   }
@@ -520,11 +521,11 @@
     <div class="why-media reveal"><img src="confused-user.png" alt="A small business client overwhelmed by software that is too hard and too expensive" loading="lazy"></div>
     <div class="why-body">
       <p class="why-lede reveal">Clients get pushed onto software that is too big, too complex and too dear for the size of their business. Easy Business App is built and priced for micro and small businesses, so it fits how your clients actually work, and it makes your job easier too.</p>
-      <ul class="why-list">
-        <li class="reveal" style="--c:#F5325B"><span class="wl-mark" aria-hidden="true"></span><div><h3>Clients love it, so you get better data</h3><p>When clients enjoy the software they keep it up to date. That means better quality data, less chasing, and a smoother run into BAS and tax time.</p></div></li>
-        <li class="reveal" style="--c:#005CFF"><span class="wl-mark" aria-hidden="true"></span><div><h3>Real, Sydney-based support</h3><p>Human support on chat and phone, based in Sydney, so when a client gets stuck they call Easy Business App, not you.</p></div></li>
-        <li class="reveal" style="--c:#2BB673"><span class="wl-mark" aria-hidden="true"></span><div><h3>Built for your practice</h3><p>A dedicated Partner Manager and one advisor portal to manage every client in one place.</p></div></li>
-        <li class="reveal" style="--c:#C026D3"><span class="wl-mark" aria-hidden="true"></span><div><h3>Priced for small business</h3><p>Made for the four-employees-or-fewer clients the big platforms are too dear for, so the move is an easy one to recommend.</p></div></li>
+      <ul class="why-list" id="whyList">
+        <li class="wq" style="--c:#005CFF;--tint:#CFE0FF"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><div><h3>Clients love it, so you get better data</h3><p>When clients enjoy the software they keep it up to date. That means better quality data, less chasing, and a smoother run into BAS and tax time.</p></div></li>
+        <li class="wq" style="--c:#2BB673;--tint:#E4FFF1"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a7.5 7.5 0 0 1-10.9 6.7L4 20l1.8-5A7.5 7.5 0 1 1 21 11.5Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></span><div><h3>Real, Sydney-based support</h3><p>Human support on chat and phone, based in Sydney, so when a client gets stuck they call Easy Business App, not you.</p></div></li>
+        <li class="wq" style="--c:#005CFF;--tint:#CFE0FF"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 21V11h5a1 1 0 0 1 1 1v9"/><path d="M3 21h18"/><path d="M7 8h3M7 12h3M7 16h3"/></svg></span><div><h3>Built for your practice</h3><p>A dedicated Partner Manager and one advisor portal to manage every client in one place.</p></div></li>
+        <li class="wq" style="--c:#2BB673;--tint:#E4FFF1"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v9"/><path d="M14.3 9.4c-.5-.7-1.4-1.1-2.3-1.1-1.3 0-2.3.8-2.3 1.9 0 1 .9 1.5 2.3 1.9 1.4.4 2.3.9 2.3 1.9 0 1.1-1 1.9-2.3 1.9-1 0-1.8-.4-2.3-1.1"/></svg></span><div><h3>Priced for small business</h3><p>Made for the four-employees-or-fewer clients the big platforms are too dear for, so the move is an easy one to recommend.</p></div></li>
       </ul>
     </div>
   </div>
@@ -646,6 +647,15 @@ function pmini(r){return '<div class="mini"><div class="s">&#9733;&#9733;&#9733;
   if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in');});return;}
   var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.08});
   els.forEach(function(e){io.observe(e);});
+})();
+
+/* "why" points reveal one after another when the list scrolls into view (same motion, staggered) */
+(function(){
+  var list=document.getElementById('whyList');if(!list)return;
+  var items=[].slice.call(list.querySelectorAll('.wq'));if(!items.length)return;
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){items.forEach(function(i){i.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){items.forEach(function(it,idx){setTimeout(function(){it.classList.add('in');},idx*170);});obs.disconnect();}});},{rootMargin:'0px 0px -12% 0px',threshold:0.2});
+  io.observe(list);
 })();
 
 /* testimonials pop in as the user scrolls to each; small close (x) dismisses for the session */
