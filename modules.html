@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<!--
+  Easy Business App - Reviews landing page (destination for the XU Mag "Read the reviews" CTA)
+  AUDIENCE: accountants and bookkeepers who refer EBA to their small business clients.
+  The review wall is the proof; the framing, CTAs and closing band speak to the advisor.
+  DATA: REVIEWS = 230 real Trustpilot reviews (4-5 star only), verbatim, first name as shown,
+  no company replies, nothing invented. Trustpilot 4.8 / 234 is VERIFIED. "10,000+" is the approved house figure.
+  App Store rating intentionally not shown. Theme counts are computed live from the real reviews, not fabricated.
+  House rules: no em dashes, AU English, no banned hype words, nothing fabricated.
+  Header uses the real EBA colour logo asset (eba-logo-colour.png, from easybusinessapp.com).
+-->
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What your clients say about Easy Business App | For accountants and bookkeepers</title>
+<meta name="description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App to their Australian small business clients.">
+<!-- Share previews. og:url / og:image are absolute per the OG spec; update the base URL if the page moves off vercel.app. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="What your clients say about Easy Business App">
+<meta property="og:description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App to their small business clients.">
+<meta property="og:url" content="https://eba-reviews-landing.vercel.app/">
+<meta property="og:image" content="https://eba-reviews-landing.vercel.app/eba-logo-colour.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What your clients say about Easy Business App">
+<meta name="twitter:description" content="234 verified Trustpilot reviews, 4.8 stars. See why accountants and bookkeepers recommend Easy Business App.">
+<!-- favicon.png is the EBA brand mark cropped from eba-logo-colour.png (128x128, transparent) -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Easy Business App",
+  "operatingSystem": "Web, iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "url": "https://easybusinessapp.com",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "234"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<!-- Headings use EBA's real font, ITC Avant Garde Gothic Pro, via the same Adobe Fonts
+     kit the live site loads (fdo2qia). That kit is domain-licensed, so it renders on
+     easybusinessapp.com but NOT on github.io; there the stack falls back to Jost, the
+     closest free geometric match. Body stays Roboto, matching EBA. -->
+<link rel="stylesheet" href="https://use.typekit.net/fdo2qia.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* Real EBA brand values, read from easybusinessapp.com: primary blue #005CFF,
+     conversion green #2BB673, text #202020, white base + #EEEEEE grey sections.
+     (No cream or orange on the main site - those came from the calculator subdomain.) */
+  /* --green-deep is a darkened green for solid fills with white text so they pass WCAG AA;
+     --green stays for accents, gradients and the Trustpilot dot. */
+  :root{--blue:#005CFF;--blue-dark:#0047CC;--green:#2BB673;--green-dark:#229A61;--green-deep:#1E7C4F;--green-deeper:#196843;--ink:#202020;--text:#202020;--muted:#5B6472;--bg:#FFFFFF;--grey:#EEEEEE;--star:#F5A524;--star-soft:#FFD75E;--star-softer:#FFF0B8;--blue-tint:#CFE0FF;--green-tint:#E4FFF1;--band-muted:#B9C0CC;--card:#FFF;--line:rgba(32,32,32,.10);--font-head:"itc-avant-garde-gothic-pro","Jost","Century Gothic",system-ui,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Roboto",system-ui,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+  @media(max-width:720px){body{padding-bottom:74px}} /* room for the sticky mobile CTA bar */
+  h1,h2,h3{font-family:var(--font-head)}
+  a{color:inherit;text-decoration:none}
+  header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .logo{display:flex;align-items:center}
+  .logo img{height:64px;width:auto;display:block}
+  @media(max-width:860px){.logo img{height:44px}} /* smaller on phones so the header button keeps its own line */
+  header .btn{white-space:nowrap}
+  @media(max-width:480px){.logo img{height:36px}header .btn{font-size:13px;padding:9px 14px}} /* "Book a partner demo" fits beside the logo on small phones */
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;border:0;padding:12px 22px;border-radius:999px;transition:background .15s,transform .15s,box-shadow .15s}
+  .btn-primary{background:var(--green-deep);color:#fff}.btn-primary:hover{background:var(--green-deeper);transform:translateY(-1px)}
+  .btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--ink)}
+
+  .hero{position:relative;overflow:hidden;min-height:52vh;display:flex;align-items:center}
+  .conveyor{position:absolute;inset:0;z-index:0;display:flex;gap:16px;justify-content:center;padding:0 14px;pointer-events:none}
+  .cvcol{flex:1 1 0;max-width:320px;overflow:hidden}
+  .cvtrack{display:flex;flex-direction:column;gap:16px;animation:flow linear infinite;will-change:transform}
+  @keyframes flow{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-50%,0)}}
+  .mini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px;box-shadow:0 2px 8px rgba(15,26,31,.05)}
+  .mini .s{color:var(--star);font-size:13px;letter-spacing:1px;margin-bottom:7px}
+  .mini .t{font-size:13.5px;line-height:1.45;color:var(--ink);margin-bottom:9px}
+  .mini .nm{font-weight:700;font-size:12.5px;color:var(--ink)}
+  .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.52));pointer-events:none}
+  .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center;max-width:1440px;margin:0 auto;padding:32px 48px;width:100%}
+  /* Soft white backing behind the headline text column only, so the copy stays readable
+     while the conveyor reviews still show around and beside it. Radial fade = no hard box;
+     confined to this column, so the hero pile in the other column is untouched. */
+  .hero-copy{position:relative}
+  .hero-copy::before{content:"";position:absolute;z-index:-1;inset:-32px -30px -32px -44px;pointer-events:none;
+    background:radial-gradient(130% 120% at 42% 50%, rgba(255,255,255,.96) 0%, rgba(255,255,255,.9) 55%, rgba(255,255,255,.45) 80%, rgba(255,255,255,0) 100%)}
+  .eyebrow{font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .hero h1{font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,3.7vw,54px);margin-bottom:18px}
+  .hero h1 .lv{color:var(--blue)}
+  .hero h1 .brandline{display:block} /* "Easy Business App" on its own line; wraps if the larger size needs it */
+  .mentioned{font-size:19px;color:var(--muted);margin-bottom:18px;min-height:26px}
+  .mentioned .rot{display:inline-block;font-weight:900;color:var(--blue);transition:opacity .35s ease,transform .35s ease}
+  .mentioned .rot.swap{opacity:0;transform:translateY(6px)}
+  .hero p.lede{font-size:clamp(17px,1.9vw,21px);color:var(--muted);max-width:46ch;margin-bottom:22px;line-height:1.5}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-cta .btn{font-size:17px;padding:16px 34px}
+  .stats{display:flex;gap:16px;flex-wrap:nowrap;margin-top:24px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 26px;text-align:center;box-shadow:0 1px 2px rgba(15,26,31,.05);white-space:nowrap}
+  .stat .num{font-size:34px;font-weight:900;color:var(--blue);line-height:1}
+  .stat .num .star{color:var(--star);font-size:26px}
+  .stat .lbl{font-size:14px;color:var(--muted);margin-top:8px}
+  .pile{position:relative;height:440px}
+  .pcard{position:absolute;left:50%;bottom:24px;width:min(400px,92%);transform:translate(-50%,0);background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px 22px;box-shadow:0 16px 40px rgba(15,26,31,.16);cursor:pointer;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .55s ease}
+  .pcard .s{color:var(--star);font-size:19px;letter-spacing:2px;margin-bottom:12px}
+  .pcard .t{font-size:17px;line-height:1.5;color:var(--ink);margin-bottom:16px;font-weight:500}
+  .pcard .nm{font-weight:900;font-size:14px;color:var(--ink)}
+  .pcard .src{font-size:12px;color:var(--muted);margin-top:2px}
+  .pcard .hl{background:rgba(0,92,255,.12);color:var(--blue-dark);font-weight:700;border-radius:4px;padding:0 3px}
+  .pile-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;font-size:13px;color:var(--muted);white-space:nowrap;background:rgba(255,255,255,.9);padding:5px 14px;border-radius:999px;border:1px solid var(--line)}
+
+  .wall-head{text-align:center;padding:52px 24px 6px}
+  .wall-head h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:8px}
+  .wall-head p{color:var(--muted);font-size:16px}
+
+  /* theme chips */
+  .themes{position:sticky;top:88px;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);padding:16px 20px;border-bottom:1px solid var(--line);display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 15px;border-radius:999px;transition:.15s;white-space:nowrap}
+  .chip:hover{border-color:var(--ink)}
+  .chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .chip .c{font-weight:900;font-size:12.5px;opacity:.7}
+  .chip.active .c{opacity:.95}
+  @media(max-width:720px){.themes{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}}
+
+  .wall-section{padding:14px 20px 10px;max-width:1180px;margin:0 auto}
+  .wall{columns:3;column-gap:22px}
+  @media(max-width:980px){.wall{columns:2}}
+  @media(max-width:640px){.wall{columns:1}}
+  .rev{break-inside:avoid;margin:0 0 22px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 2px 10px rgba(15,26,31,.05);cursor:pointer;position:relative;opacity:0;transform:translateY(26px) scale(.98);transition:opacity .5s ease,transform .5s ease,box-shadow .18s ease}
+  .rev.in{opacity:1;transform:translateY(0) scale(1)}
+  .rev:hover{box-shadow:0 12px 30px rgba(15,26,31,.14);transform:translateY(-3px)}
+  .rev .stars{color:var(--star);font-size:15px;letter-spacing:1px;margin-bottom:10px}
+  .rev .q{font-size:17px;line-height:1.55;color:var(--ink);margin-bottom:16px}
+  .rev .q .hl{background:rgba(0,92,255,.11);color:var(--blue-dark);font-weight:700;border-radius:4px;padding:0 3px}
+  .rev .who{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .rev .name{font-weight:700;font-size:14px;color:var(--ink)}
+  .rev .src{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+  .rev .src .tp{width:9px;height:9px;border-radius:2px;background:var(--green);display:inline-block}
+  .tp-logo{display:inline-block;width:65px;height:16px;background:url(trustpilot-logo-black.svg) left center/contain no-repeat;flex:none}
+  .rev.blue .src .tp-logo,.rev.green .src .tp-logo{background-image:url(trustpilot-logo-white.svg)}
+  .rev .more{font-size:12px;font-weight:600;color:var(--blue);margin-top:10px;display:inline-block}
+  .rev.blue{background:var(--blue);border-color:var(--blue)}.rev.blue .q,.rev.blue .name{color:#fff}
+  .rev.blue .src{color:rgba(255,255,255,.95)}.rev.blue .src .tp{background:#fff}.rev.blue .stars{color:var(--star-soft)}.rev.blue .more{color:var(--blue-tint)}
+  .rev.green{background:var(--green-deep);border-color:var(--green-deep)}.rev.green .q,.rev.green .name{color:#fff}
+  .rev.green .src{color:rgba(255,255,255,.95)}.rev.green .src .tp{background:#fff}.rev.green .stars{color:var(--star-softer)}.rev.green .more{color:var(--green-tint)}
+  .rev.hide{display:none}
+
+  /* Advisor testimonial modules: used exactly twice (Amy after the hero, Zak after the wall).
+     Sized as full CTA modules, not skinny inline cards. */
+  .advisor-card{max-width:1180px;margin:56px auto;padding:0 24px}
+  .ac-inner{position:relative;overflow:hidden;display:flex;align-items:center;gap:48px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:52px 60px 52px 68px;box-shadow:0 24px 60px rgba(15,26,31,.14)}
+  .ac-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,var(--blue),var(--green))}
+  .ac-photo{flex:none;width:200px;height:200px;border-radius:24px;object-fit:cover;box-shadow:0 10px 26px rgba(15,26,31,.18)}
+  .ac-copy{min-width:0}
+  .ac-line{margin:0 0 14px;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+  .ac-quote{margin:0 0 16px;font-size:clamp(22px,2.6vw,31px);line-height:1.35;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .ac-name{margin:0 0 24px;font-size:15px;font-weight:600;color:var(--muted)}
+  .ac-btn{font-size:17px;padding:16px 34px;transform-origin:center;will-change:transform;animation:softpulse 2s ease-in-out infinite}
+  .ac-btn:hover{animation:none;transform:translateY(-2px) scale(1.04)}
+  @keyframes softpulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+  @media(max-width:860px){
+    .ac-inner{gap:30px;padding:38px 34px 38px 42px}
+    .ac-photo{width:150px;height:150px}
+  }
+  @media(max-width:640px){
+    .advisor-card{padding:0 14px;margin:34px auto}
+    .ac-inner{flex-direction:column;text-align:center;gap:20px;padding:32px 24px}
+    .ac-photo{width:132px;height:132px}
+  }
+
+  /* What people love key-stats strip */
+  .lovestrip{max-width:1180px;margin:0 auto;padding:4px 24px 2px;text-align:center}
+  .love-head{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .love-stats{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .love-stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:118px;box-shadow:0 1px 2px rgba(15,26,31,.05)}
+  .ls-num{display:block;font-size:30px;font-weight:900;color:var(--blue);line-height:1}
+  .ls-lbl{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+  .love-sell{max-width:64ch;margin:18px auto 0;color:var(--ink);font-size:16px;line-height:1.5}
+
+  .band{background:var(--ink);color:#fff;text-align:center;padding:66px 24px;position:relative;overflow:hidden;margin-top:20px}
+  .band::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
+  .band h2{font-size:clamp(28px,4.5vw,46px);font-weight:900;letter-spacing:-.02em;margin-bottom:16px}
+  .band p{color:var(--band-muted);font-size:18px;margin:0 auto 28px;max-width:60ch}
+  footer{padding:30px 28px;color:var(--muted);font-size:13px;text-align:center}
+
+  /* stars draw in left-to-right as each card reveals */
+  .rev .stars{clip-path:inset(-2px 100% -2px 0)}
+  .rev.in .stars{clip-path:inset(-2px 0 -2px 0);transition:clip-path .55s ease .12s}
+
+  /* filter bar flashes once when "Read the reviews" lands, to teach the filtering */
+  .themes.flash{animation:barpulse 1.3s ease}
+  @keyframes barpulse{0%,100%{background:rgba(255,255,255,.94)}45%{background:rgba(0,92,255,.10)}}
+
+  /* contextual CTA strip shown while a filter is active */
+  .filtercta{display:none;justify-content:center;max-width:1180px;margin:18px auto 0;padding:0 24px}
+  .filtercta.show{display:flex}
+  .fc-inner{display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:14px;padding:14px 24px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .fc-inner p{margin:0;font-size:15px;color:var(--ink)}
+  .fc-inner strong{color:var(--blue);font-weight:900}
+
+  /* slim CTA bars between review sections */
+  .ctabar{max-width:1180px;margin:6px auto 30px;padding:0 24px}
+  .ctabar-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 26px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .ctabar-inner p{margin:0;font-size:15.5px;color:var(--ink);font-weight:500}
+  @media(max-width:640px){.ctabar-inner{justify-content:center;text-align:center}}
+
+  .showmore{text-align:center;padding:4px 24px 10px}
+
+  /* bottom-right savings popup (desktop/tablet; phones have the sticky CTA bar instead) */
+  .savepop{position:fixed;right:22px;bottom:22px;z-index:65;max-width:330px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(15,26,31,.22);padding:22px 24px 20px;opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;overflow:hidden}
+  .savepop::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
+  .savepop.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .savepop h3{font-size:18px;font-weight:900;color:var(--ink);margin:2px 0 8px;letter-spacing:-.01em}
+  .savepop p{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
+  .savepop .close{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink);line-height:1}
+  @media(max-width:720px){.savepop{display:none}}
+
+  /* sticky mobile CTA */
+  .mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s ease}
+  .mobile-cta .btn{width:100%;font-size:16px;padding:14px}
+  .mobile-cta.show{transform:translateY(0)}
+  @media(min-width:721px){.mobile-cta{display:none}}
+
+  /* modal prev/next */
+  .mnav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--ink);box-shadow:0 4px 14px rgba(15,26,31,.18)}
+  .mnav:hover{border-color:var(--ink)}
+  .mnav.prev{left:-56px}.mnav.next{right:-56px}
+  @media(max-width:760px){.mnav.prev{left:8px}.mnav.next{right:8px}}
+
+  /* four-module story: sits directly above the calculator */
+  .modules{max-width:1180px;margin:64px auto 0;padding:0 24px}
+  .mod-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+  .mod-copy h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:12px}
+  .mod-lede{color:var(--muted);font-size:17px;line-height:1.55;margin-bottom:14px}
+  .mod-save{color:var(--ink);font-size:17px;line-height:1.5;margin-bottom:22px}
+  .mod-save strong{color:var(--blue)}
+  .mod-logos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mod-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;box-shadow:0 2px 8px rgba(15,26,31,.05)}
+  .mod-item img{height:44px;width:auto;display:block;margin-bottom:10px}
+  .mod-item span{font-size:13.5px;color:var(--muted);line-height:1.4;display:block}
+  .mod-img{width:100%;height:auto;border-radius:16px}
+  @media(max-width:860px){
+    .mod-grid{grid-template-columns:1fr;gap:26px}
+    .mod-img{max-width:480px;margin:0 auto}
+    .modules{margin-top:44px}
+  }
+  @media(max-width:480px){.mod-logos{grid-template-columns:1fr}}
+
+  /* savings calculator */
+  .calc{background:var(--grey);padding:60px 24px;margin-top:44px}
+  .calc-inner{max-width:1080px;margin:0 auto;text-align:center}
+  .calc h2{font-size:clamp(26px,3.4vw,40px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:10px}
+  .calc-sub{color:var(--muted);font-size:16px;max-width:62ch;margin:0 auto}
+  .calc-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:34px;text-align:left}
+  .calc-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 32px;box-shadow:0 2px 10px rgba(15,26,31,.06)}
+  .calc-card label,.calc-field{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:24px}
+  .calc-card label:last-child,.calc-field:last-child{margin-bottom:0}
+  .calc-out{float:right;font-weight:900;color:var(--blue);font-size:18px}
+  .calc-card input[type=range]{width:100%;margin-top:12px;accent-color:var(--blue)}
+  .calc-presets{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .calc-money{display:flex;align-items:center;gap:6px;margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:700;color:var(--ink)}
+  .calc-money input{border:0;outline:none;font:inherit;font-weight:700;width:100%;color:var(--ink);background:transparent}
+  .calc-card small{display:block;margin-top:8px;color:var(--muted);font-weight:400;font-size:13px;line-height:1.4}
+  .calc-result{background:var(--ink);color:#fff;border-radius:20px;padding:36px 34px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;position:relative;overflow:hidden}
+  .calc-result::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green))}
+  .cr-brand{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .cr-brand img{border-radius:7px;flex:none}
+  .cr-lbl{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--band-muted);line-height:1.4}
+  .calc-card label.calc-check{display:flex;align-items:center;gap:10px;font-weight:500;font-size:14.5px;margin:8px 0 0;color:var(--ink);cursor:pointer;min-height:32px}
+  .calc-check input{accent-color:var(--blue);width:20px;height:20px;flex:none}
+  .calc-check+small{margin-top:12px}
+  .calc-money input{font-size:16px} /* 16px+ stops iOS Safari auto-zooming on focus */
+  .cr-num{font-family:var(--font-head);font-size:clamp(40px,5vw,58px);font-weight:900;line-height:1.05}
+  .cr-sub{color:var(--band-muted);font-size:15px;margin-bottom:18px}
+  @media(max-width:860px){.calc-grid{grid-template-columns:1fr}.calc-result{align-items:center;text-align:center}}
+
+  .overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,26,31,.55);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+  .overlay.open{display:flex;animation:fadein .2s ease}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+  .modal{background:#fff;border-radius:24px;max-width:600px;width:100%;padding:44px 40px 36px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .24s cubic-bezier(.2,.9,.3,1.2);text-align:center}
+  @keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+  .modal .close{position:absolute;top:16px;right:18px;background:var(--grey);border:0;width:34px;height:34px;border-radius:50%;font-size:19px;cursor:pointer;color:var(--ink);line-height:1}
+  .modal .stars{color:var(--star);font-size:26px;letter-spacing:3px;margin-bottom:18px}
+  .modal .q{font-size:clamp(20px,2.6vw,27px);line-height:1.4;color:var(--ink);font-weight:500;margin-bottom:22px}
+  .modal .name{font-weight:900;font-size:17px;color:var(--ink)}
+  .modal .src{font-size:14px;color:var(--muted);margin-top:4px;margin-bottom:26px}
+  .modal .m-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:6px}
+
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:24px;text-align:center;padding:64px 20px}
+    .hero p.lede,.mentioned{margin-left:auto;margin-right:auto}
+    .hero-cta,.stats{justify-content:center}
+    .stats{flex-wrap:wrap}
+    .pile{height:380px;order:2}
+    header{padding:10px 14px}
+    .themes{top:64px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .cvtrack{animation:none}.pcard{transition:none}.mentioned .rot{transition:none}.ac-btn{animation:none}
+    .rev{opacity:1;transform:none;transition:box-shadow .18s ease}.overlay.open,.modal{animation:none}
+    .rev .stars{clip-path:none;transition:none}.themes.flash{animation:none}.mobile-cta{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="https://easybusinessapp.com" target="_blank" rel="noopener" aria-label="Easy Business App"><img src="eba-logo-colour.png" alt="Easy Business App"></a>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+</header>
+
+<section class="hero">
+  <div class="conveyor" id="conveyor" aria-hidden="true"></div>
+  <div class="veil"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">For accountants and bookkeepers</p>
+      <h1>Software your clients will actually <span class="lv">love</span></h1>
+      <p class="mentioned">Most mentioned in their reviews: <span class="rot" id="rot">easy to use</span></p>
+      <p class="lede">Accounting software built for micro and small businesses. Thousands of them run their books on Easy Business App. Before you recommend it to your clients, read what they say, in their own words.</p>
+      <div class="hero-cta">
+        <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+        <a class="btn btn-ghost" href="#wall" id="readReviews">Read the reviews</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num"><span class="cu" data-target="4.8" data-dec="1">4.8</span><span class="star">&#9733;</span></div><div class="lbl">Trustpilot, 234 reviews</div></div>
+        <div class="stat"><div class="num"><span class="cu" data-target="10000" data-comma="1" data-suffix="+">10,000+</span></div><div class="lbl">small businesses</div></div>
+        <div class="stat"><div class="num"><span class="cu" data-target="90" data-suffix="%">90%</span></div><div class="lbl">of reviews are five stars</div></div>
+      </div>
+    </div>
+    <div class="pile" id="pile" aria-hidden="true"><span class="pile-hint">Tap the card for another review</span></div>
+  </div>
+</section>
+
+<!-- Featured advisor proof, lifted above the wall so the advisor story leads -->
+<div class="advisor-card">
+  <div class="ac-inner">
+    <img class="ac-photo" src="amy-headshot.png" width="280" height="280" alt="Amy L. FCPA, Practice Owner, NSW">
+    <div class="ac-copy">
+      <p class="ac-line">Advisors are already moving their clients across</p>
+      <blockquote class="ac-quote">&ldquo;I&rsquo;ve already moved 250 clients onto Easy Business App and with the money I&rsquo;m saving I&rsquo;ve hired more staff to grow my practice.&rdquo;</blockquote>
+      <div class="ac-name">Amy L. FCPA, Practice Owner, NSW</div>
+      <a class="btn btn-primary ac-btn" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="wall-head" id="wall">
+  <h2>Read them for yourself</h2>
+  <p>Every review is real and shown word for word. This is what your clients can expect. Filter by what people talk about, or tap any review to read it in full.</p>
+</div>
+
+<div class="lovestrip" id="lovestrip"></div>
+
+<div class="themes" id="themes"></div>
+
+<!-- contextual CTA shown while a filter is active: highest-intent moment on the page -->
+<div class="filtercta" id="filtercta" aria-live="polite">
+  <div class="fc-inner">
+    <p id="fcText"></p>
+    <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+  </div>
+</div>
+
+<div id="wallzone"></div>
+
+<!-- Four-module story. Copy and the "up to $1,000 a year per client compared to Xero" claim
+     mirror easybusinessapp.com/accountants (July 2026); module logos and the confused-user
+     image are EBA's own assets from that page. -->
+<section class="modules" id="modules">
+  <div class="mod-grid">
+    <div class="mod-copy">
+      <h2>Only pay for the modules they need</h2>
+      <p class="mod-lede">Easy Business App is designed specifically for micro and small businesses and their accountants. It comes as four simple modules. If a client only needs payslips, that is fine. Invoicing too? Covered. Just a bank feed? That is Easy Cashflow. And Easy Reports is free for everyone.</p>
+      <p class="mod-save">Save up to <strong>$1,000 a year per client</strong> compared to Xero. Check it against your own numbers below.</p>
+      <div class="mod-logos">
+        <div class="mod-item"><img src="module-payslip.png" alt="Easy Payslip"><span>Payroll, STP and super, from $14.95 a month</span></div>
+        <div class="mod-item"><img src="module-invoicing.png" alt="Easy Invoicing"><span>Quotes and invoices, free tier or $10.95 a month</span></div>
+        <div class="mod-item"><img src="module-cashflow.png" alt="Easy Cashflow"><span>Bank feeds and expenses, free tier or $10.95 a month</span></div>
+        <div class="mod-item"><img src="module-reports.png" alt="Easy Reports"><span>P&amp;L, BAS and balance sheet, completely free</span></div>
+      </div>
+    </div>
+    <img class="mod-img" src="confused-user.png" width="1000" height="707" loading="lazy" alt="A confused software user surrounded by speech bubbles: How do I do that in Xero, again? More than $1,000 a year for accounting software!? I sent you 87 emails and a spreadsheet.">
+  </div>
+</section>
+
+<!-- Savings calculator. Preset prices are vendor list prices (AUD, inc GST) checked July 2026:
+     Xero AU: Ignite $37, Grow $78 (xero.com/au/pricing-plans, via stackpick.com.au + pp.tax July 2026 update)
+     MYOB AU: Business Pro $70 full price, payroll +$3/employee/month (myob.com/au/pricing)
+     QuickBooks AU: Simple Start $33, Essentials $55 (quickbooks.intuit.com/au/pricing)
+     Presets only pre-fill the editable field and are labelled as list prices to re-check.
+     EBA side mirrors easybusinessapp.com/pricing (checked July 2026):
+       Easy Payslip: Starter $14.95 (up to 4 employees), Standard $19.95 (up to 6), Unlimited $29.95
+       Easy Invoicing Pro $10.95, Easy Cashflow Pro $10.95, Easy Reports free
+     Re-check all prices whenever vendors change them. -->
+<section class="calc" id="calculator">
+  <div class="calc-inner">
+    <h2>What could switching save?</h2>
+    <p class="calc-sub">How are you managing all this today? Pick where your clients are now, or enter your own numbers, and compare it with Easy Business App. Estimates only.</p>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <label>Clients you would move <span class="calc-out" id="cClientsOut">20</span>
+          <input type="range" id="cClients" min="1" max="250" value="20" aria-describedby="cTotal">
+        </label>
+        <div class="calc-field">Where are they now?
+          <span class="calc-presets" id="cPresets"></span>
+        </div>
+        <label for="cNow">What each pays now, a month
+          <span class="calc-money">$<input type="number" id="cNow" value="78" min="0" step="1" inputmode="decimal"></span>
+          <small id="cNowNote">Xero Grow list price, July 2026. Plans and add-ons vary, so adjust to what your clients actually pay.</small>
+        </label>
+        <label>Employees per client, typically <span class="calc-out" id="cEmpOut">4</span>
+          <input type="range" id="cEmp" min="0" max="10" value="4">
+          <small id="cEmpNote">Easy Payslip Starter, $14.95 a month for up to 4 employees.</small>
+        </label>
+        <div class="calc-field">Modules your clients need
+          <label class="calc-check"><input type="checkbox" id="cInv"> Easy Invoicing Pro, $10.95 a month</label>
+          <label class="calc-check"><input type="checkbox" id="cCf"> Easy Cashflow Pro, $10.95 a month</label>
+          <small>Easy Reports is free, and Invoicing and Cashflow both have free tiers. Prices from easybusinessapp.com/pricing, July 2026.</small>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="cr-brand"><img src="favicon.png" alt="Easy Business App" width="32" height="32"><span class="cr-lbl">Estimated savings by switching your clients to Easy Business App</span></div>
+        <div class="cr-num" id="cTotal">$0</div>
+        <div class="cr-sub" id="cPer"></div>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- remaining review sections continue below the calculator -->
+<div id="wallzone2"></div>
+
+<div id="zakslot"></div>
+
+<section class="band" id="book">
+  <h2>Which clients will you move first?</h2>
+  <!-- TODO for Trent: confirm what a partner demo actually covers (migration help, partner
+       pricing, onboarding support) and add one sentence about it here. Nothing invented. -->
+  <p>Payroll from $14.95 a month for a four-employee business. Book a partner demo and see it end to end before you put your name to it.</p>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" style="font-size:16px;padding:15px 30px">Book a partner demo</a>
+</section>
+
+<footer>Easy Business App. Australian accounting software for micro and small businesses.</footer>
+
+<!-- bottom-right savings popup: appears after the reader is into the reviews,
+     hides while the calculator is on screen, stays dismissed for the session -->
+<div class="savepop" id="savepop" role="complementary" aria-label="Savings calculator shortcut">
+  <button class="close" id="spClose" aria-label="Dismiss">&times;</button>
+  <h3>How much could you save?</h3>
+  <p>Find out what switching clients off Xero to Easy Business App could save, with your own numbers.</p>
+  <a class="btn btn-blue" href="#calculator" id="spCta" style="font-size:15px;padding:12px 22px">Calculate my savings</a>
+</div>
+
+<!-- sticky CTA on phones, shown once the hero scrolls out of view -->
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="mQuote">
+  <div class="modal" id="modal">
+    <button class="close" id="closeBtn" aria-label="Close">&times;</button>
+    <button class="mnav prev" id="mPrev" aria-label="Previous review">&#8249;</button>
+    <button class="mnav next" id="mNext" aria-label="Next review">&#8250;</button>
+    <div class="stars" id="mStars"></div>
+    <div class="q" id="mQuote"></div>
+    <div class="name" id="mName"></div>
+    <div class="src" id="mSrc"></div>
+    <div class="m-cta">
+      <a class="btn btn-blue" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener" id="mCta">Book a partner demo</a>
+      <button class="btn btn-ghost" id="mClose2">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const REVIEWS = [{"name":"Terence Byrt","stars":5,"source":"Trustpilot","quote":"Using the Easy Business Payslip app, which now incorporates the payday Super Payments system, is so easy to use. I've never had a problem with my employees. They receive their payslips each payday and they are happy. That's the main thing, happy employees, and having an easy payment system, as well. Thank you Easy Business."},{"name":"Sonia","stars":5,"source":"Trustpilot","quote":"It is easy to use, quite intuitive. I only wish I knew how to use it better. It made my profit and loss statement easier to generate but some confusion around sales income and other income being separated. User error I imagine. When I asked for help in the chat box, it was answered very quickly."},{"name":"DJC","stars":5,"source":"Trustpilot","quote":"The best small business payroll and accounting software out there! I've tried Xero and other software, but found them to be overly complex and not user-friendly. Easy Business App is the most user-friendly software, while also being comprehensive and providing a full range of services. Really happy with the recent additions like the Auto Super function through Beam. The live chat support is fantastic - they responded straight away and solved my issue on the spot. As are the video tutorials - they are easy to follow and well-explained. It's clear the software is still growing, as there is room for additional features (e.g. more room for flexibility with the invoice templates). However, overall it's a great software and great service for a fair price. Couldn't recommend this more."},{"name":"Denise","stars":5,"source":"Trustpilot","quote":"Have dealt with Easy Business for a number of years now but after selling the business and retiring, no longer have a need for the service. This company has always been super efficient regarding any problem, query or general assistance required at various times. For those seeking a service such as this, I would not hesitate in highly recommending Easy Business for all payroll activities. The customer service, I must say, went above and beyond!"},{"name":"Lea O'Dea","stars":5,"source":"Trustpilot","quote":"We are a small business using Easy Payslip. Could not be happier. We are already up and running with PAYG Super payments on payday. The software is spot-on and super easy to use. They have great communication, and the pricing is very fair."},{"name":"Cameron","stars":5,"source":"Trustpilot","quote":"Easy Business App's service is amazing. So responsive and has a simple answer for everything. They seem to be developing their product constantly because they are always releasing cool features. Loving it."},{"name":"Tracey","stars":5,"source":"Trustpilot","quote":"Love the new business accounting, invoicing app. It's easy to use, and saves doubling up, with spreadsheets etc. I trialled a few options and im happy to say, the app works best for my soul trader hort and gardening business. Tracey Winn Northcote"},{"name":"B Johnston","stars":5,"source":"Trustpilot","quote":"Very happy with Easy Payslip. Clear instructions available for everything and if I have had any specific questions, the Customer Support team are very responsive to any emails that I have sent (even going above and beyond and responding on a weekend)."},{"name":"Tracey Lee","stars":5,"source":"Trustpilot","quote":"I found the product easy to navigate and perform all the required tasks that I needed. Only leaving due to retirement. Any questions were very quickly responded to via the chat box."},{"name":"Jacqui","stars":5,"source":"Trustpilot","quote":"Thought the livechat was a bot. Not a bot at all. Adam - demonstrably human - answered really quickly. The problem turned out to be really simple. Altogether 10/10 livechat support experience."},{"name":"Rob Hughes","stars":5,"source":"Trustpilot","quote":"Very quick to respond via the chat feature and very helpful. I made inadvertant errors and my problem was resolved within minutes. Can't ask for more than that!"},{"name":"Isatu Kanu","stars":5,"source":"Trustpilot","quote":"I've been using easy Business app for years now it's really helping me with my cleaning business and it's really easy when doing invoice for customers!!"},{"name":"BF - Australia","stars":5,"source":"Trustpilot","quote":"I have been using the Easy Business App since STP reporting was required and the app is so easy to use. Today I needed some assistance and my email was replied to instantly and the issues was solved. A big thank you!"},{"name":"Toni","stars":5,"source":"Trustpilot","quote":"this is the best app by far.customer service is fantastic. You get a reply instantly when you have a problem. I would Recommend this app to anyone .We are a small business and it has made my life so easy."},{"name":"Shane","stars":5,"source":"Trustpilot","quote":"Great accounting software, priced well, easy to use and very good ongoing support via the chat feature."},{"name":"Kaz","stars":5,"source":"Trustpilot","quote":"Very quick support! I asked a question and Adam responded within a minute or so. Just brilliant."},{"name":"Kim","stars":5,"source":"Trustpilot","quote":"User friendly system. Cost effective. Excellent support which is prompt and thorough. Fully recommend."},{"name":"Joseph","stars":5,"source":"Trustpilot","quote":"Their software and apps are very comprehensive and easy to use, from downloading bank transaction and uploading bank transactions to the bookkeeping modules, to Payroll including STP, to BAS reporting. Also, technical staff are always on hand to solve issues which I had encountered a few. 5 stars for customer service."},{"name":"David P","stars":5,"source":"Trustpilot","quote":"An excellent service. Very easy to navigate, all the tools to manage our payroll and taxation obligations."},{"name":"Jane","stars":4,"source":"Trustpilot","quote":"Super prompt service. I'm a little disappointed to hear that I can't generate an invoice from the app, but I appreciate that receipts are now going to be sent to me monthly."},{"name":"Sim","stars":4,"source":"Trustpilot","quote":"There are still some minor issues I've come across with the software but for the price it is great for my little business. User friendly and with the features I need day to day. I recommend it to others all the time."},{"name":"William","stars":4,"source":"Trustpilot","quote":"It is a great, self explanatory application that makes payroll and superannuation easy"},{"name":"Jin","stars":4,"source":"Trustpilot","quote":"I've been using the Easy Business App for years, and I was so stressed when my data suddenly went missing. But Adam helped me out so thoroughly and solved the problem perfectly. Thank you, Adam!"},{"name":"Jack Smith","stars":4,"source":"Trustpilot","quote":"Good app, really like to use it"},{"name":"Helen","stars":5,"source":"Trustpilot","quote":"A great Payroll Software Package. Easy to use, and assistance is only a chat or call away. Helen"},{"name":"LEIGH","stars":5,"source":"Trustpilot","quote":"Easy Business App is convenient, easy to use and the support provided for any queries is excellent."},{"name":"Anneliese","stars":5,"source":"Trustpilot","quote":"I am using the free version of this app as I only need limited features and so far it is great. The user experience is great as it is pretty easy to follow. If I was requiring more features, I would definitely pay for it as it is a great app to use."},{"name":"Teresa","stars":5,"source":"Trustpilot","quote":"quick easy response - issue sorted straight away"},{"name":"Leisa","stars":5,"source":"Trustpilot","quote":"Adam answers emails so quickly, it is wonderful."},{"name":"SALLY-ANNE M","stars":5,"source":"Trustpilot","quote":"They are able to assist quickly and explain any queries Easy to use"},{"name":"customer","stars":5,"source":"Trustpilot","quote":"Easy to use and simple user experience"},{"name":"Jenny","stars":5,"source":"Trustpilot","quote":"Experience so far is very good, easy app that has everything we need and support tuition has been great. Cannot fault the app so far very happy"},{"name":"Sylvia","stars":5,"source":"Trustpilot","quote":"Easy to navigate and user friendly."},{"name":"Cynthia","stars":5,"source":"Trustpilot","quote":"Quickly feedback and nice customer service. As the name of the app, very easy to use."},{"name":"Nev","stars":5,"source":"Trustpilot","quote":"Adam was patient, courteous, timely in replying, and made implementation very easy. Once you get the data in and get the hang of the system is easy to use - ideal for a charity being run as a small business. Adam gently guided me though understanding the principles of the system. I have quickly been able to teach two other simple manual journal entry to record transactions."},{"name":"DJ","stars":5,"source":"Trustpilot","quote":"Program soooo easy to use. If need help response is quick and instruction clear to follow."},{"name":"Victor Reid","stars":5,"source":"Trustpilot","quote":"Ease of use, adding invoices is a piece of cake."},{"name":"Garry Davenport","stars":5,"source":"Trustpilot","quote":"Single touch pay roll was so simple and easy to use and very helpful!!"},{"name":"Meredith","stars":5,"source":"Trustpilot","quote":"fast and helpful!"},{"name":"Busy Nan","stars":5,"source":"Trustpilot","quote":"Excellent easy business app"},{"name":"GN","stars":5,"source":"Trustpilot","quote":"very quick response for all the questions , very supportive team. affordable price for small business and easy to use system"},{"name":"Maureen","stars":5,"source":"Trustpilot","quote":"Always get a prompt response to any questions I ask in the chat"},{"name":"Salman AZIZ","stars":5,"source":"Trustpilot","quote":"perfect customer service. software is easy to operate"},{"name":"Lee","stars":5,"source":"Trustpilot","quote":"Responded quickly and resolved my issue immediately"},{"name":"Wendy Wu","stars":5,"source":"Trustpilot","quote":"Easy to use! Simple and user friendly!"},{"name":"Tracy","stars":5,"source":"Trustpilot","quote":"Support has been outstanding!"},{"name":"GUANJIE","stars":5,"source":"Trustpilot","quote":"Good for small Business app"},{"name":"Alexei","stars":5,"source":"Trustpilot","quote":"Always excellent support. Platform & instructions good to follow."},{"name":"Alison","stars":5,"source":"Trustpilot","quote":"Easy and straightforward to navigate"},{"name":"Diane","stars":5,"source":"Trustpilot","quote":"Incredibly fast customer service! Migrating over from Xero has been an absolute breeze. The system is sleek, intuitive, and user-friendly. They've made a complex process feel completely seamless. Thank you!"},{"name":"Ivar Charles","stars":5,"source":"Trustpilot","quote":"Quick and easy"},{"name":"Paul","stars":5,"source":"Trustpilot","quote":"Excellent product and service. immediate tech support"},{"name":"Leo","stars":5,"source":"Trustpilot","quote":"I used your product in the simplest manner possible, one working director. But this doesn't detract from how useful it was to me. I am a dinosaur but that did not bother your staff. Over the years it served me well. When I had an issue it was always my doing. Your staff always came to my rescue immediately. I have recommended you to at least one other"},{"name":"Jane","stars":5,"source":"Trustpilot","quote":"EOFY headaches Adam always makes it easier to understand. Thank you :-)"},{"name":"Core Civil Comm Pty Ltd","stars":5,"source":"Trustpilot","quote":"very clear instructions"},{"name":"Brett McPherson","stars":5,"source":"Trustpilot","quote":"Intuitive, reliable and compliant. Makes payment very straight forward."},{"name":"John Freeman","stars":5,"source":"Trustpilot","quote":"Recommended by CPH Accounting for Payday Super requirements. Seems to be logical to work with."},{"name":"Matthew","stars":5,"source":"Trustpilot","quote":"Timely accurate support and domain knowledge provided to resolve issue in minutes"},{"name":"JT & Barton Ellis","stars":5,"source":"Trustpilot","quote":"Love the reliable and quick customer service response and the app itself doesn't charge an arm and a leg for probably one of the easiest and best invoicing, payroll&super, bank feed reconciliation and reports app. I also love the fact that you only pay for the system that you use. 100% value for money and they make it easy to have you compliant with the ATO which is a requirement for small local businesses who can't afford to pay lawyers and fancy accountants."},{"name":"Michelle","stars":5,"source":"Trustpilot","quote":"The support is second to none. Easy to use features. Overall a fantastic product. 100% recommended!"},{"name":"Irene","stars":5,"source":"Trustpilot","quote":"The support team was helpful and responded promptly, providing clear guidance on setting up Auto Super."},{"name":"Ann Dahlen","stars":5,"source":"Trustpilot","quote":"Quick, easy to use and also support when you need it."},{"name":"Matthew","stars":5,"source":"Trustpilot","quote":"Great customer service"},{"name":"Owen Mcpherson","stars":5,"source":"Trustpilot","quote":"guided me to problem which was my end all corrected in short time thank you"},{"name":"Sam&Fab","stars":5,"source":"Trustpilot","quote":"We have been using Easy Business since 2018 and have consistently had a very positive experience. On the rare occasions that an issue has arisen, Adam or Paul resolved it promptly and efficiently. They are always supportive, approachable, and willing to assist. Overall, the level of customer service has been outstanding, and we truly appreciate their professionalism and reliability."},{"name":"Francesco","stars":5,"source":"Trustpilot","quote":"Staff are amazing. Always extremely helpful and very efficient."},{"name":"Cheryl","stars":5,"source":"Trustpilot","quote":"helpful, quick and very clever"},{"name":"Bt","stars":5,"source":"Trustpilot","quote":"Prompt response"},{"name":"Michael Berthhun","stars":5,"source":"Trustpilot","quote":"quick response"},{"name":"Drew","stars":5,"source":"Trustpilot","quote":"Rapid response & problem turnaround."},{"name":"CAMERON A.","stars":5,"source":"Trustpilot","quote":"Easy Business App have been the best people to deal with, always quick to respond with help and they are constantly improving their products!"},{"name":"Raymond Stewart","stars":5,"source":"Trustpilot","quote":"Web site easy to navigate and the staff on the chat feature always resolve my problems"},{"name":"Aruna","stars":5,"source":"Trustpilot","quote":"Easy to use, worked like a charm."},{"name":"Caitlin","stars":5,"source":"Trustpilot","quote":"This app/service is great all round for me so far. EASY to navigate noting I'm tech and admin challenged. Excellent service that is very responsive. No notes so far. Looking forward to continuing to use it. Was also recommended by another small business friend who likes things simple but effective."},{"name":"Tim Halls","stars":5,"source":"Trustpilot","quote":"Great and easy to access customer service. The application itself provides plenty of scope for accounting and business-minded people without complication. The monthly fees are also reasonable and within the range of small to medium-sized businesses. Refreshing to find a practical and relatively easy to use application 'out-of-the-box'. Full marks for a good application and one that is web-based making access readily available across tablets, PC's and mobiles. Very happy that it is Aussie made as well!"},{"name":"Ben","stars":5,"source":"Trustpilot","quote":"Quick and friendly help in being able to resolve encountered problem."},{"name":"Hadi","stars":5,"source":"Trustpilot","quote":"Easy application and friendly available support,"},{"name":"Robert","stars":5,"source":"Trustpilot","quote":"I am really happy with Easy Business App. Their customer service is great. They are Australian based and very caring. I am in the process of changing over from another larger software provider who's prices have gone up every month and their customer service is limited to web chat and email. It took 3 days for them to reply to my help request when I lost the ability to print my own invoice on their software. Their slogan is \"we are for small business\". But small business need help and small costs."},{"name":"Wheels By The Ocean","stars":5,"source":"Trustpilot","quote":"BEST APP FOR SMALL BUSINESS!!! This is sp easy to use! Fully set up invoice with my own logo. Support is unreal, they get back to me straight away. I just had a small issue and they sorted it within minutes! Absolutely love it. I highly recommend. I've been using for over 12 months running my Mobile Mechanic Business and will keep using. Cheers!"},{"name":"Justine","stars":5,"source":"Trustpilot","quote":"Always fast in replying, always helpful, always polite, always simple explanations, highly recommend. Even replied to me on a Sunday!!"},{"name":"Phil Crane","stars":5,"source":"Trustpilot","quote":"Unlike other STP software suppliers I have found that Easy Business (on www easybusinessapp com) provides swift and helpful feedback from their Customer Service team (Adam)."},{"name":"Gail Ashton","stars":5,"source":"Trustpilot","quote":"My problem was resolved"},{"name":"Tom","stars":5,"source":"Trustpilot","quote":"Adam provided quick clear info to my requests."},{"name":"David","stars":5,"source":"Trustpilot","quote":"Very user friendly"},{"name":"Andrew","stars":4,"source":"Trustpilot","quote":"Very easy to use invoicing component of app."},{"name":"CAMERON A.","stars":5,"source":"Trustpilot","quote":"Awesome Business Accounting! Easy Business App have been the best people to deal with, always quick to respond with help and they are constantly improving their products!"},{"name":"Rakesh","stars":5,"source":"Trustpilot","quote":"quick reply"},{"name":"Sina Ighaniyan","stars":5,"source":"Trustpilot","quote":"I can't believe that more people don't use Easy Business. It's unbelievably simple and a great alternative to other systems out there. The support team is there and promptly assists. I would highly recommend to other businesses."},{"name":"Nikki","stars":5,"source":"Trustpilot","quote":"Great simple software that works. Such a refreshing change."},{"name":"Laura","stars":5,"source":"Trustpilot","quote":"Super easy to use for small businesses. Great customer service."},{"name":"kerri claridge","stars":5,"source":"Trustpilot","quote":"Have been using easyapp for payroll for about 2 years and find it very easy to use and set up. The team are quick to respond to questions/help. Would highly recommend Easy Business App"},{"name":"Marty","stars":5,"source":"Trustpilot","quote":"This app is the best! It's easy to use and works flawlessly"},{"name":"Rafelia","stars":5,"source":"Trustpilot","quote":"very helpful/prompt assistance"},{"name":"Robyn","stars":5,"source":"Trustpilot","quote":"Quick response to all queries. Very helpful with any query."},{"name":"Vadim","stars":5,"source":"Trustpilot","quote":"Great service, great software!"},{"name":"Wheels By The Ocean","stars":5,"source":"Trustpilot","quote":"BEST APP FOR SMALL BUSINESS!!! This is sp easy to use! Fully set up invoice with my own logo. Support is unreal, they get back to me straight away."},{"name":"Sina","stars":5,"source":"Trustpilot","quote":"A great tool for all to use. I can't believe that more people don't use Easy Business. It's unbelievably simple and a great alternative to other systems out there."},{"name":"Michael","stars":5,"source":"Trustpilot","quote":"quick response"},{"name":"Lauren","stars":5,"source":"Trustpilot","quote":"The app is just so Simple to use, and I'm not great With technology so I Appreciate It Immensely. And $10 p/month is just within my budget, so I'm BEyond Grateful for This, too. Running a business is hard enough at times, let Alone having to pay for expensive fee's to Achieve such! ThankYOU to the BeYOUtiful Soul's Who Provide This platform."},{"name":"Gavin","stars":5,"source":"Trustpilot","quote":"Great so far"},{"name":"Lenora","stars":5,"source":"Trustpilot","quote":"Very easy to use, cost effective, it makes things simple ."},{"name":"Andrew","stars":5,"source":"Trustpilot","quote":"Extremely professional people to deal with. Easy software to use and is extremely user friendly. I have told many other people about this company and they have started to use the software and they too love it."},{"name":"GLEN","stars":5,"source":"Trustpilot","quote":"Adam was prompt, knowledgeable and on point to what i needed. I would defiantly recommend."},{"name":"Sarah","stars":5,"source":"Trustpilot","quote":"As someone who's just started their own business, having a simple yet effective means of generating invoices and tracking expenses is absolutely fantastic! I would highly recommend this software to anyone looking to manage the accounts for their business"},{"name":"Willem G","stars":5,"source":"Trustpilot","quote":"Very easy to use. Glad to move from Xero to you guys."},{"name":"Silvon Mark","stars":5,"source":"Trustpilot","quote":"Easy app as it says, super easy to use,instant support, what more can you ask for"},{"name":"Giulia","stars":5,"source":"Trustpilot","quote":"Easy to use even for small business owner who never done accounting jobs before. Good job guys"},{"name":"Louise","stars":5,"source":"Trustpilot","quote":"The speed in a reply to my question, the simplicy of the software, ease of use, really enjoying getting around Easy Business, after 30 odd years of using all the big brands, this is what I need. One of the biggest factor I am enjoy this is- It's Aussie 's making a diffence, It's Local, and it's real people with a solution."},{"name":"Lani","stars":5,"source":"Trustpilot","quote":"Great Company to deal with. Customer Service is the best. The program is easy to use and the reports are all up to date and relevant."},{"name":"Colin","stars":5,"source":"Trustpilot","quote":"The website has improved and is easier to navigate"},{"name":"Marie","stars":5,"source":"Trustpilot","quote":"It's easy to use and support help is great"},{"name":"Nurettin","stars":5,"source":"Trustpilot","quote":"Extremely helpful staff, prompt and supportive and very professional. Very easy user friendly app."},{"name":"Mohammad","stars":5,"source":"Trustpilot","quote":"its very easy and simple to use and the support is great, thank you"},{"name":"Andy","stars":4,"source":"Trustpilot","quote":"Prior to the recent update, this was a flawless 5-star app for me. The current version, however, has removed some critical features that were integral to my workflow: 1. The ability to export Ins & Outs transactions to spreadsheets 2. Automatic calculation for business/personal expense splits Despite these recent setbacks, it remains an impressively useful business application developed by Australian entrepreneurs. What truly sets this app apart is its extraordinary customer service - they are consistently exceptional, going above and beyond expectations. I sincerely hope the developers will restore the missing functionalities in future updates, as the app's core value remains strong."},{"name":"Peter","stars":5,"source":"Trustpilot","quote":"Its a very good app and very easy to follow with great support if needed"},{"name":"Bruce Lyon","stars":4,"source":"Trustpilot","quote":"Promptness & good questions."},{"name":"Serena","stars":5,"source":"Trustpilot","quote":"Efficient, easy-to-use, and great customer support."},{"name":"Mary","stars":5,"source":"Trustpilot","quote":"The app is user friendly. And gets support instantly when there are issues."},{"name":"Paul","stars":5,"source":"Trustpilot","quote":"Easy to use. I like paying for the different modules, only pay what I need"},{"name":"SHELLEY LEE WILLIAMS","stars":5,"source":"Trustpilot","quote":"My problem was fixed and the remedy explained clearly. My error was corrected"},{"name":"Katrina","stars":5,"source":"Trustpilot","quote":"Easypay is easy to use. Its inexpensive and it does everything a small company needs. Support is good and product is reliable."},{"name":"Mark","stars":5,"source":"Trustpilot","quote":"Brilliant service! Super fast response time and resolved the issue promptly. Enjoying using the EB app for my consulting & advisory business. Very simple to use, but with the key features you need to run the accounting and reporting aspects of business. Great job."},{"name":"Brown Family Trust","stars":5,"source":"Trustpilot","quote":"I was looking for a reasonable priced payroll program for a tiny business and it was perfect. The one time I needed assistance it was given in a timely manner."},{"name":"Gail","stars":5,"source":"Trustpilot","quote":"The Team at Easy Business App were able to guide me to a resolution from a glitch in the 2FA today. The record of our chat was emailed to me with instructions on how to proceed in a very timely manner. Shout out to Adam for his expertise today. Made a stressful situation disappear. All the troops have their payslips and the ATO has the STP. Great work Easy Business App"},{"name":"Diana","stars":5,"source":"Trustpilot","quote":"Great app. Customer service is the best!"},{"name":"JASON","stars":5,"source":"Trustpilot","quote":"Quick and super easy STP reporting and if you ever do need help the guys are amazing, highly recommended!"},{"name":"Paul Pittorino","stars":5,"source":"Trustpilot","quote":"I was looking for something more simple than Xero for my horse trainer. Been playing around for a few days now and this program ticks most of the boxes. Simple = Yes - ready to go in an hour. Does the Job = Yes and does it simply, haven't found anything I can't do yet. Cost = Cheaper the Xero by over $70 a month. Service = used chat twice and they are very responsive, answers within minutes. This program doesn't have all the bells and whistles but that is a good thing as many of the majors have too many and add unnecessary complexity. Pretty impressed with this company. We'll be buying this program."},{"name":"AJ","stars":5,"source":"Trustpilot","quote":"Quick Response, a real person and resolved my query."},{"name":"John","stars":5,"source":"Trustpilot","quote":"This is a brilliant application, so easy to use it just takes a bit of patience to navigate for the first couple of uses. The support team are quick to respond to any problems you may come across. Best prices and you only pay for the module you use."},{"name":"Majeed","stars":5,"source":"Trustpilot","quote":"Easy to do everything here I liked"},{"name":"Rangi","stars":5,"source":"Trustpilot","quote":"Very straight forward and easy to use. No jargon."},{"name":"Connie","stars":5,"source":"Trustpilot","quote":"This accounting program is superb. It does everything that we need. The staff are always prompt on replying with any questions or issues."},{"name":"Kim","stars":5,"source":"Trustpilot","quote":"I found the app very easy to use, having never done it before. And your prices are very competitive."},{"name":"David","stars":5,"source":"Trustpilot","quote":"The system is easy to follow and most of all when your stuck the team is there to help you with any issues."},{"name":"Luke","stars":4,"source":"Trustpilot","quote":"Easy to use and everything is layed out quite well. Will know more once I use more features later on"},{"name":"Roslyn","stars":5,"source":"Trustpilot","quote":"Very responsive to enquires sent in the chatbox- had my issue sorted in less time that it took to write this review :)"},{"name":"CKM Test and Tag","stars":5,"source":"Trustpilot","quote":"I use payslips feature and it is just so easy to use and I can do the STP right there and then awesome. Had one hiccup and emailed issue and had it sorted promptly"},{"name":"Pol","stars":5,"source":"Trustpilot","quote":"Only a couple days in. Looks easy to use and intuitive."},{"name":"Thomas Conlon","stars":5,"source":"Trustpilot","quote":"Great service Adam - quick fix!"},{"name":"Karen","stars":5,"source":"Trustpilot","quote":"This is superb accounting software. I hated doing my accounting because the big name products were so complicated and they cost so much. This software is super easy to use even for someone like me with no accounting knowledge. Next to zero cost is also fantastic. I love it and have recommended it to my accountant for their clients."},{"name":"DEAN WALTER","stars":5,"source":"Trustpilot","quote":"Ease of use, great back up, ask a question, you get an answer or they look into it. Always improving, willing to listen and help."},{"name":"EVK","stars":5,"source":"Trustpilot","quote":"Great customer service, very responsive and super easy to use"},{"name":"JM","stars":5,"source":"Trustpilot","quote":"Prompt response and resolved my issue"},{"name":"Louise","stars":5,"source":"Trustpilot","quote":"excellent app"},{"name":"Laura","stars":5,"source":"Trustpilot","quote":"Adam is always a champ :)"},{"name":"Susan","stars":5,"source":"Trustpilot","quote":"When you have questions on how to do something they are straight back to you with answers and help you through it. It's such an easy program to navigate."},{"name":"Linda","stars":5,"source":"Trustpilot","quote":"Always personally respond to every call for help quickly and with no fuss! Great to work with."},{"name":"customer Ric","stars":5,"source":"Trustpilot","quote":"Adam and Paul have been very approachable and fast to implement suggestions or offer tips. Great work from the Easy team. Thanks Ric"},{"name":"Annette","stars":5,"source":"Trustpilot","quote":"Easy to use website and consistently fantastic customer service, only closing my account as my business has now closed. 5 stars all the way, would absolutely highly recommend"},{"name":"Matthew","stars":5,"source":"Trustpilot","quote":"Very helpful"},{"name":"BIAO","stars":5,"source":"Trustpilot","quote":"Solve the problem very quickly and efficiently"},{"name":"Elizabeth","stars":5,"source":"Trustpilot","quote":"The app is pretty cool – and their support is wonderful!!!"},{"name":"customer","stars":5,"source":"Trustpilot","quote":"Great service by Adam in how to deal with an odd transaction. Very impressed in the fast detailed reply."},{"name":"Careway Cleaning","stars":5,"source":"Trustpilot","quote":"I find Mike and the team at Easy Business great. They are there to answer queries in chat online and if its outside their hours they get back to me the next day. They also have a feature request page where you can let them know the issues you have and they actively seek out solutions for you...even as a non-paying customer. As a result their product just gets better and better. Im extremely happy with Easy Business and wholeheartedly recommend it to anyone looking for a great accounting system."},{"name":"Claire Taylor","stars":5,"source":"Trustpilot","quote":"Adam was fab! quick to respond and helped me with my issue. The experience with you guys is just great. Thank you !"},{"name":"Jan","stars":5,"source":"Trustpilot","quote":"Always very helpful"},{"name":"Melita Wignall","stars":5,"source":"Trustpilot","quote":"I use EasyPayslip and from time to time have had queries, submitted through the chat function. I always receive an instant response which answers my queries every time. So helpful and the payroll function is easy to use."},{"name":"Raymond","stars":5,"source":"Trustpilot","quote":"Prompt reply to my email with a very professional explanation of the problem and a resolutions"},{"name":"David Lee CA","stars":5,"source":"Trustpilot","quote":"Friendly & professional customer services via chat solves 99% of issues instantly. Highly recommend to small business owners and accountants alike!"},{"name":"Elaine","stars":5,"source":"Trustpilot","quote":"Excellent responses from enquiries . Just getting started and very happy"},{"name":"Peter","stars":5,"source":"Trustpilot","quote":"Great service, problem solved"},{"name":"Sue","stars":5,"source":"Trustpilot","quote":"App is easy to use. Excellent service."},{"name":"Brett Smith","stars":5,"source":"Trustpilot","quote":"Always quick to respond with my random questions and help me find the answers I'm looking for. Customer service is top notch!"},{"name":"Melissa","stars":5,"source":"Trustpilot","quote":"This accounting system is the best I have ever used and even if you have no bookkeeping or accounting experience, this program is very user friendly and easy to understand and use. The guides that are available on hand are very informative and useful. The online support is quick to respond and extremely helpful. The fees are very reasonable and to have the choice of using a free desktop version or pay a minimal fee to have a cloud edition is fantastic. I highly recommend this program to anyone and everyone!"},{"name":"Steve from Randwick","stars":5,"source":"Trustpilot","quote":"Customer support solved all my urgent queries professionally and in a split of second! And also the Easypayslip is a great app."},{"name":"William","stars":5,"source":"Trustpilot","quote":"I have found 3 workers accidently deleted from the list last night and call the help and it restored straight away. It was really thankful."},{"name":"Dianne","stars":4,"source":"Trustpilot","quote":"Is easy to use and quick to get assistance"},{"name":"Bianca","stars":5,"source":"Trustpilot","quote":"I've been using this app for about 5 years now and love it! Customer service always replies within minutes they are happy to help with every request. It's easy to use."},{"name":"Chucky823","stars":5,"source":"Trustpilot","quote":"This software is so easy, it's true to its name, for all users which makes it great for clients who have limited skills in any sort of accounting software."},{"name":"Christie","stars":5,"source":"Trustpilot","quote":"Very easy to use, great communication and quick to answer questions. Thanks guys!"},{"name":"Ann","stars":4,"source":"Trustpilot","quote":"Easy to use would be better if I could remove customers from invoice list"},{"name":"Gavin Heyink","stars":5,"source":"Trustpilot","quote":"Very easy to use"},{"name":"Diana","stars":5,"source":"Trustpilot","quote":"Being someone who is not great with computers, I find this App easy to navigate and if I'm not sure on something, I get quick responses from the help team"},{"name":"DPG LOGISTICS","stars":5,"source":"Trustpilot","quote":"Easy pay is exactly that, easy to use to pay."},{"name":"Wendy Jayne","stars":5,"source":"Trustpilot","quote":"Very Easy software to use and great support given to myself when needed."},{"name":"Joan","stars":5,"source":"Trustpilot","quote":"I find Easy Business App good to use to report STP to ATO for closely held payee."},{"name":"Fatma Tuncer","stars":5,"source":"Trustpilot","quote":"Their straightforward, supportive website/portal and prompt email communication enabled me to submit my first STP with ease. I browsed other providers' websites before, but found them less straightforward. I'd recommend Easy Payslip and the Easy Business App especially to small business owners with no previous digital accounting experience. As I got more familiar with their portal, I also found their Reports very useful e.g.their Income/Expense Reports are a great way to better understand one's business finances, without being overwhelmed by bank feeds. In addition, their pricing structure is much better than their competitors."},{"name":"HWEI MAY CHUA","stars":5,"source":"Trustpilot","quote":"good service easy to use software"},{"name":"RobbieG","stars":5,"source":"Trustpilot","quote":"This is such a fantastic app. Easy is the operative word. Our previous Single touch Payroll software was so cumbersome & when we discovered this Easy Business app, I was sooo relieved. This app just gets the job done with elegance & efficiency. 10/10"},{"name":"Tim","stars":5,"source":"Trustpilot","quote":"Easy to use."},{"name":"Vesna","stars":5,"source":"Trustpilot","quote":"Love how simple and easy the app is to use. It has all the features I need for my business and also so affordable."},{"name":"Jason Burnard","stars":5,"source":"Trustpilot","quote":"Have been using this for the past year for invoice and expenses very happy with all aspects of the process. As the name says (Easy) to set up and use, great IT support if required. Other better known systems complicated and overpriced compared to this. Five Stars All The Way."},{"name":"Ljubica","stars":5,"source":"Trustpilot","quote":"Amazing, simple and easy to use app that has all you need for small Business. Well done"},{"name":"Marisa","stars":4,"source":"Trustpilot","quote":"Simple & Easy to use."},{"name":"Rick Furnell - 9539","stars":5,"source":"Trustpilot","quote":"I had my questions answered prompted and quickly by the internet assistant."},{"name":"Martin","stars":5,"source":"Trustpilot","quote":"Very fast and easy to use - and a lot cheaper than the other accounting apps. Also it works on your phone - everything is visible on the iphone app which allows me to see all my invoices and payslips when I'm away from my desk."},{"name":"Nan","stars":5,"source":"Trustpilot","quote":"Easy Business App is indeed easy to use and reliable. I'm happy to choose this app for ATO reporting, highly recommended!"},{"name":"Harry","stars":5,"source":"Trustpilot","quote":"Easy friendly and helpul"},{"name":"Brian Terry","stars":4,"source":"Trustpilot","quote":"I have had a couple of issues in the past due to the narrow window of deductions, allowances etc within the programme, and the online assistance has been super quick to respond and has 100% sorted out any issue I had. I am a BAS Agent and as such have many \"tradie\" type clients, who find the program easy to work with, which is always a BIG plus. It is a simple, cost effective method to manage Payroll liabilities and compliance. Keep up the Great Work"},{"name":"Deborah","stars":5,"source":"Trustpilot","quote":"Everything about this App is so user friendly, to the point and excellent back up support if needed. I use the Easy Pay as well as the invoicing App."},{"name":"Maureen","stars":5,"source":"Trustpilot","quote":"Very easy to use"},{"name":"William","stars":5,"source":"Trustpilot","quote":"Always good support whenever I have an issue. Easy to use."},{"name":"Carol","stars":5,"source":"Trustpilot","quote":"Easy Business app is so easy to use and customer service is amazing. Would highly recomend to anyone."},{"name":"Lynn","stars":5,"source":"Trustpilot","quote":"We are a very small business and don't have or need an expensive bookkeeping or payroll program. Easy Business (or Easy Payslip as it was when I discovered it) is a nominal cost, but delivers hugely in ease of use and performance. I've been with them for about 3 years now, and they have made all payroll related obligations easy, quick and simple. On the rare occasion I've had a problem (usually due to my own error, or some glitch with the ATO), I have used the Chat function and they have always been able to help, so the problem is sorted straight away, which is great for my stress levels! I can't recommend Easy Business enough for payroll. I haven't used their other features, but I'm sure they would be just as efficient."},{"name":"mark h","stars":4,"source":"Trustpilot","quote":"I discovered that I can only delete and create a new payslip to correct the pay period date after lodgement; hopefully the developer can fine tune so that user can amend a small error rather than start all over again."},{"name":"Tashi Tobgyel","stars":5,"source":"Trustpilot","quote":"It is an easy business app and helps growth to your financial needs. Come join and make some money"},{"name":"Linda","stars":5,"source":"Trustpilot","quote":"This is a very user-friendly program. What I love most about this app is if you have any issues there is always someone to speak to. They have very good customer service"},{"name":"Bernadette","stars":5,"source":"Trustpilot","quote":"The ability to report as Commission as my payroll varies every fortnight. Flexibility in inputting data eg dates, amounts etc. Very simple to navigate. Perfect for small business"},{"name":"Wonyoung","stars":5,"source":"Trustpilot","quote":"Very easy and convenient!!"},{"name":"Boris Golembo","stars":5,"source":"Trustpilot","quote":"Great service and customer support! Highly recommend"},{"name":"Wayne","stars":5,"source":"Trustpilot","quote":"Great App, great business, always prompt service / response. Highly recommend this App to anyone."},{"name":"Janice","stars":5,"source":"Trustpilot","quote":"Extremely easy to use and very helpful staff if you have questions, thorough recommendation"},{"name":"Judy","stars":5,"source":"Trustpilot","quote":"Person to person assistance and the ease of using the app has been wonderful after transferring from a group who wasn't interested in customer service. Please don't lose that aspect. Thank you."},{"name":"Marilyn","stars":4,"source":"Trustpilot","quote":"They are very informative, helpful and a good value for money!! The STP process is easy!!"},{"name":"Ron","stars":5,"source":"Trustpilot","quote":"Your program is a delight to use - any mistakes made are my mistakes, not yours [I recently forgot to mark in when a payment was to be made]. Now I am an advocate of the notion that everything needs a gentle tweek at sometime or other, but don't make the mistake of thinking you have to do a major review and alteration everytime. There are only 3 principles of change - is it easier to find - is it easier to use - does the result add to the program [none of this adding something new, but taking something useful away]. I keep recommending you to all my friends - 11/10"},{"name":"Peter Robert","stars":5,"source":"Trustpilot","quote":"Eazy platform to use and inexpensive to run for a small business. Most importantly is the quick response by the support team whevever needed. We are a small bricklaying team with limited computer literacy therefore communication at a basic level is both refreshing and time efficient. We remain confident in using this payroll system for the foreseeable future."},{"name":"Graham Neale","stars":5,"source":"Trustpilot","quote":"Easy for everything"},{"name":"a very useful travel tool","stars":5,"source":"Trustpilot","quote":"Great App, so easy to use!"},{"name":"Sue M","stars":5,"source":"Trustpilot","quote":"Easy Business App had the most user friendly interface when I checked out payroll apps, and their service has been fantastic. I've been with them a few years now, and whenever I have questions it is easy to contact them by email or phone, and always receive friendly, helpful and patient advice!"},{"name":"MARK","stars":5,"source":"Trustpilot","quote":"Great company Great crew Impressive service"},{"name":"Ashley","stars":5,"source":"Trustpilot","quote":"Great easy to use tool for my needs"},{"name":"MARIA","stars":5,"source":"Trustpilot","quote":"Very simple app"},{"name":"Monica","stars":5,"source":"Trustpilot","quote":"Excellent easy to use app, great support from the team, highly recommend for small business."},{"name":"GEOFF APPLEBY CONSTRUCTIONS PT","stars":5,"source":"Trustpilot","quote":"This is such an easy product to use. Fantastic for a small business. It has a great reporting feature. On the odd occasion I have needed help, my questions have been answered very very promptly. It is very inexpensive."},{"name":"Katharine","stars":5,"source":"Trustpilot","quote":"As always the support is fantastic. Fast responses and very informative and helpful. Easy business app is exactly that. Easy :)"},{"name":"Joseph","stars":5,"source":"Trustpilot","quote":"Excellent Service with clear instructions"},{"name":"customer","stars":5,"source":"Trustpilot","quote":"Quick, clear, informative response."},{"name":"Mick","stars":5,"source":"Trustpilot","quote":"Adam has been excellent to help me with a few issues"},{"name":"DEBBIE","stars":5,"source":"Trustpilot","quote":"Easy to use and easy"},{"name":"Amie Siu Yin Wong","stars":5,"source":"Trustpilot","quote":"Wonderful service! Great app!"},{"name":"Wayne","stars":5,"source":"Trustpilot","quote":"Very easy to use and great support"},{"name":"Marie","stars":5,"source":"Trustpilot","quote":"I actually love this payslips ap. It's so easy and straightforward to use. I'm able to lodge the ATO required STP reports with ease and easily access any previous employee reports when needed. If I ever get stuck or need to ask for help, the lovely staff there are just a phone call or email away and are quick with accurate assistance and advice and can advise me through any issues I may have. For me being a bit of a dinosaur when it comes to technology, I still hand write my accounting books! EasyPayslips is all I need..and it's not expensive! Highly recommended!"},{"name":"Graham Wise","stars":5,"source":"Trustpilot","quote":"The App is very easy to use, as are generating all necessary reports. Whenever I needed support I always received a very quick response even if I rang after hours, as we are WA based. There business name says it all!"},{"name":"Rob","stars":5,"source":"Trustpilot","quote":"The help they gave me Always open to suggestions to improve Great price Australian product"},{"name":"Sevi Matz","stars":5,"source":"Trustpilot","quote":"Extremely helpful and professional staff, user friendly app."},{"name":"Tony","stars":5,"source":"Trustpilot","quote":"A great company to work with. Their software is easy to use and their support is second to none. I love working with them. Thanks Easy Business App."},{"name":"DAVID","stars":5,"source":"Trustpilot","quote":"for a farmer like myself and who doesn't use computers often its very easy to use when I have to"},{"name":"Susy","stars":4,"source":"Trustpilot","quote":"Easypayslip is very easy to use, whether setting up a new client, processing pays/payslips or lodging STP information. Support is always available, with real people that can resolve any problem quickly and easily. Great pricing structure."},{"name":"Adam","stars":5,"source":"Trustpilot","quote":"This app has made life so much easier for me a sole trader. I am able to effectively quote invoices keep track of payments and keep track of expenses. 100%. Only improvement to me would be to allow us to add our own categories gor expenses. For example materials or consumables/gas ect. For welding"},{"name":"Susan Williams","stars":5,"source":"Trustpilot","quote":"Every year I am amazed at how easy this is to finalise the old financial year and begin the new one."},{"name":"toniee1856","stars":5,"source":"App Store","quote":"This app has saved my life and so much time. I looked at the free apps but was happy that I picked this app. Few teething problems on my end but the service was fantastic. I emailed my problem and instantly had a reply so quick. They are so very help"},{"name":"megzyjeffs","stars":5,"source":"App Store","quote":"I wasted so much time trying to set up other stp reporting programs and apps. They were complicated or didn't work correctly. I came across this one - it's awesome. Happy to pay the monthly fee for something this good."},{"name":"Wegna!!","stars":5,"source":"App Store","quote":"Great App, awesome Phone support and very easy to use. Was able to use with my very old computer system and can use either App or computer to complete my pays and STP requirements. Well done and thanks for making my life soooo much easier. (Received official reply from ATO that they received my first STP Report - big thanks to Adam who helped me load pay info and returned my call within minutes)"},{"name":"Vote for Remote!","stars":5,"source":"App Store","quote":"We use Easy Payslip for both our businesses and have had the best experience over the last 2 years so far. The program is simple to use and affordable. But the highlight is the support team. The support team is very responsive and quick to answer any"},{"name":"NPSmallBusiness","stars":5,"source":"App Store","quote":"Sole trader turned employer and this app has saved a lot of time and worry. Easy to use, easy to access, emails with step by step instructions for end of financial year reconciliations. Worth every cent!"},{"name":"Dory Melbourne","stars":5,"source":"App Store","quote":"Easy Pay is highly recommend, staff are very helpful and accommodating at all times. It's process is pretty straight forward, just need guide from staff if doing it for the first time."},{"name":"Rubadubbaaa","stars":5,"source":"App Store","quote":"Amazingly easy to use. Great app, great features and amazing customer service. Highly recommend."},{"name":"path2oz","stars":5,"source":"App Store","quote":"I've been using this app for free, but now they're starting to charge for it. Fair enough. I'm pretty used to it already — it lets me make and send invoices in under a minute. Highly recommend it."},{"name":"Writesuite","stars":5,"source":"App Store","quote":"I've started my own business and it's been great to have an easy tool to use and when I've asked questions the team is super helpful"},{"name":"Heath","source":"Verified customer","quote":"Easy to use software. Reasonable price. Extremely helpful support and assistance."},{"name":"Gordon","source":"Verified customer","quote":"The system is really simple to use and does exactly what I need. It is also very good value."},{"name":"Tiger","source":"Verified customer","quote":"Very easy to use and affortable prices per month. I also love the invoice system. Its very easy to make an invoice and quote for my clients."},{"name":"Miranda","source":"Verified customer","quote":"Easy Payslip is very user friendly and easy to manage for a small business. The customer service support is good."},{"name":"Karen","source":"Verified customer","quote":"I have a micro business so don't need a fancy accounting system for paying my employees. The new BEAM option for for the new weekly Super payments and reporting is so easy to use. You have afantastic system!"},{"name":"Jacqui","source":"Verified customer","quote":"Still learning the ins and outs but the app is easy to use and I have just installed it on my phone as well!"},{"name":"Michelle","source":"Verified customer","quote":"I have recommended you to my accountant. Good simplified methods for sole traders"},{"name":"Robert","source":"Verified customer","quote":"We highly recommend the Easy Business app. So well designed to make all aspects of creating pay runs, emailing pay slips and fulfilling the ATO STP tasks so easy & straight forward. Fantastic small business solution."},{"name":"Jason","source":"Verified customer","quote":"Ease of use, especially for someone that just fumbles along, the app is informative and easy to navigate. Also easy to search app for information if unsure of a process, Very happy thank you :)"},{"name":"Susan","source":"Verified customer","quote":"Easy to use app and website. Any time I have had to ask a question, the chat is answered promptly and we are kept up to date with other issues such as the ATO request for software ID which was not necessary. I have been using Easypayslip since STP began and have had no issues at all. I just wish everything about running a business was this easy !"},{"name":"Tyson","source":"Verified customer","quote":"user friendly platform, super fast response if you need it but the walk through instructions you wont need to contact them."},{"name":"Owen","source":"Verified customer","quote":"I am 81 years can still understand your methods and you are always advising what needs to be done re ATO always respond to questions promptly. Very happy with your service."},{"name":"Joseph","source":"Verified customer","quote":"All my questions were answered quickly when I needed help and the app is very easy to use."},{"name":"Lorraine","source":"Verified customer","quote":"I have only ever used this system and have not had any issues against me. Thank you for your service."},{"name":"Celine","source":"Verified customer","quote":"I like the accessibility to support and their responsiveness and the price fits my business needs"}];
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function shuffle(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+const data = shuffle(REVIEWS);
+window.__R = data;
+const stars=n=>n>0?'&#9733;'.repeat(n):'';
+
+/* themes: label + matching regex (computed live so counts are real) */
+const THEMES=[
+  {key:'easy',label:'Easy to use',re:/easy to use|easy to navigate|user[- ]friendly|simple to use|so easy|easy app|straightforward/i},
+  {key:'support',label:'Great support',re:/support|customer service|help(ful|ed)?|the team|adam/i},
+  {key:'quick',label:'Quick to respond',re:/quick|prompt|fast|instant|straight away|within minutes|responsive|response/i},
+  {key:'value',label:'Great value',re:/value|price|pricing|cost|cheap|affordable|inexpensive|reasonable/i},
+  {key:'switch',label:'Switched from Xero',re:/xero|switch|moved over|migrat/i},
+  {key:'recommend',label:'Would recommend',re:/recommend/i}
+];
+function themesFor(r){return THEMES.filter(t=>t.re.test(r.quote)).map(t=>t.key);}
+const counts={};THEMES.forEach(t=>counts[t.key]=data.filter(r=>t.re.test(r.quote)).length);
+
+/* keyword highlighting inside cards (escaped text only, so it is safe) */
+const HL=[/\beasy\b/gi,/user[- ]friendly/gi,/customer service/gi,/\bsupport(ive)?\b/gi,/\bquick(ly)?\b/gi,/\brecommend(ed|ing)?\b/gi,/value for money/gi,/\bhelpful\b/gi,/\bsimple\b/gi,/\bresponsive\b/gi];
+function highlight(escaped){let s=escaped;HL.forEach(re=>{s=s.replace(re,m=>'<span class="hl">'+m+'</span>');});return s;}
+
+/* conveyor */
+function miniCard(r){return '<div class="mini">'+(r.stars?'<div class="s">'+stars(r.stars)+'</div>':'')+'<div class="t">'+esc(r.quote.length>150?r.quote.slice(0,148).trim()+'\u2026':r.quote)+'</div><div class="nm">'+esc(r.name)+'</div></div>';}
+(function(){const el=document.getElementById('conveyor');const cols=window.innerWidth<720?3:(window.innerWidth<1100?4:5);for(let ci=0;ci<cols;ci++){const col=document.createElement('div');col.className='cvcol';const tr=document.createElement('div');tr.className='cvtrack';const sl=data.filter((_,k)=>k%cols===ci).slice(0,14);const h=sl.map(miniCard).join('');tr.innerHTML=h+h;tr.style.animationDuration=(sl.length*3.4+ci*3)+'s';col.appendChild(tr);el.appendChild(col);}})();
+
+/* rotating "most mentioned" word */
+(function(){const rotEl=document.getElementById('rot');const words=THEMES.slice().sort((a,b)=>counts[b.key]-counts[a.key]).map(t=>t.label.toLowerCase());let i=0;rotEl.textContent=words[0];if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval(()=>{rotEl.classList.add('swap');setTimeout(()=>{i=(i+1)%words.length;rotEl.textContent=words[i];rotEl.classList.remove('swap');},350);},2200);}})();
+
+/* hero pile */
+const featured=data.filter(r=>r.stars===5&&r.quote.length>=90&&r.quote.length<=280);
+const pileEl=document.getElementById('pile');const PILE_MAX=4;let pile=[];let fIdx=0;
+function srcLabel(s){return s==='Trustpilot'?'<span class="tp-logo" role="img" aria-label="Trustpilot"></span>':esc(s);}
+function pcardHTML(r){return '<div class="s">'+stars(r.stars)+'</div><div class="t">\u201C'+highlight(esc(r.quote))+'\u201D</div><div class="nm">'+esc(r.name)+'</div><div class="src">'+srcLabel(r.source)+'</div>';}
+function renderPile(){const n=pile.length;pile.forEach((it,i)=>{const ft=n-1-i;it.el.style.zIndex=i;it.el.style.opacity=ft>=PILE_MAX?0:1;it.el.style.transform='translate(-50%,'+(ft*-18)+'px) rotate('+((i%2?1:-1)*(ft*1.4))+'deg) scale('+(1-ft*0.045)+')';});}
+function addToPile(){if(!featured.length)return;const r=featured[fIdx%featured.length];fIdx++;const el=document.createElement('div');el.className='pcard';el.innerHTML=pcardHTML(r);el.style.opacity='0';el.style.transform='translate(-50%,-150px) rotate(7deg) scale(1.02)';pileEl.appendChild(el);pile.push({el});requestAnimationFrame(()=>requestAnimationFrame(renderPile));if(pile.length>PILE_MAX+1){const old=pile.shift();old.el.style.opacity='0';old.el.style.transform='translate(-50%,60px) rotate(-5deg) scale(.88)';setTimeout(()=>old.el.remove(),650);}}
+/* Tap the stack to deal the next card yourself; otherwise it deals on a timer.
+   Every tap resets the timer so the auto-deal never fights the user. */
+const pileMotionOK=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pileTimer=null;
+function startPileTimer(){if(!pileMotionOK)return;if(pileTimer)clearInterval(pileTimer);pileTimer=setInterval(addToPile,9000);}
+function dealNext(){const top=pile[pile.length-1];if(top){pile.pop();top.el.style.transform='translate(calc(-50% + 260px),-60px) rotate(12deg) scale(.96)';top.el.style.opacity='0';setTimeout(()=>top.el.remove(),600);}addToPile();startPileTimer();}
+pileEl.addEventListener('click',e=>{if(e.target.closest('.pcard'))dealNext();});
+if(pileMotionOK){for(let k=0;k<PILE_MAX;k++)setTimeout(addToPile,k*260);startPileTimer();}else{for(let k=0;k<PILE_MAX;k++)addToPile();}
+
+/* wall */
+function card(r,idx){let cls='rev';const accent=(idx%9===2)?'blue':(idx%13===5?'green':'');if(accent)cls+=' '+accent;const trunc=r.quote.length>170;const raw=trunc?r.quote.slice(0,168).trim()+'\u2026':r.quote;const q=accent?esc(raw):highlight(esc(raw));return '<div class="'+cls+'" data-i="'+idx+'" data-themes="'+themesFor(r).join(' ')+'" tabindex="0" role="button" aria-label="Read review from '+esc(r.name)+'">'+(r.stars?'<div class="stars">'+stars(r.stars)+'</div>':'')+'<div class="q">'+q+'</div>'+(trunc?'<span class="more">Read more</span>':'')+'<div class="who"><span class="name">'+esc(r.name)+'</span><span class="src">'+srcLabel(r.source)+'</span></div></div>';}
+/* Advisor callout cards: native, alternating Amy/Zak, inserted through the wall */
+function advisorCard(which){
+  var A={photo:'amy-headshot.png',line:'Advisors are switching and moving their clients across',quote:'I’ve already moved 250 clients onto Easy Business App and with the money I’m saving I’ve hired more staff to grow my practice.',name:'Amy L. FCPA, Practice Owner, NSW'};
+  var Z={photo:'zak-headshot.png',line:'See why advisors recommend it to their clients',quote:'My clients don’t want bells and whistles. They want fast, easy, and affordable. That’s what Easy Business App gives them.',name:'Zak M., BAS Agent, WA'};
+  var c=which==='amy'?A:Z;
+  return '<div class="advisor-card"><div class="ac-inner">'
+    +'<img class="ac-photo" src="'+c.photo+'" width="280" height="280" loading="lazy" alt="'+c.name+'">'
+    +'<div class="ac-copy">'
+    +'<p class="ac-line">'+c.line+'</p>'
+    +'<blockquote class="ac-quote">“'+c.quote+'”</blockquote>'
+    +'<div class="ac-name">'+c.name+'</div>'
+    +'<a class="btn btn-primary ac-btn" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener">Book a partner demo</a>'
+    +'</div></div></div>';
+}
+/* Wall: paginated in sections of 30 so the page is not one long unbroken scroll.
+   A slim CTA bar sits before each later section. Advisor modules appear exactly twice:
+   Amy above the wall (static HTML), Zak in #zakslot after the calculator. */
+var SECTION_SIZE=30, wallSections=[], ctaBars=[], shownSections=1, activeTheme='all';
+var DEMO_URL='https://meetings.hubspot.com/grajah/demo';
+function updatePagination(){
+  wallSections.forEach(function(el,i){el.style.display=(activeTheme!=='all'||i<shownSections)?'':'none';});
+  ctaBars.forEach(function(el){el.style.display=(activeTheme==='all'&&(+el.dataset.sec)<shownSections)?'':'none';});
+  var wrap=document.querySelector('.showmore'); if(!wrap) return;
+  var remaining=data.length-Math.min(shownSections*SECTION_SIZE,data.length);
+  wrap.style.display=(activeTheme==='all'&&remaining>0)?'':'none';
+  if(remaining>0)document.getElementById('showMore').textContent='Show more reviews ('+remaining+' more)';
+}
+(function(){
+  var zone=document.getElementById('wallzone'),zone2=document.getElementById('wallzone2'); if(!zone||!zone2) return;
+  var nsec=Math.ceil(data.length/SECTION_SIZE);
+  /* first section sits above the calculator; the rest continue below it */
+  zone.innerHTML='<section class="wall-section" data-sec="0"><div class="wall">'+data.slice(0,SECTION_SIZE).map(function(r,i){return card(r,i);}).join('')+'</div></section>';
+  var html='';
+  for(var s=1;s<nsec;s++){
+    /* no CTA bar before the first section here: it would sit right under the calculator's own CTA */
+    if(s>1){html+='<div class="ctabar" data-sec="'+s+'"><div class="ctabar-inner"><p>See Easy Business App live before you recommend it.</p><a class="btn btn-blue" href="'+DEMO_URL+'" target="_blank" rel="noopener">Book a partner demo</a></div></div>';}
+    html+='<section class="wall-section" data-sec="'+s+'"><div class="wall">'+data.slice(s*SECTION_SIZE,(s+1)*SECTION_SIZE).map(function(r,i){return card(r,s*SECTION_SIZE+i);}).join('')+'</div></section>';
+  }
+  html+='<div class="showmore"><button class="btn btn-ghost" id="showMore">Show more reviews</button></div>';
+  zone2.innerHTML=html;
+  wallSections=[].slice.call(document.querySelectorAll('#wallzone .wall-section, #wallzone2 .wall-section'));
+  ctaBars=[].slice.call(zone2.querySelectorAll('.ctabar'));
+  document.getElementById('showMore').addEventListener('click',function(){shownSections++;updatePagination();});
+  document.getElementById('zakslot').innerHTML=advisorCard('zak');
+  updatePagination();
+})();
+
+/* "What people love": top themes by live count from the real reviews, plus a sell line */
+(function(){
+  var el=document.getElementById('lovestrip'); if(!el) return;
+  var top=THEMES.slice().sort(function(a,b){return counts[b.key]-counts[a.key];}).slice(0,4);
+  el.innerHTML='<div class="love-head">What people love</div><div class="love-stats">'+top.map(function(t){return '<div class="love-stat"><span class="ls-num cu" data-target="'+counts[t.key]+'">'+counts[t.key]+'</span><span class="ls-lbl">'+t.label+'</span></div>';}).join('')+'</div><p class="love-sell">Your clients want software that is easy to use, with support that is quick to respond. So do the thousands of businesses below.</p>';
+})();
+
+
+/* theme chips + filtering */
+const themesBar=document.getElementById('themes');
+themesBar.innerHTML='<button class="chip active" data-t="all">All reviews <span class="c">'+data.length+'</span></button>'+THEMES.map(t=>'<button class="chip" data-t="'+t.key+'">'+t.label+' <span class="c">'+counts[t.key]+'</span></button>').join('');
+const filterCta=document.getElementById('filtercta');
+themesBar.addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  [...themesBar.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');
+  activeTheme=b.dataset.t;
+  const all=activeTheme==='all';
+  document.querySelectorAll('.rev').forEach(el=>{const show=all||el.dataset.themes.split(' ').indexOf(activeTheme)>-1;el.classList.toggle('hide',!show);if(show&&!el.classList.contains('in'))el.classList.add('in');});
+  document.querySelectorAll('.advisor-card').forEach(cs=>{cs.style.display=all?'':'none';});
+  if(all){filterCta.classList.remove('show');}
+  else{
+    const t=THEMES.find(t=>t.key===activeTheme);
+    document.getElementById('fcText').innerHTML='<strong>'+counts[t.key]+'</strong> reviews mention &ldquo;'+t.label+'&rdquo;. See it for yourself, live.';
+    filterCta.classList.add('show');
+  }
+  updatePagination();
+});
+
+/* flood-in reveal */
+const cards=[...document.querySelectorAll('.rev')];
+if('IntersectionObserver' in window){let n=0;const io=new IntersectionObserver((es,obs)=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.transitionDelay=((n%12)*0.045)+'s';e.target.classList.add('in');n++;obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.05});cards.forEach(c=>io.observe(c));}else cards.forEach(c=>c.classList.add('in'));
+
+/* modal */
+const overlay=document.getElementById('overlay');
+const mS=document.getElementById('mStars'),mQ=document.getElementById('mQuote'),mN=document.getElementById('mName'),mSr=document.getElementById('mSrc');
+let lastFocus=null,mList=[],mPos=0;
+function fillModal(r){mS.innerHTML=stars(r.stars);mQ.textContent='\u201C'+r.quote+'\u201D';mN.textContent=r.name;mSr.innerHTML=srcLabel(r.source);}
+/* prev/next steps through the reviews currently visible under the active filter */
+function modalStep(d){if(!mList.length)return;mPos=(mPos+d+mList.length)%mList.length;fillModal(window.__R[mList[mPos]]);}
+function openModal(i){const r=window.__R[i];if(!r)return;
+  mList=[...document.querySelectorAll('.rev:not(.hide)')].map(el=>+el.dataset.i);
+  mPos=mList.indexOf(i);if(mPos<0){mList=[i];mPos=0;}
+  fillModal(r);overlay.classList.add('open');document.body.style.overflow='hidden';lastFocus=document.activeElement;document.getElementById('closeBtn').focus();}
+function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';if(lastFocus&&lastFocus.focus){lastFocus.focus();lastFocus=null;}}
+/* keep Tab inside the modal while it is open */
+document.addEventListener('keydown',e=>{if(e.key!=='Tab'||!overlay.classList.contains('open'))return;const f=overlay.querySelectorAll('button, a[href]');if(!f.length)return;const first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-i]');if(c)openModal(+c.dataset.i);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();
+  if(overlay.classList.contains('open')){if(e.key==='ArrowLeft')modalStep(-1);if(e.key==='ArrowRight')modalStep(1);}
+  if((e.key==='Enter'||e.key===' ')&&document.activeElement&&document.activeElement.classList.contains('rev')){e.preventDefault();openModal(+document.activeElement.dataset.i);}});
+document.getElementById('mPrev').addEventListener('click',()=>modalStep(-1));
+document.getElementById('mNext').addEventListener('click',()=>modalStep(1));
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
+document.getElementById('closeBtn').addEventListener('click',closeModal);
+document.getElementById('mClose2').addEventListener('click',closeModal);
+document.getElementById('mCta').addEventListener('click',closeModal);
+
+/* count-up stats when they scroll into view */
+(function(){
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fmtVal(el,v){
+    const dec=+(el.dataset.dec||0);let s=v.toFixed(dec);
+    if(el.dataset.comma)s=Number(s).toLocaleString('en-AU',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+    return s+(el.dataset.suffix||'');
+  }
+  function countUp(el){
+    const target=parseFloat(el.dataset.target);
+    if(reduce||!('requestAnimationFrame' in window)){el.textContent=fmtVal(el,target);return;}
+    const t0=performance.now(),dur=900;
+    (function step(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);el.textContent=fmtVal(el,target*e);if(p<1)requestAnimationFrame(step);})(t0);
+  }
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((es,obs)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);obs.unobserve(e.target);}});},{threshold:.6});
+    document.querySelectorAll('.cu').forEach(el=>io.observe(el));
+  }
+})();
+
+/* "Read the reviews": after the smooth scroll lands, flash the filter bar once to teach it */
+document.getElementById('readReviews').addEventListener('click',function(){
+  setTimeout(function(){const tb=document.getElementById('themes');tb.classList.add('flash');setTimeout(function(){tb.classList.remove('flash');},1400);},650);
+});
+
+/* bottom-right savings popup: shows once the reader is ~1.5 screens in, hides while the
+   calculator itself is visible, and a dismiss lasts the whole session */
+(function(){
+  const pop=document.getElementById('savepop');if(!pop)return;
+  let dismissed=false;
+  try{dismissed=sessionStorage.getItem('eba-savepop')==='1';}catch(e){}
+  if(dismissed)return;
+  let calcVisible=false,scrolledEnough=false;
+  function sync(){pop.classList.toggle('show',scrolledEnough&&!calcVisible&&!dismissed);}
+  window.addEventListener('scroll',function(){if(!scrolledEnough&&window.scrollY>window.innerHeight*1.5){scrolledEnough=true;sync();}},{passive:true});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{es.forEach(e=>{calcVisible=e.isIntersecting;sync();});},{threshold:.15}).observe(document.getElementById('calculator'));
+  }
+  function dismiss(){dismissed=true;sync();try{sessionStorage.setItem('eba-savepop','1');}catch(e){}}
+  document.getElementById('spClose').addEventListener('click',dismiss);
+  document.getElementById('spCta').addEventListener('click',function(){pop.classList.remove('show');});
+})();
+
+/* sticky mobile CTA appears once the hero is scrolled away */
+(function(){
+  const bar=document.getElementById('mobileCta'),hero=document.querySelector('.hero');
+  if(!bar||!hero||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(es=>{es.forEach(e=>bar.classList.toggle('show',!e.isIntersecting));},{threshold:0}).observe(hero);
+})();
+
+/* savings calculator: client-side estimate. Presets pre-fill the editable "pays now" field
+   with vendor list prices; the EBA side mirrors easybusinessapp.com/pricing module tiers
+   (both checked July 2026 - see the comment on the calc section). */
+(function(){
+  const c=document.getElementById('cClients'),n=document.getElementById('cNow');
+  if(!c)return;
+  const out=document.getElementById('cClientsOut'),tot=document.getElementById('cTotal'),per=document.getElementById('cPer');
+  const emp=document.getElementById('cEmp'),empOut=document.getElementById('cEmpOut'),empNote=document.getElementById('cEmpNote');
+  const inv=document.getElementById('cInv'),cf=document.getElementById('cCf');
+  function payslipTier(e){
+    if(e===0)return {price:0,note:'No payroll module. Easy Reports is free, and Invoicing and Cashflow have free tiers.'};
+    if(e<=4)return {price:14.95,note:'Easy Payslip Starter, $14.95 a month for up to 4 employees.'};
+    if(e<=6)return {price:19.95,note:'Easy Payslip Standard, $19.95 a month for up to 6 employees.'};
+    return {price:29.95,note:'Easy Payslip Unlimited, $29.95 a month for unlimited employees.'};
+  }
+  function ebaMonthly(){
+    return payslipTier(+emp.value).price+(inv.checked?10.95:0)+(cf.checked?10.95:0);
+  }
+  const PRESETS=[
+    {label:'Xero Grow',v:78,note:'Xero Grow list price, July 2026.'},
+    {label:'Xero Ignite',v:37,note:'Xero Ignite list price, July 2026.'},
+    {label:'MYOB Pro',v:70,note:'MYOB Business Pro full list price, July 2026. Payroll is an extra $3 per employee a month.'},
+    {label:'QuickBooks Essentials',v:55,note:'QuickBooks Online Essentials list price, July 2026.'},
+    {label:'Custom',v:null,note:'Enter what your clients actually pay, including add-ons.'}
+  ];
+  const wrap=document.getElementById('cPresets'),note=document.getElementById('cNowNote');
+  wrap.innerHTML=PRESETS.map((p,i)=>'<button type="button" class="chip'+(i===0?' active':'')+'" data-p="'+i+'">'+p.label+(p.v?' $'+p.v:'')+'</button>').join('');
+  function setActive(i){[...wrap.children].forEach((b,k)=>b.classList.toggle('active',k===i));}
+  wrap.addEventListener('click',e=>{
+    const b=e.target.closest('.chip');if(!b)return;
+    const p=PRESETS[+b.dataset.p];setActive(+b.dataset.p);
+    note.textContent=p.note+(p.v?' Plans and add-ons vary, so adjust to what your clients actually pay.':'');
+    if(p.v!=null){n.value=p.v;upd();}else{n.focus();n.select();}
+  });
+  n.addEventListener('input',()=>{ /* manual edits switch to Custom */
+    const i=PRESETS.findIndex(p=>p.v===+n.value);
+    setActive(i>-1?i:PRESETS.length-1);
+  });
+  function upd(){
+    const clients=+c.value,now=+n.value||0,eba=ebaMonthly();
+    const tier=payslipTier(+emp.value);
+    empOut.textContent=emp.value+(+emp.value>=10?'+':'');
+    empNote.textContent=tier.note;
+    const diff=Math.max(0,now-eba);
+    out.textContent=clients+(clients>=250?'+':'');
+    tot.textContent='$'+Math.round(diff*12*clients).toLocaleString('en-AU');
+    per.textContent=diff>0
+      ?('a year. $'+now.toFixed(2)+' now vs $'+eba.toFixed(2)+' on Easy Business App, per client each month.')
+      :'a year. Adjust the numbers above to compare.';
+  }
+  [c,n,emp].forEach(el=>el.addEventListener('input',upd));
+  [inv,cf].forEach(el=>el.addEventListener('change',upd));
+  upd();
+})();
+</script>
+</body>
+</html>
