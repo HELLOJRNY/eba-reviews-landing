@@ -398,6 +398,22 @@
   .mrev .x{position:absolute;top:10px;right:10px;background:var(--grey);border:0;width:26px;height:26px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer;color:var(--ink)}
   @media(max-width:760px){.mrev{position:static;max-width:none;margin:0 28px 20px;transform:none}}
 
+  /* ---- advisor 'what your client pays' section (real verified prices only) ---- */
+  .pays-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pay-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;box-shadow:0 6px 20px rgba(15,26,31,.06)}
+  .pay-card h3{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:3px}
+  .pay-card .pc-sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .pay-line{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+  .pay-line img{height:20px;width:auto;max-width:122px;display:block}
+  .pay-line .amt{margin-left:auto;font-weight:700;color:var(--ink);font-size:14.5px;white-space:nowrap}
+  .pay-line .amt.free{color:var(--green-deep)}
+  .pay-total{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:auto;padding-top:16px;border-top:2px solid rgba(0,92,255,.18)}
+  .pay-total .lbl{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .pay-total .val{font-family:var(--font-head);font-size:26px;font-weight:900;color:var(--blue);line-height:1}
+  .pay-note{text-align:center;max-width:74ch;margin:30px auto 0;font-size:16px;color:var(--ink);line-height:1.55}
+  .pay-note strong{color:var(--blue)}
+  @media(max-width:820px){.pays-grid{grid-template-columns:1fr}}
+
   /* ---- 4. EVERYTHING EBA CAN DO: one tight block ---- */
   .allblock{position:relative;overflow:hidden;max-width:960px;margin:0 auto;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:24px;padding:44px 44px 40px;box-shadow:0 26px 60px rgba(15,26,31,.28);color:#fff}
   .allblock::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#F5325B,#C026D3,#005CFF,#2BB673)}
@@ -570,17 +586,51 @@
   </section>
 </div>
 
+<!-- Advisor: what a real client pays, using verified prices only (no competitor comparison, no invented savings) -->
+<section class="section" id="pricing">
+  <div class="section-head reveal">
+    <h2>What your client pays</h2>
+    <p>Priced for micro and small businesses, the four-employees-or-fewer clients that software built for bigger businesses is too big, too complex or too expensive for. They only pay for the modules they use, and Easy Reports is always free.</p>
+  </div>
+  <div class="pays-grid">
+    <div class="pay-card reveal">
+      <h3>Micro client, payroll only</h3>
+      <div class="pc-sub">Four employees</div>
+      <div class="pay-line"><img src="module-payslip.png" alt="Easy Payslip"><span class="amt">$14.95</span></div>
+      <div class="pay-total"><span class="lbl">A month</span><span class="val">$14.95</span></div>
+    </div>
+    <div class="pay-card reveal">
+      <h3>Sole trader</h3>
+      <div class="pc-sub">Invoicing and banking</div>
+      <div class="pay-line"><img src="module-invoicing.png" alt="Easy Invoicing"><span class="amt">$10.95</span></div>
+      <div class="pay-line"><img src="module-banking.png" alt="Easy Bank Feeds"><span class="amt">$10.95</span></div>
+      <div class="pay-total"><span class="lbl">A month</span><span class="val">$21.90</span></div>
+    </div>
+    <div class="pay-card reveal">
+      <h3>Small business, the lot</h3>
+      <div class="pc-sub">Payroll, banking and invoicing</div>
+      <div class="pay-line"><img src="module-payslip.png" alt="Easy Payslip"><span class="amt">$14.95</span></div>
+      <div class="pay-line"><img src="module-banking.png" alt="Easy Bank Feeds"><span class="amt">$10.95</span></div>
+      <div class="pay-line"><img src="module-invoicing.png" alt="Easy Invoicing"><span class="amt">$10.95</span></div>
+      <div class="pay-line"><img src="module-reports.png" alt="Easy Reports"><span class="amt free">Free</span></div>
+      <div class="pay-total"><span class="lbl">A month</span><span class="val">$36.85</span></div>
+    </div>
+  </div>
+  <p class="pay-note">They only pay for the modules they use, and reports are always free. <strong>An easy, low-cost move to recommend</strong>, and you look good passing on software your clients can actually afford and will use.</p>
+  <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
+</section>
+
 <!-- 4. EVERYTHING EBA CAN DO: one tight block -->
 <section class="section">
   <div class="allblock reveal">
     <h2>Everything Easy Business App can do for your clients</h2>
     <ul class="all-grid">
-      <li><strong>Pay only for the modules you use</strong>, most from $10.95 a month.</li>
-      <li><strong>Easy Reports is always free.</strong></li>
-      <li>Typically much cheaper than the usual alternatives.</li>
-      <li>Modular and pay-as-you-go, with no lock-in and no annual contracts.</li>
-      <li><strong>Australian-based support</strong> via phone, live chat and email.</li>
-      <li>A dedicated <strong>Partner Manager</strong> and one advisor portal for every client.</li>
+      <li><strong>Built and priced for micro and small businesses</strong>, not software made for bigger businesses that is too big, too complex or too expensive for them.</li>
+      <li><strong>Modular and pay-as-you-go</strong>, only pay for what you need. No lock-in, no annual contracts.</li>
+      <li>Pay only for the modules you use, most from $10.95 a month, and Easy Reports is always free.</li>
+      <li><strong>Clients love it, so they use it</strong>, which means better data, less chasing, and a smoother run into BAS and tax time.</li>
+      <li><strong>Australian-based support</strong> via phone, live chat and email, so when a client gets stuck they call Easy Business App, not you.</li>
+      <li>A dedicated <strong>Partner Manager</strong> and one advisor portal to manage every client in one place.</li>
     </ul>
     <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer" style="font-size:15px;padding:14px 28px">Book a demo</a>
   </div>
