@@ -42,15 +42,12 @@
   }
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <!-- Headings use EBA's real font, ITC Avant Garde Gothic Pro, via the same Adobe Fonts
      kit the live site loads (fdo2qia). That kit is domain-licensed, so it renders on
      easybusinessapp.com but NOT on github.io; there the stack falls back to Roboto,
      the EBA body font. Only EBA brand fonts are used: Avant Garde headings, Roboto body. -->
 <link rel="stylesheet" href="https://use.typekit.net/fdo2qia.css">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   /* Real EBA brand values, read from easybusinessapp.com: primary blue #005CFF,
      conversion green #2BB673, text #202020, white base + #EEEEEE grey sections.
@@ -310,7 +307,7 @@
     .rev .stars{clip-path:none;transition:none}.themes.flash{animation:none}.mobile-cta{transition:none}
   }
 
-  /* ================= modules.html advisor campaign page, scoped to this file only ================= */
+  /* ================= modules.html: dedicated modules page, scoped to this file only ================= */
   /* soft EDM-style grey-to-white gradient, drifting slowly behind the whole page */
   body{background:linear-gradient(140deg,#F5F8FC 0%,#FFFFFF 46%,#ECF1F7 100%);background-attachment:fixed;background-size:220% 220%;animation:bgdrift 24s ease-in-out infinite}
   @keyframes bgdrift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -319,104 +316,99 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* header keeps a book-a-demo that fades in once the hero scrolls away */
   .header-cta{opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .3s ease,transform .3s ease}
   .header-cta.show{opacity:1;transform:none;pointer-events:auto}
 
-  .section{max-width:1120px;margin:0 auto;padding:80px 24px}
-  .section-head{text-align:center;max-width:760px;margin:0 auto 44px}
+  .section{max-width:1080px;margin:0 auto;padding:78px 24px}
+  .section-head{text-align:center;max-width:760px;margin:0 auto 42px}
   .section-head h2{font-family:var(--font-head);font-size:clamp(27px,3.4vw,42px);font-weight:900;color:var(--ink);letter-spacing:-.02em;margin-bottom:12px}
   .section-head p{color:var(--muted);font-size:17px;line-height:1.55}
-  .section-cta{text-align:center;margin-top:40px}
+  .section-cta{text-align:center;margin-top:38px}
   .txt-blue{color:var(--blue)}
 
-  /* clean module icons in the four campaign colours (kept consistent in weight and style) */
-  .micon{display:inline-flex;align-items:center;justify-content:center;border-radius:16px;background:var(--tint,var(--blue-tint))}
-  .micon svg{fill:none;stroke:var(--c,var(--blue));stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .mtile .micon{width:60px;height:60px}
-  .mtile .micon svg{width:32px;height:32px}
-  .mod-top .micon{width:52px;height:52px;flex:none;border-radius:14px}
-  .mod-top .micon svg{width:28px;height:28px}
-
-  /* ---- HERO: bigger branded module cluster that pops in, then floats and gently orbits ---- */
+  /* ---- 1. HERO: big cluster of the four real module logos, pop in then drift ---- */
   .mhero{position:relative;overflow:hidden;background:transparent}
   .mhero::before{content:"";position:absolute;top:-16%;right:-8%;width:78%;height:135%;pointer-events:none;z-index:0;background:radial-gradient(closest-side, rgba(0,92,255,.12), rgba(0,92,255,0) 70%)}
   .mhero-accent{position:absolute;top:0;left:0;right:0;height:3px;z-index:3;background:linear-gradient(90deg,#F5325B,#FF9A00,#C026D3,#005CFF,#2BB673)}
-  .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:70px 40px;min-height:76vh}
+  .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:70px 40px;min-height:78vh}
   .mhero-copy .eyebrow{margin-bottom:16px}
-  .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,4.2vw,56px);margin-bottom:18px}
-  .mhero-copy p.sub{font-size:clamp(17px,1.85vw,21px);color:var(--muted);max-width:48ch;line-height:1.55;margin-bottom:28px}
+  .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,4.2vw,54px);margin-bottom:18px}
+  .mhero-copy p.sub{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:52ch;line-height:1.6;margin-bottom:28px}
   .mhero-cta{display:flex;gap:14px;flex-wrap:wrap}
   .mhero-cta .btn{font-size:17px;padding:16px 34px}
-  .mstage{position:relative;height:440px;animation:morbit 27s ease-in-out infinite;transform-origin:56% 50%}
-  .mtile{position:absolute;opacity:0;animation:mpop .64s cubic-bezier(.2,.9,.3,1.45) forwards}
-  .mtile-in{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:210px;height:150px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 22px 50px rgba(15,26,31,.15);animation:mfloat 7s ease-in-out infinite}
-  .mtile-name{font-family:var(--font-head);font-weight:900;font-size:16px;color:var(--ink);letter-spacing:-.01em}
-  .mtile.p1{top:2%;left:8%}
+  .mstage{position:relative;height:420px;animation:morbit 27s ease-in-out infinite;transform-origin:55% 50%}
+  .mtile{position:absolute;opacity:0;animation:mpop .64s cubic-bezier(.2,.9,.3,1.4) forwards}
+  .mtile-in{display:flex;align-items:center;justify-content:center;width:216px;height:104px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 22px 50px rgba(15,26,31,.15);animation:mfloat 7s ease-in-out infinite}
+  .mtile-in img{height:34px;width:auto;max-width:172px;object-fit:contain;display:block}
+  .mtile.p1{top:2%;left:4%}
   .mtile.p2{top:2%;left:50%}
-  .mtile.p3{top:52%;left:8%}
+  .mtile.p3{top:52%;left:4%}
   .mtile.p4{top:52%;left:50%}
   .mtile.p1{animation-delay:.15s}.mtile.p1 .mtile-in{animation-duration:6.6s;animation-delay:-.3s}
   .mtile.p2{animation-delay:.32s}.mtile.p2 .mtile-in{animation-duration:7.9s;animation-delay:-1.6s}
   .mtile.p3{animation-delay:.49s}.mtile.p3 .mtile-in{animation-duration:7.2s;animation-delay:-.9s}
   .mtile.p4{animation-delay:.66s}.mtile.p4 .mtile-in{animation-duration:8.3s;animation-delay:-2.2s}
-  @keyframes mpop{0%{opacity:0;transform:scale(.32)}60%{opacity:1;transform:scale(1.09)}100%{opacity:1;transform:scale(1)}}
-  @keyframes mfloat{0%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-11px) rotate(1.2deg)}100%{transform:translateY(0) rotate(-1.2deg)}}
-  @keyframes morbit{0%{transform:rotate(-1.8deg)}50%{transform:rotate(1.8deg)}100%{transform:rotate(-1.8deg)}}
+  @keyframes mpop{0%{opacity:0;transform:scale(.32)}60%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+  @keyframes mfloat{0%{transform:translateY(0) rotate(-1.1deg)}50%{transform:translateY(-11px) rotate(1.1deg)}100%{transform:translateY(0) rotate(-1.1deg)}}
+  @keyframes morbit{0%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}100%{transform:rotate(-1.6deg)}}
 
-  /* ---- MODULES: pick and mix, four branded cards with campaign names ---- */
-  .modgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .modcard{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 28px 26px;box-shadow:0 6px 20px rgba(15,26,31,.06);transition:transform .2s ease,box-shadow .2s ease}
-  .modcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,#005CFF)}
-  .modcard:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(15,26,31,.12)}
-  .mod-top{display:flex;align-items:center;gap:16px;margin-bottom:12px}
-  .modcard h3{font-family:var(--font-head);font-size:20px;font-weight:900;color:var(--ink);letter-spacing:-.01em;line-height:1.1}
-  .mod-logo{height:34px;width:auto;max-width:100%;display:block;margin-bottom:16px}
-  .mod-tag{display:block;font-size:13px;font-weight:700;color:var(--c,#005CFF);margin-bottom:10px}
-  .modcard p{font-size:14.5px;color:var(--muted);line-height:1.5;margin:0}
-  .modcard .price{font-weight:700;color:var(--ink)}
-  .modline{text-align:center;max-width:70ch;margin:32px auto 0;font-size:16.5px;color:var(--ink);line-height:1.55}
-  .modline strong{color:var(--blue)}
+  /* ---- 2. MOVING MODULE WALL: drifting module cards (reuses the reviews-page flow motion) ---- */
+  .modwall{position:relative;overflow:hidden;height:380px;display:flex;gap:18px;justify-content:center;padding:0 18px;-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
+  .mw-col{flex:1 1 0;max-width:320px;overflow:hidden}
+  .mw-track{display:flex;flex-direction:column;gap:18px;animation:flow linear infinite;will-change:transform}
+  .mw-col:hover .mw-track{animation-play-state:paused}
+  .mw-card{position:relative;overflow:hidden;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(15,26,31,.06);cursor:pointer;font-family:inherit;transition:transform .18s ease,box-shadow .18s ease}
+  .mw-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,#005CFF)}
+  .mw-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,26,31,.13)}
+  .mw-card img{height:26px;width:auto;max-width:150px;display:block;margin-bottom:10px}
+  .mw-card span{display:block;font-size:13px;font-weight:700;color:var(--c,#005CFF)}
+  .mw-card small{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
 
-  /* ---- WHY: illustration beside a clean list that reveals one by one ---- */
-  .why-two{display:grid;grid-template-columns:.92fr 1.08fr;gap:50px;align-items:center}
-  .why-media img{width:100%;height:auto;display:block;filter:drop-shadow(0 20px 44px rgba(15,26,31,.12))}
-  .why-lede{color:var(--muted);font-size:17px;line-height:1.6;margin-bottom:24px}
-  .why-list{list-style:none;display:grid;gap:22px}
-  .why-list li{display:flex;gap:16px;align-items:flex-start}
-  .wl-ico{flex:none;width:46px;height:46px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:var(--tint,var(--blue-tint))}
-  .wl-ico svg{width:24px;height:24px;fill:none;stroke:var(--c,var(--blue));stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .why-list h3{font-family:var(--font-head);font-size:17.5px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:4px}
-  .why-list p{font-size:15px;color:var(--muted);line-height:1.55;margin:0}
-  .wq{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
-  .wq.in{opacity:1;transform:none}
+  /* ---- 3. EXPANDABLE MODULE SECTIONS (accordion) ---- */
+  .modlist{max-width:960px;margin:0 auto;padding:0 24px;display:grid;gap:16px}
+  .mx{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 6px 20px rgba(15,26,31,.06);overflow:hidden}
+  .mx::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,#005CFF)}
+  .mx.lead{box-shadow:0 16px 44px rgba(15,26,31,.12)}
+  .mx-head{display:flex;align-items:center;gap:20px;width:100%;background:none;border:0;cursor:pointer;font-family:inherit;text-align:left;padding:24px 28px}
+  .mx-logo{height:34px;width:auto;max-width:190px;display:block;flex:none}
+  .mx.lead .mx-logo{height:42px;max-width:230px}
+  .mx-tag{font-size:14px;font-weight:700;color:var(--c,#005CFF)}
+  .mx-toggle{margin-left:auto;flex:none;width:34px;height:34px;border-radius:50%;background:var(--grey);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-size:22px;line-height:1;transition:transform .3s ease}
+  .mx.open .mx-toggle{transform:rotate(45deg)}
+  .mx-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .45s ease,opacity .35s ease}
+  .mx.open .mx-body{max-height:1400px;opacity:1}
+  .mx-inner{padding:4px 28px 28px}
+  .mx.lead .mx-inner{padding:4px 32px 34px}
+  .mx-what{font-size:clamp(16px,1.7vw,18px);color:var(--ink);line-height:1.55;margin-bottom:16px;max-width:64ch}
+  .mx.lead .mx-what{font-size:clamp(17px,1.9vw,20px)}
+  .mx-benefits{list-style:none;display:grid;gap:10px;margin:0 0 18px}
+  .mx-benefits li{position:relative;padding-left:28px;font-size:15px;color:var(--muted);line-height:1.5}
+  .mx-benefits li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:color-mix(in srgb,var(--c,#005CFF) 16%,transparent);box-shadow:inset 0 0 0 2px var(--c,#005CFF)}
+  .mx-price{display:inline-block;font-weight:800;color:var(--c,#005CFF);font-size:15px;margin:0 0 18px}
+  .mx-explore{font-size:14px;color:var(--muted);margin-bottom:16px}
+  .mx-body .btn{font-size:15px}
 
-  /* ---- SOCIAL PROOF: dark on-brand card, drifting reviews behind, two appearing testimonials ---- */
-  .proofsec{position:relative;overflow:hidden}
-  .proofsec .conveyor{opacity:.4;z-index:0}
-  .proof-veil{position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(247,249,252,.66),rgba(247,249,252,.82));pointer-events:none}
-  .proof-inner{position:relative;z-index:2}
-  .proof-card{position:relative;overflow:hidden;max-width:940px;margin:0 auto 34px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:22px;padding:34px 30px;box-shadow:0 26px 60px rgba(15,26,31,.28)}
-  .proof-card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#F5325B,#C026D3,#005CFF,#2BB673)}
-  .pc-item{text-align:center;padding:6px 12px;color:#fff}
-  .pc-item+.pc-item{border-left:1px solid rgba(255,255,255,.12)}
-  .pc-num{font-family:var(--font-head);font-size:clamp(26px,3vw,34px);font-weight:900;line-height:1;display:block;margin-bottom:8px}
-  .pc-stars{color:var(--star-soft);font-size:20px;letter-spacing:2px;display:block;margin-bottom:8px}
-  .pc-ico{display:inline-flex;margin-bottom:8px}
-  .pc-ico svg{width:26px;height:26px;fill:none;stroke:#7FE3B4;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .pc-lbl{font-size:14px;color:#C9D2DC;line-height:1.4;display:block}
-  @media(max-width:720px){.proof-card{grid-template-columns:1fr;gap:20px}.pc-item+.pc-item{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding-top:18px}}
+  /* payroll review pop-up: appears while the payroll section is in view, does not blur the page */
+  .mrev{position:absolute;top:18px;right:18px;z-index:6;max-width:300px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--star);border-radius:16px;box-shadow:0 20px 50px rgba(15,26,31,.2);padding:20px 22px 18px;opacity:0;transform:translateY(-8px) scale(.96);pointer-events:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.9,.3,1.2)}
+  .mrev.show{opacity:1;transform:none;pointer-events:auto}
+  .mrev.gone{display:none}
+  .mrev .stars{color:var(--star);font-size:15px;letter-spacing:1px;margin-bottom:8px}
+  .mrev p{font-size:14px;color:var(--ink);line-height:1.5;margin:0 0 10px}
+  .mrev .who{font-size:12.5px;color:var(--muted);font-weight:600}
+  .mrev .x{position:absolute;top:10px;right:10px;background:var(--grey);border:0;width:26px;height:26px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer;color:var(--ink)}
+  @media(max-width:760px){.mrev{position:static;max-width:none;margin:0 28px 20px;transform:none}}
 
-  .t-card{position:relative;max-width:720px;margin:22px auto;opacity:0;transform:translateY(28px) scale(.95);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.9,.3,1.25)}
-  .t-card.show{opacity:1;transform:none}
-  .t-card.gone{display:none}
-  .t-card .ac-inner{padding:30px 34px;gap:28px}
-  .t-card .ac-photo{width:118px;height:118px;border-radius:18px}
-  .t-card .ac-quote{font-size:clamp(17px,1.9vw,22px);margin-bottom:12px}
-  .t-close{position:absolute;top:12px;right:14px;z-index:4;background:var(--grey);border:0;width:30px;height:30px;border-radius:50%;font-size:17px;line-height:1;cursor:pointer;color:var(--ink)}
-  .t-close:hover{background:#e2e6ec}
+  /* ---- 4. EVERYTHING EBA CAN DO: one tight block ---- */
+  .allblock{position:relative;overflow:hidden;max-width:960px;margin:0 auto;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:24px;padding:44px 44px 40px;box-shadow:0 26px 60px rgba(15,26,31,.28);color:#fff}
+  .allblock::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#F5325B,#C026D3,#005CFF,#2BB673)}
+  .allblock h2{font-family:var(--font-head);font-size:clamp(24px,3vw,34px);font-weight:900;letter-spacing:-.02em;margin-bottom:22px}
+  .all-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 34px;margin-bottom:26px}
+  .all-grid li{list-style:none;position:relative;padding-left:30px;font-size:15.5px;line-height:1.5;color:#D7DEE6}
+  .all-grid li::before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:50%;background:rgba(43,182,115,.22);box-shadow:inset 0 0 0 2px #2BB673}
+  .all-grid li strong{color:#fff;font-weight:700}
+  @media(max-width:640px){.all-grid{grid-template-columns:1fr}}
 
-  /* ---- timed CTA: slides in bottom-right after 8s ---- */
+  /* ---- timed CTA ---- */
   .timed-cta{position:fixed;right:22px;bottom:22px;z-index:80;max-width:330px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 24px 20px;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;overflow:hidden}
   .timed-cta::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--blue),var(--green))}
   .timed-cta.show{opacity:1;transform:none;pointer-events:auto}
@@ -425,28 +417,27 @@
   .tc-text{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
   .timed-cta .btn{font-size:15px;padding:12px 22px}
 
-  @media(max-width:900px){
-    .modgrid,.why-two{grid-template-columns:1fr;gap:26px}
-    .why-media{max-width:440px;margin:0 auto}
-  }
   @media(max-width:860px){
     .mhero-inner{grid-template-columns:1fr;gap:18px;text-align:center;padding:54px 20px 30px;min-height:0}
     .mhero-copy p.sub,.mhero-cta{margin-left:auto;margin-right:auto}
     .mhero-cta{justify-content:center}
-    .mstage{height:340px;order:2}
+    .mstage{height:330px;order:2}
+    .mx-head{flex-wrap:wrap;gap:12px 16px}
   }
   @media(max-width:520px){
     .timed-cta{left:14px;right:14px;max-width:none}
-    .mtile-in{width:168px;height:128px}.mtile .micon{width:52px;height:52px}.mtile .micon svg{width:28px;height:28px}
-    .mtile.p1{left:2%}.mtile.p2{left:50%}.mtile.p3{left:2%}.mtile.p4{left:50%}
+    .mtile-in{width:172px;height:88px}.mtile-in img{height:28px;max-width:138px}
+    .mtile.p1{left:1%}.mtile.p2{left:50%}.mtile.p3{left:1%}.mtile.p4{left:50%}
   }
   @media (prefers-reduced-motion:reduce){
     body{animation:none}
     .mstage{animation:none}
     .mtile{opacity:1;animation:none;transform:none}
     .mtile-in{animation:none}
-    .reveal,.wq{opacity:1;transform:none;transition:none}
-    .t-card{opacity:1;transform:none;transition:none}
+    .mw-track{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+    .mx-body{transition:none}
+    .mrev{transition:none}
     .timed-cta,.header-cta{transition:none}
   }
 </style>
@@ -458,113 +449,144 @@
   <a class="btn btn-primary header-cta" id="hdrCta" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
 </header>
 
-<!-- HERO: a branded moment. Four bigger module marks pop in, then float and gently orbit. -->
+<!-- 1. HERO: payroll-led, cluster of the four real module logos -->
 <section class="mhero">
   <div class="mhero-accent" aria-hidden="true"></div>
   <div class="mhero-inner">
     <div class="mhero-copy">
       <p class="eyebrow">For accountants and bookkeepers</p>
-      <h1>Accounting software built for <span class="txt-blue">micro and small</span> businesses</h1>
-      <p class="sub">When clients are on software that is too big, too complex or too expensive for the size of their business, Easy Business App is the easy switch. Modular and pay-as-you-go, so they only pay for what they need. No lock-in, no annual contracts.</p>
+      <h1>Payroll, and every module a <span class="txt-blue">micro or small</span> business needs</h1>
+      <p class="sub">When clients are on software that is too big, too complex or too expensive for the size of their business, Easy Business App is the easy switch. Modular and pay-as-you-go, they only pay for what they need. No lock-in, no annual contracts.</p>
       <div class="mhero-cta">
         <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
-        <a class="btn btn-ghost" href="#modules">See the modules</a>
+        <a class="btn btn-ghost" href="#explore">Explore the modules</a>
       </div>
     </div>
     <div class="mstage" aria-hidden="true">
-      <div class="mtile p1"><div class="mtile-in"><span class="micon" style="--c:#F5325B;--tint:#FFE4EB"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5h.01M18 14.5h.01"/></svg></span><span class="mtile-name">Easy Payslip</span></div></div>
-      <div class="mtile p2"><div class="mtile-in"><span class="micon" style="--c:#005CFF;--tint:#CFE0FF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8"/><path d="M3.5 21h17"/></svg></span><span class="mtile-name">Easy Bank Feeds</span></div></div>
-      <div class="mtile p3"><div class="mtile-in"><span class="micon" style="--c:#2BB673;--tint:#E4FFF1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="mtile-name">Easy Invoicing</span></div></div>
-      <div class="mtile p4"><div class="mtile-in"><span class="micon" style="--c:#C026D3;--tint:#F6E1FA"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V3M4 21h17"/><path d="M8 21v-5M13 21v-9M18 21v-3"/></svg></span><span class="mtile-name">Easy Reports</span></div></div>
+      <div class="mtile p1"><div class="mtile-in"><img src="module-payslip.png" alt="Easy Payslip"></div></div>
+      <div class="mtile p2"><div class="mtile-in"><img src="module-banking.png" alt="Easy Bank Feeds"></div></div>
+      <div class="mtile p3"><div class="mtile-in"><img src="module-invoicing.png" alt="Easy Invoicing"></div></div>
+      <div class="mtile p4"><div class="mtile-in"><img src="module-reports.png" alt="Easy Reports"></div></div>
     </div>
   </div>
 </section>
 
-<!-- MODULES: pick and mix, four branded cards -->
-<section class="section" id="modules">
+<!-- 2. MOVING MODULE WALL: drifting module cards, click to open a module below -->
+<section class="section" id="explore" style="padding-bottom:34px">
   <div class="section-head reveal">
-    <h2>Pick and mix the modules your clients need</h2>
-    <p>A modular setup, priced for micro clients, where they only pay for what they need. No lock-in. No annual contracts.</p>
+    <h2>Explore the modules</h2>
+    <p>Pick and mix what your clients need. Tap a module to see what it does.</p>
   </div>
-  <div class="modgrid">
-    <div class="modcard reveal" style="--c:#F5325B">
-      <img class="mod-logo" src="module-payslip.png" alt="Easy Payslip" loading="lazy">
-      <span class="mod-tag">Payroll and STP</span>
-      <p><span class="price">From $14.95 a month for a four-employee business.</span></p>
-    </div>
-    <div class="modcard reveal" style="--c:#005CFF">
-      <img class="mod-logo" src="module-banking.png" alt="Easy Bank Feeds" loading="lazy">
-      <span class="mod-tag">Bank feeds and recon</span>
-      <p>Snap a receipt and it files itself.</p>
-    </div>
-    <div class="modcard reveal" style="--c:#2BB673">
-      <img class="mod-logo" src="module-invoicing.png" alt="Easy Invoicing" loading="lazy">
-      <span class="mod-tag">Invoices and payments</span>
-      <p><span class="price">Free tier or $10.95 a month.</span></p>
-    </div>
-    <div class="modcard reveal" style="--c:#C026D3">
-      <img class="mod-logo" src="module-reports.png" alt="Easy Reports" loading="lazy">
-      <span class="mod-tag">Insights and BAS</span>
-      <p><span class="price">Always free.</span></p>
-    </div>
-  </div>
-  <p class="modline reveal">Payroll from <strong>$14.95 a month</strong> for a four-employee business. Only pay for the modules you use, most modules from <strong>$10.95 a month</strong>, and reports always free.</p>
-  <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
+  <div class="modwall" id="modwall" aria-hidden="true"></div>
 </section>
 
-<!-- WHY it is the easy switch: four points reveal one by one -->
+<!-- 3. EXPANDABLE MODULE SECTIONS, payroll first and open by default -->
+<div class="modlist" id="modules">
+  <section class="mx lead open" id="mod-payslip" style="--c:#F5325B">
+    <button class="mx-head" type="button" aria-expanded="true" aria-controls="body-payslip">
+      <img class="mx-logo" src="module-payslip.png" alt="Easy Payslip">
+      <span class="mx-tag">Payroll and STP</span>
+      <span class="mx-toggle" aria-hidden="true">+</span>
+    </button>
+    <div class="mx-body" id="body-payslip">
+      <div class="mx-inner">
+        <p class="mx-what">Pay staff, lodge STP, and pay Payday Super. Built for small teams, ATO compliant, with payslips sent to employees automatically.</p>
+        <ul class="mx-benefits">
+          <li>Single Touch Payroll reported to the ATO every pay run.</li>
+          <li>Payday Super, so super is paid at the same time as wages.</li>
+          <li>Payslips generated and emailed to employees automatically.</li>
+          <li>Made for small teams, without the setup your clients will not use.</li>
+        </ul>
+        <p class="mx-price">From $14.95 a month for a four-employee business.</p>
+        <p class="mx-explore">Want to see a pay run end to end? Book a demo and we will walk you through it.</p>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+      </div>
+    </div>
+    <div class="mrev" id="payrollRev" role="complementary" aria-label="Customer review">
+      <button class="x" type="button" aria-label="Dismiss">&times;</button>
+      <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;We highly recommend the Easy Business App. So well designed to make all aspects of creating pay runs, emailing pay slips and fulfilling the ATO STP tasks so easy and straight forward. Fantastic small business solution.&rdquo;</p>
+      <div class="who">Robert, Robert L Granter and Associates</div>
+    </div>
+  </section>
+
+  <section class="mx" id="mod-bank" style="--c:#005CFF">
+    <button class="mx-head" type="button" aria-expanded="false" aria-controls="body-bank">
+      <img class="mx-logo" src="module-banking.png" alt="Easy Bank Feeds">
+      <span class="mx-tag">Bank feeds and recon</span>
+      <span class="mx-toggle" aria-hidden="true">+</span>
+    </button>
+    <div class="mx-body" id="body-bank">
+      <div class="mx-inner">
+        <p class="mx-what">Connects the bank so every cent in and out lands in the books. Snap a receipt and it files itself, and bank rules automate the repetitive coding.</p>
+        <ul class="mx-benefits">
+          <li>Live bank feeds, so the books stay up to date.</li>
+          <li>Receipt snapping that reads and files the details for you.</li>
+          <li>Bank rules that handle the repetitive coding automatically.</li>
+        </ul>
+        <p class="mx-price">From $10.95 a month.</p>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx" id="mod-invoicing" style="--c:#2BB673">
+    <button class="mx-head" type="button" aria-expanded="false" aria-controls="body-invoicing">
+      <img class="mx-logo" src="module-invoicing.png" alt="Easy Invoicing">
+      <span class="mx-tag">Invoices and payments</span>
+      <span class="mx-toggle" aria-hidden="true">+</span>
+    </button>
+    <div class="mx-body" id="body-invoicing">
+      <div class="mx-inner">
+        <p class="mx-what">Create and send invoices and quotes, take card payments, and chase what is overdue automatically.</p>
+        <ul class="mx-benefits">
+          <li>Send invoices and quotes from your phone or desktop.</li>
+          <li>Take card payments so clients get paid sooner.</li>
+          <li>Automatic reminders that chase overdue invoices for you.</li>
+        </ul>
+        <p class="mx-price">Free tier or $10.95 a month.</p>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx" id="mod-reports" style="--c:#C026D3">
+    <button class="mx-head" type="button" aria-expanded="false" aria-controls="body-reports">
+      <img class="mx-logo" src="module-reports.png" alt="Easy Reports">
+      <span class="mx-tag">Insights and BAS</span>
+      <span class="mx-toggle" aria-hidden="true">+</span>
+    </button>
+    <div class="mx-body" id="body-reports">
+      <div class="mx-inner">
+        <p class="mx-what">Turns the data into a profit and loss, balance sheet and BAS you can read any day.</p>
+        <ul class="mx-benefits">
+          <li>Profit and loss, balance sheet and BAS, ready when you are.</li>
+          <li>Clear enough for clients, detailed enough for you.</li>
+        </ul>
+        <p class="mx-price">Always free.</p>
+        <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 4. EVERYTHING EBA CAN DO: one tight block -->
 <section class="section">
-  <div class="section-head reveal"><h2>Why it is the easy switch for advisors</h2></div>
-  <div class="why-two">
-    <div class="why-media reveal"><img src="confused-user.png" alt="A small business client overwhelmed by software that is too big, too complex or too expensive for the size of their business" loading="lazy"></div>
-    <div class="why-body">
-      <p class="why-lede reveal">Your clients get pushed onto software that is too big, too complex or too expensive for the size of their business. Easy Business App is software built for micro and small businesses, so it is the easy switch to recommend, and easier for you.</p>
-      <ul class="why-list" id="whyList">
-        <li class="wq" style="--c:#005CFF;--tint:#CFE0FF"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><div><h3>Better data, less chasing</h3><p>Clients love it, so they keep it up to date. You get better quality data, less chasing, and a smoother run into BAS and tax time.</p></div></li>
-        <li class="wq" style="--c:#2BB673;--tint:#E4FFF1"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z"/></svg></span><div><h3>Australian-based support</h3><p>Real people on phone, live chat and email, so when a client gets stuck they call Easy Business App, not you.</p></div></li>
-        <li class="wq" style="--c:#005CFF;--tint:#CFE0FF"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16"/><path d="M14 21V11h5a1 1 0 0 1 1 1v9"/><path d="M3 21h18"/><path d="M7 8h3M7 12h3M7 16h3"/></svg></span><div><h3>Built for your practice</h3><p>A dedicated Partner Manager and one advisor portal to manage every client in one place.</p></div></li>
-        <li class="wq" style="--c:#2BB673;--tint:#E4FFF1"><span class="wl-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v9"/><path d="M14.3 9.4c-.5-.7-1.4-1.1-2.3-1.1-1.3 0-2.3.8-2.3 1.9 0 1 .9 1.5 2.3 1.9 1.4.4 2.3.9 2.3 1.9 0 1.1-1 1.9-2.3 1.9-1 0-1.8-.4-2.3-1.1"/></svg></span><div><h3>Priced for micro and small business</h3><p>Priced for micro clients, where they only pay for what they need.</p></div></li>
-      </ul>
-    </div>
-  </div>
-  <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
-</section>
-
-<!-- SOCIAL PROOF: dark on-brand card, drifting reviews behind, two appearing testimonials -->
-<section class="section proofsec" id="proof">
-  <div class="conveyor" id="proofFlow" aria-hidden="true"></div>
-  <div class="proof-veil" aria-hidden="true"></div>
-  <div class="proof-inner">
-    <div class="section-head reveal"><h2>Advisors and their clients rate it</h2></div>
-    <div class="proof-card reveal">
-      <div class="pc-item"><span class="pc-num"><span class="cu" data-target="10000" data-comma="1" data-suffix="+">10,000+</span></span><span class="pc-lbl">small businesses trust us</span></div>
-      <div class="pc-item"><span class="pc-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="pc-lbl">Rated 4.8 on Trustpilot</span></div>
-      <div class="pc-item"><span class="pc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z"/></svg></span><span class="pc-lbl">Australian-based support via phone, live chat and email</span></div>
-    </div>
-    <div class="t-card advisor-card" id="tAmy">
-      <button class="t-close" type="button" aria-label="Dismiss">&times;</button>
-      <div class="ac-inner">
-        <img class="ac-photo" src="amy-headshot.png" width="280" height="280" alt="Amy L. FCPA, Practice Owner, NSW">
-        <div class="ac-copy">
-          <blockquote class="ac-quote">&ldquo;I&rsquo;ve already moved 250 clients onto Easy Business App and with the money I&rsquo;m saving I&rsquo;ve hired more staff to grow my practice.&rdquo;</blockquote>
-          <div class="ac-name">Amy L. FCPA, Practice Owner, NSW</div>
-        </div>
-      </div>
-    </div>
-    <div class="t-card advisor-card" id="tZak">
-      <button class="t-close" type="button" aria-label="Dismiss">&times;</button>
-      <div class="ac-inner">
-        <img class="ac-photo" src="zak-headshot.png" width="280" height="280" alt="Zak M., BAS Agent, WA">
-        <div class="ac-copy">
-          <blockquote class="ac-quote">&ldquo;My clients don&rsquo;t want bells and whistles. They want fast, easy, and affordable. That&rsquo;s what Easy Business App gives them.&rdquo;</blockquote>
-          <div class="ac-name">Zak M., BAS Agent, WA</div>
-        </div>
-      </div>
-    </div>
+  <div class="allblock reveal">
+    <h2>Everything Easy Business App can do for your clients</h2>
+    <ul class="all-grid">
+      <li><strong>Pay only for the modules you use</strong>, most from $10.95 a month.</li>
+      <li><strong>Easy Reports is always free.</strong></li>
+      <li>Typically much cheaper than the usual alternatives.</li>
+      <li>Modular and pay-as-you-go, with no lock-in and no annual contracts.</li>
+      <li><strong>Australian-based support</strong> via phone, live chat and email.</li>
+      <li>A dedicated <strong>Partner Manager</strong> and one advisor portal for every client.</li>
+    </ul>
+    <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer" style="font-size:15px;padding:14px 28px">Book a demo</a>
   </div>
 </section>
 
-<!-- CLOSING CTA -->
+<!-- 5. CLOSING CTA -->
 <section class="band">
   <div class="reveal">
     <h2>Which clients will you move first?</h2>
@@ -586,41 +608,60 @@
 <script>
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-/* drifting reviews behind the social-proof section (same effect as the reviews page, dimmed) */
-var PROOF=[
-  {n:'Wendy Wu',q:'Easy to use! Simple and user friendly!'},{n:'Tracy',q:'Support has been outstanding!'},
-  {n:'Vadim',q:'Great service, great software!'},{n:'Ivar Charles',q:'Quick and easy'},
-  {n:'Diana',q:'Great app. Customer service is the best!'},{n:'Meredith',q:'fast and helpful!'},
-  {n:'Maureen',q:'Very easy to use'},{n:'Busy Nan',q:'Excellent easy business app'},
-  {n:'David',q:'Very user friendly'},{n:'Michael',q:'quick response'},
-  {n:'a very useful travel tool',q:'Great App, so easy to use!'},{n:'MARIA',q:'Very simple app'},
-  {n:'HWEI MAY CHUA',q:'good service easy to use software'},{n:'Tim',q:'Easy to use.'},
-  {n:'Drew',q:'Rapid response and problem turnaround.'},{n:'Alison',q:'Easy and straightforward to navigate'},
-  {n:'Cheryl',q:'helpful, quick and very clever'},{n:'Louise',q:'excellent app'},
-  {n:'Wonyoung',q:'Very easy and convenient!!'},{n:'Graham Neale',q:'Easy for everything'},
-  {n:'Core Civil Comm Pty Ltd',q:'very clear instructions'},{n:'Bt',q:'Prompt response'},
-  {n:'Matthew',q:'Great customer service'},{n:'Rakesh',q:'quick reply'}
+var MODULES=[
+  {id:'mod-payslip',logo:'module-payslip.png',name:'Easy Payslip',tag:'Payroll and STP',c:'#F5325B'},
+  {id:'mod-bank',logo:'module-banking.png',name:'Easy Bank Feeds',tag:'Bank feeds and recon',c:'#005CFF'},
+  {id:'mod-invoicing',logo:'module-invoicing.png',name:'Easy Invoicing',tag:'Invoices and payments',c:'#2BB673'},
+  {id:'mod-reports',logo:'module-reports.png',name:'Easy Reports',tag:'Insights and BAS',c:'#C026D3'}
 ];
-function pmini(r){return '<div class="mini"><div class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="t">'+esc(r.q)+'</div><div class="nm">'+esc(r.n)+'</div></div>';}
+
+/* open a module accordion and scroll to it */
+function openModule(id){
+  var sec=document.getElementById(id);if(!sec)return;
+  sec.classList.add('open');
+  var head=sec.querySelector('.mx-head');if(head)head.setAttribute('aria-expanded','true');
+  sec.scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
+}
+
+/* 2. MOVING MODULE WALL: columns of drifting module cards (reuses the flow keyframes) */
 (function(){
-  var el=document.getElementById('proofFlow');if(!el)return;
-  var cols=window.innerWidth<720?2:(window.innerWidth<1100?3:4);
+  var wall=document.getElementById('modwall');if(!wall)return;
+  function cardHTML(m){return '<button type="button" class="mw-card" data-target="'+m.id+'" style="--c:'+m.c+'" aria-label="Open '+esc(m.name)+'"><img src="'+m.logo+'" alt="'+esc(m.name)+'"><span>'+esc(m.tag)+'</span><small>Tap to explore</small></button>';}
+  var cols=window.innerWidth<640?1:(window.innerWidth<1000?2:3);
   for(var ci=0;ci<cols;ci++){
-    var col=document.createElement('div');col.className='cvcol';
-    var tr=document.createElement('div');tr.className='cvtrack';
-    var sl=PROOF.filter(function(_,k){return k%cols===ci;});
-    var h=sl.map(pmini).join('');
-    tr.innerHTML=h+h;tr.style.animationDuration=(sl.length*3.6+ci*3)+'s';
-    col.appendChild(tr);el.appendChild(col);
+    var col=document.createElement('div');col.className='mw-col';
+    var tr=document.createElement('div');tr.className='mw-track';
+    var order=MODULES.slice(ci).concat(MODULES.slice(0,ci)); /* rotate order per column */
+    var h=order.map(cardHTML).join('');
+    tr.innerHTML=h+h; /* duplicate for a continuous loop */
+    tr.style.animationDuration=(16+ci*5)+'s';
+    col.appendChild(tr);wall.appendChild(col);
   }
+  wall.addEventListener('click',function(e){var b=e.target.closest('.mw-card');if(b)openModule(b.getAttribute('data-target'));});
 })();
 
-/* count-up numbers */
+/* 3. accordion: toggle each module section open/closed */
 (function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function fmtVal(el,v){var dec=+(el.dataset.dec||0);var s=v.toFixed(dec);if(el.dataset.comma)s=Number(s).toLocaleString('en-AU',{minimumFractionDigits:dec,maximumFractionDigits:dec});return s+(el.dataset.suffix||'');}
-  function countUp(el){var target=parseFloat(el.dataset.target);if(reduce||!('requestAnimationFrame' in window)){el.textContent=fmtVal(el,target);return;}var t0=performance.now(),dur=900;(function step(t){var p=Math.min(1,(t-t0)/dur);var e=1-Math.pow(1-p,3);el.textContent=fmtVal(el,target*e);if(p<1)requestAnimationFrame(step);})(t0);}
-  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es,obs){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);obs.unobserve(e.target);}});},{threshold:.6});document.querySelectorAll('.cu').forEach(function(el){io.observe(el);});}
+  document.querySelectorAll('.mx-head').forEach(function(head){
+    head.addEventListener('click',function(){
+      var sec=head.closest('.mx');var open=sec.classList.toggle('open');
+      head.setAttribute('aria-expanded',open?'true':'false');
+    });
+  });
+})();
+
+/* payroll review pop-up: appears while the payroll section is in view, dismissible, once */
+(function(){
+  var rev=document.getElementById('payrollRev'),sec=document.getElementById('mod-payslip');
+  if(!rev||!sec)return;
+  var dismissed=false;
+  var x=rev.querySelector('.x');
+  if(x)x.addEventListener('click',function(){dismissed=true;rev.classList.remove('show');rev.classList.add('gone');});
+  if(!('IntersectionObserver' in window)){rev.classList.add('show');return;}
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(dismissed)return;
+    rev.classList.toggle('show',e.isIntersecting);
+  });},{threshold:.35}).observe(sec);
 })();
 
 /* one gentle scroll-reveal language across the page */
@@ -629,27 +670,6 @@ function pmini(r){return '<div class="mini"><div class="s">&#9733;&#9733;&#9733;
   if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in');});return;}
   var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.08});
   els.forEach(function(e){io.observe(e);});
-})();
-
-/* the four "why" points reveal one after another when the list scrolls into view */
-(function(){
-  var list=document.getElementById('whyList');if(!list)return;
-  var items=[].slice.call(list.querySelectorAll('.wq'));if(!items.length)return;
-  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){items.forEach(function(i){i.classList.add('in');});return;}
-  var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){items.forEach(function(it,idx){setTimeout(function(){it.classList.add('in');},idx*170);});obs.disconnect();}});},{rootMargin:'0px 0px -12% 0px',threshold:0.2});
-  io.observe(list);
-})();
-
-/* testimonials pop in on scroll; small close (x) dismisses for the session */
-(function(){
-  var cards=[].slice.call(document.querySelectorAll('.t-card'));if(!cards.length)return;
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!('IntersectionObserver' in window)||reduce){cards.forEach(function(c){c.classList.add('show');});}
-  else{
-    var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px',threshold:0.25});
-    cards.forEach(function(c){io.observe(c);});
-  }
-  cards.forEach(function(c){var x=c.querySelector('.t-close');if(x)x.addEventListener('click',function(){c.classList.add('gone');});});
 })();
 
 /* header Book a demo fades in once the hero is scrolled past */
