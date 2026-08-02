@@ -328,11 +328,11 @@
 
   /* ---- 1. HERO: big cluster of the four real module logos, pop in then drift ---- */
   .mhero{position:relative;overflow:hidden;background:transparent}
-  .mhero::before{content:"";position:absolute;top:-16%;right:-8%;width:78%;height:135%;pointer-events:none;z-index:0;background:radial-gradient(closest-side, rgba(0,92,255,.12), rgba(0,92,255,0) 70%)}
+  .mhero::before{content:"";position:absolute;top:-25%;right:-14%;width:96%;height:150%;pointer-events:none;z-index:0;background:radial-gradient(closest-side, rgba(0,92,255,.10), rgba(43,182,115,.06) 46%, rgba(0,92,255,0) 80%)}
   .mhero-accent{position:absolute;top:0;left:0;right:0;height:3px;z-index:3;background:linear-gradient(90deg,#F5325B,#FF9A00,#C026D3,#005CFF,#2BB673)}
   /* EBA brand-mark motif tiled faintly across the hero, drifting slowly behind the content */
-  .mhero-motif{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(motif-tile.png) 0 0/116px repeat;opacity:.06;animation:motifdrift 44s linear infinite}
-  @keyframes motifdrift{from{background-position:0 0}to{background-position:116px 232px}}
+  .mhero-motif{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(motif-tile.png) 0 0/188px repeat;opacity:.045;animation:motifdrift 52s linear infinite;-webkit-mask-image:radial-gradient(130% 105% at 72% 38%,#000 20%,transparent 82%);mask-image:radial-gradient(130% 105% at 72% 38%,#000 20%,transparent 82%)}
+  @keyframes motifdrift{from{background-position:0 0}to{background-position:188px 300px}}
   .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:70px 40px;min-height:78vh}
   .mhero-copy .eyebrow{margin-bottom:16px}
   .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,4.2vw,54px);margin-bottom:18px}
@@ -356,16 +356,12 @@
   @keyframes morbit{0%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}100%{transform:rotate(-1.6deg)}}
 
   /* ---- 2. MOVING MODULE WALL: drifting module cards (reuses the reviews-page flow motion) ---- */
-  .modwall{position:relative;overflow:hidden;height:380px;display:flex;gap:18px;justify-content:center;padding:0 18px;-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
-  .mw-col{flex:1 1 0;max-width:320px;overflow:hidden}
-  .mw-track{display:flex;flex-direction:column;gap:18px;animation:flow linear infinite;will-change:transform}
-  .mw-col:hover .mw-track{animation-play-state:paused}
-  .mw-card{position:relative;overflow:hidden;text-align:left;width:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 4px 16px rgba(15,26,31,.06);cursor:pointer;font-family:inherit;transition:transform .18s ease,box-shadow .18s ease}
-  .mw-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,#005CFF)}
-  .mw-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,26,31,.13)}
-  .mw-card img{height:26px;width:auto;max-width:150px;display:block;margin-bottom:10px}
-  .mw-card span{display:block;font-size:13px;font-weight:700;color:var(--c,#005CFF)}
-  .mw-card small{display:block;font-size:12.5px;color:var(--muted);margin-top:4px}
+  /* decorative only: a slow, faint drift of module logos that sets the tone (not a content section) */
+  .modwall{position:relative;overflow:hidden;height:196px;display:flex;gap:24px;justify-content:center;padding:0 18px;opacity:.5;pointer-events:none;-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
+  .mw-col{flex:1 1 0;max-width:300px;overflow:hidden}
+  .mw-track{display:flex;flex-direction:column;gap:22px;animation:flow linear infinite;will-change:transform}
+  .mw-chip{display:flex;align-items:center;justify-content:center;height:62px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 14px rgba(15,26,31,.05)}
+  .mw-chip img{height:26px;width:auto;max-width:158px;display:block}
 
   /* ---- 3. EXPANDABLE MODULE SECTIONS (accordion) ---- */
   .modlist{max-width:960px;margin:0 auto;padding:0 24px;display:grid;gap:16px}
@@ -446,6 +442,20 @@
   .all-grid li strong{color:#fff;font-weight:700}
   @media(max-width:640px){.all-grid{grid-template-columns:1fr}}
 
+  /* ---- timed advisor speech bubbles: slide in from the edges on scroll, dismissible, auto-hide ---- */
+  .qbub{position:fixed;z-index:75;max-width:320px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 50px rgba(15,26,31,.2);padding:16px 34px 16px 18px;display:flex;gap:12px;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.9,.3,1.2)}
+  .qbub.left{left:22px;bottom:118px;transform:translateX(-26px)}
+  .qbub.right{right:22px;bottom:198px;transform:translateX(26px)}
+  .qbub.show{opacity:1;transform:none;pointer-events:auto}
+  .qbub .av{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:900;font-size:13.5px;color:#fff;letter-spacing:.02em}
+  .qbub .qb-body{min-width:0}
+  .qbub p{font-size:13.5px;color:var(--ink);line-height:1.45;margin:0 0 6px}
+  .qbub .nm{font-size:12px;color:var(--muted);font-weight:600}
+  .qbub .qx{position:absolute;top:9px;right:11px;background:none;border:0;font-size:16px;line-height:1;color:var(--muted);cursor:pointer}
+  .qbub::after{content:"";position:absolute;bottom:-7px;width:14px;height:14px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+  .qbub.left::after{left:28px}.qbub.right::after{right:28px}
+  @media(max-width:560px){.qbub{left:14px;right:14px;max-width:none}.qbub.left,.qbub.right{bottom:150px;transform:translateY(18px)}}
+
   /* ---- timed CTA ---- */
   .timed-cta{position:fixed;right:22px;bottom:22px;z-index:80;max-width:330px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 24px 20px;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;overflow:hidden}
   .timed-cta::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--blue),var(--green))}
@@ -478,6 +488,7 @@
     .mx-body{transition:none}
     .mrev{transition:none}
     .timed-cta,.header-cta{transition:none}
+    .qbub,.qbub.left,.qbub.right{transform:none}.qbub{transition:opacity .4s ease}
   }
 </style>
 </head>
@@ -511,16 +522,19 @@
   </div>
 </section>
 
-<!-- 2. MOVING MODULE WALL: drifting module cards, click to open a module below -->
-<section class="section" id="explore" style="padding-bottom:34px">
-  <div class="section-head reveal">
-    <h2>Explore the modules</h2>
-    <p>Pick and mix what your clients need. Tap a module to see what it does.</p>
-  </div>
+<!-- 2. MOVING MODULE WALL: decorative only, a faint drift of module logos that sets the tone -->
+<section id="explore" style="padding:26px 24px 4px;max-width:1080px;margin:0 auto">
   <div class="modwall" id="modwall" aria-hidden="true"></div>
 </section>
 
 <!-- 3. EXPANDABLE MODULE SECTIONS, payroll first and open by default -->
+<div class="section" style="padding-bottom:6px">
+  <div class="section-head reveal">
+    <p class="eyebrow">The modules in detail</p>
+    <h2>What each Easy module does</h2>
+    <p>Open any module for the detail. Start with payroll, then add only what a client actually needs.</p>
+  </div>
+</div>
 <div class="modlist" id="modules">
   <section class="mx lead open" id="mod-payslip" style="--c:#F5325B">
     <button class="mx-head" type="button" aria-expanded="true" aria-controls="body-payslip">
@@ -652,8 +666,9 @@
 <!-- Advisor: what a real client pays, using verified prices only (no competitor comparison, no invented savings) -->
 <section class="section" id="pricing">
   <div class="section-head reveal">
+    <p class="eyebrow">Real client examples</p>
     <h2>What your client pays</h2>
-    <p>Priced for micro and small businesses, the four-employees-or-fewer clients that software built for bigger businesses is too big, too complex or too expensive for. They only pay for the modules they use, and Easy Reports is always free.</p>
+    <p>A few typical setups at their real monthly cost. They only pay for the modules they use, and Easy Reports is always free.</p>
   </div>
   <div class="pays-grid">
     <div class="pay-card reveal">
@@ -710,6 +725,18 @@
 
 <footer>Easy Business App. Australian accounting software for micro and small businesses.</footer>
 
+<!-- timed advisor speech bubbles: slide in from the edges at a couple of scroll points -->
+<div class="qbub left" id="bub1" role="complementary" aria-label="Advisor quote">
+  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
+  <span class="av" style="background:#005CFF" aria-hidden="true">BL</span>
+  <div class="qb-body"><p>&ldquo;This is easily the best accounting software I have ever seen. I am stunned at how good it is.&rdquo;</p><div class="nm">Business Lane</div></div>
+</div>
+<div class="qbub right" id="bub2" role="complementary" aria-label="Advisor quote">
+  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
+  <span class="av" style="background:#2BB673" aria-hidden="true">GC</span>
+  <div class="qb-body"><p>&ldquo;Ease of use and quick responses to queries.&rdquo;</p><div class="nm">GC Perry and Co</div></div>
+</div>
+
 <!-- timed Book a demo, bottom-right after 8s, once per visit -->
 <div class="timed-cta" id="timedCta" role="complementary" aria-label="Book a demo">
   <button class="tc-close" id="tcClose" aria-label="Dismiss">&times;</button>
@@ -736,21 +763,20 @@ function openModule(id){
   sec.scrollIntoView({behavior:(window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'),block:'start'});
 }
 
-/* 2. MOVING MODULE WALL: columns of drifting module cards (reuses the flow keyframes) */
+/* 2. decorative module drift: faint logo chips, no interaction (tone only, reuses the flow keyframes) */
 (function(){
   var wall=document.getElementById('modwall');if(!wall)return;
-  function cardHTML(m){return '<button type="button" class="mw-card" data-target="'+m.id+'" style="--c:'+m.c+'" aria-label="Open '+esc(m.name)+'"><img src="'+m.logo+'" alt="'+esc(m.name)+'"><span>'+esc(m.tag)+'</span><small>Tap to explore</small></button>';}
-  var cols=window.innerWidth<640?1:(window.innerWidth<1000?2:3);
+  function chipHTML(m){return '<div class="mw-chip"><img src="'+m.logo+'" alt="" aria-hidden="true"></div>';}
+  var cols=window.innerWidth<640?2:3;
   for(var ci=0;ci<cols;ci++){
     var col=document.createElement('div');col.className='mw-col';
     var tr=document.createElement('div');tr.className='mw-track';
     var order=MODULES.slice(ci).concat(MODULES.slice(0,ci)); /* rotate order per column */
-    var h=order.map(cardHTML).join('');
+    var h=order.map(chipHTML).join('');
     tr.innerHTML=h+h; /* duplicate for a continuous loop */
-    tr.style.animationDuration=(16+ci*5)+'s';
+    tr.style.animationDuration=(34+ci*8)+'s';
     col.appendChild(tr);wall.appendChild(col);
   }
-  wall.addEventListener('click',function(e){var b=e.target.closest('.mw-card');if(b)openModule(b.getAttribute('data-target'));});
 })();
 
 /* 3. accordion: toggle each module section open/closed */
@@ -804,6 +830,15 @@ function openModule(id){
     var sel=c.classList.toggle('sel');c.setAttribute('aria-pressed',sel?'true':'false');update();
   });});
   update();
+})();
+
+/* timed advisor speech bubbles: slide in as the reader reaches a couple of scroll points, then auto-hide */
+(function(){
+  var list=[{el:document.getElementById('bub1'),at:0.30,done:false,t:null},{el:document.getElementById('bub2'),at:0.60,done:false,t:null}];
+  list.forEach(function(b){if(!b.el)return;var x=b.el.querySelector('.qx');if(x)x.addEventListener('click',function(){b.done=true;if(b.t)clearTimeout(b.t);b.el.classList.remove('show');});});
+  function show(b){if(b.done||!b.el)return;b.done=true;b.el.classList.add('show');b.t=setTimeout(function(){b.el.classList.remove('show');},6500);}
+  function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;var p=h>0?window.scrollY/h:0;list.forEach(function(b){if(!b.done&&p>=b.at)show(b);});}
+  window.addEventListener('scroll',onScroll,{passive:true});
 })();
 
 /* timed Book a demo, bottom-right after 8s, once per visit */
