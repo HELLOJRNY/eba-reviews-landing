@@ -352,6 +352,14 @@
 
   /* ---- 3. EXPANDABLE MODULE SECTIONS (accordion) ---- */
   .modlist{max-width:960px;margin:0 auto;padding:0 24px;display:grid;gap:16px}
+  /* staggered pop-in: the four module rows rise in one by one when the list enters view
+     (same easing and opacity/translate as .reveal, with a slight scale-up added) */
+  .modlist .mx{opacity:0;transform:translateY(22px) scale(.965);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
+  .modlist.in .mx{opacity:1;transform:none}
+  .modlist.in .mx:nth-child(1){transition-delay:0s}
+  .modlist.in .mx:nth-child(2){transition-delay:.12s}
+  .modlist.in .mx:nth-child(3){transition-delay:.24s}
+  .modlist.in .mx:nth-child(4){transition-delay:.36s}
   .mx{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 6px 20px rgba(15,26,31,.06);overflow:hidden}
   .mx::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c,#005CFF)}
   .mx.lead{box-shadow:0 16px 44px rgba(15,26,31,.12)}
@@ -470,6 +478,7 @@
     .mroll{-webkit-mask-image:none;mask-image:none}
     .mroll-track{animation:none}
     .reveal{opacity:1;transform:none;transition:none}
+    .modlist .mx{opacity:1;transform:none;transition:none}
     .mx-body{transition:none}
     .mrev{transition:none}
     .timed-cta,.header-cta{transition:none}
@@ -858,6 +867,14 @@ function openModule(id){
   if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in');});return;}
   var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.08});
   els.forEach(function(e){io.observe(e);});
+})();
+
+/* module list: the four rows pop in one by one (staggered via CSS) when the list enters view */
+(function(){
+  var list=document.getElementById('modules');if(!list)return;
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){list.classList.add('in');return;}
+  var io=new IntersectionObserver(function(entries,obs){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.12});
+  io.observe(list);
 })();
 
 /* header Book a demo fades in once the hero is scrolled past */
