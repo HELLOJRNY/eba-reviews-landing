@@ -330,6 +330,9 @@
   .mhero{position:relative;overflow:hidden;background:transparent}
   .mhero::before{content:"";position:absolute;top:-16%;right:-8%;width:78%;height:135%;pointer-events:none;z-index:0;background:radial-gradient(closest-side, rgba(0,92,255,.12), rgba(0,92,255,0) 70%)}
   .mhero-accent{position:absolute;top:0;left:0;right:0;height:3px;z-index:3;background:linear-gradient(90deg,#F5325B,#FF9A00,#C026D3,#005CFF,#2BB673)}
+  /* EBA brand-mark motif tiled faintly across the hero, drifting slowly behind the content */
+  .mhero-motif{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(motif-tile.png) 0 0/116px repeat;opacity:.06;animation:motifdrift 44s linear infinite}
+  @keyframes motifdrift{from{background-position:0 0}to{background-position:116px 232px}}
   .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;max-width:1240px;margin:0 auto;padding:70px 40px;min-height:78vh}
   .mhero-copy .eyebrow{margin-bottom:16px}
   .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,4.2vw,54px);margin-bottom:18px}
@@ -398,6 +401,25 @@
   .mrev .x{position:absolute;top:10px;right:10px;background:var(--grey);border:0;width:26px;height:26px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer;color:var(--ink)}
   @media(max-width:760px){.mrev{position:static;max-width:none;margin:0 28px 20px;transform:none}}
 
+  /* ---- interactive calculator: build your own Easy stack ---- */
+  .calc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .calc-card{position:relative;text-align:left;background:#fff;border:2px solid var(--line);border-radius:20px;padding:26px 26px 24px;box-shadow:0 6px 20px rgba(15,26,31,.06);cursor:pointer;font-family:inherit;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+  .calc-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(15,26,31,.12)}
+  .calc-card.sel{border-color:var(--c,#005CFF);box-shadow:0 16px 38px color-mix(in srgb,var(--c,#005CFF) 20%,rgba(15,26,31,.10))}
+  .calc-card img{height:28px;width:auto;max-width:158px;display:block;margin-bottom:14px}
+  .cc-desc{font-size:14.5px;color:var(--muted);line-height:1.5;margin-bottom:16px;min-height:44px}
+  .cc-price{display:block;font-weight:800;color:var(--ink);font-size:16px}
+  .cc-price small{display:block;font-weight:600;color:var(--muted);font-size:12.5px;margin-top:3px}
+  .cc-check{position:absolute;top:16px;right:16px;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:#fff;transition:border-color .18s ease,background .18s ease}
+  .calc-card.sel .cc-check{border-color:var(--c,#005CFF);background:var(--c,#005CFF)}
+  .calc-card.sel .cc-check::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .calc-bar{position:sticky;bottom:14px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:24px;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:18px;padding:20px 28px;box-shadow:0 18px 44px rgba(15,26,31,.26);color:#fff}
+  .calc-bar .cb-lbl{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:2px}
+  .calc-bar .cb-total{font-family:var(--font-head);font-size:clamp(26px,3vw,34px);font-weight:900;line-height:1.05}
+  .calc-bar .cb-total span{color:#fff}
+  .calc-bar .btn{flex:none}
+  @media(max-width:720px){.calc-grid{grid-template-columns:1fr}.cc-desc{min-height:0}.calc-bar{justify-content:center;text-align:center}}
+
   /* ---- advisor 'what your client pays' section (real verified prices only) ---- */
   .pays-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .pay-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 26px 24px;box-shadow:0 6px 20px rgba(15,26,31,.06)}
@@ -448,6 +470,7 @@
   @media (prefers-reduced-motion:reduce){
     body{animation:none}
     .mstage{animation:none}
+    .mhero-motif{animation:none}
     .mtile{opacity:1;animation:none;transform:none}
     .mtile-in{animation:none}
     .mw-track{animation:none}
@@ -467,6 +490,7 @@
 
 <!-- 1. HERO: payroll-led, cluster of the four real module logos -->
 <section class="mhero">
+  <div class="mhero-motif" aria-hidden="true"></div>
   <div class="mhero-accent" aria-hidden="true"></div>
   <div class="mhero-inner">
     <div class="mhero-copy">
@@ -585,6 +609,45 @@
     </div>
   </section>
 </div>
+
+<!-- Interactive calculator: pick and choose only the modules you need, live total -->
+<section class="section" id="calc">
+  <div class="section-head reveal">
+    <p class="eyebrow">Only pay for what you need</p>
+    <h2>Build your own Easy stack</h2>
+    <p>Four simple modules. Tap the ones your clients need and watch the price. No bundles, no bloat, and Easy Reports is free for everyone.</p>
+  </div>
+  <div class="calc-grid">
+    <button type="button" class="calc-card sel reveal" data-price="14.95" style="--c:#F5325B" aria-pressed="true">
+      <span class="cc-check" aria-hidden="true"></span>
+      <img src="module-payslip.png" alt="Easy Payslip">
+      <p class="cc-desc">The easiest way to manage payroll, STP and Payday Super.</p>
+      <span class="cc-price">From $14.95<small>/mo, up to 4 employees</small></span>
+    </button>
+    <button type="button" class="calc-card reveal" data-price="10.95" style="--c:#2BB673" aria-pressed="false">
+      <span class="cc-check" aria-hidden="true"></span>
+      <img src="module-invoicing.png" alt="Easy Invoicing">
+      <p class="cc-desc">Professional invoices and quotes. Accept online payments and get paid faster.</p>
+      <span class="cc-price">$10.95<small>/mo, free tier available</small></span>
+    </button>
+    <button type="button" class="calc-card reveal" data-price="10.95" style="--c:#005CFF" aria-pressed="false">
+      <span class="cc-check" aria-hidden="true"></span>
+      <img src="module-banking.png" alt="Easy Bank Feeds">
+      <p class="cc-desc">Super simple bank feeds with AI-powered receipt snapping. Never miss an expense.</p>
+      <span class="cc-price">$10.95<small>/mo, free tier available</small></span>
+    </button>
+    <button type="button" class="calc-card reveal" data-price="0" style="--c:#C026D3" aria-pressed="false">
+      <span class="cc-check" aria-hidden="true"></span>
+      <img src="module-reports.png" alt="Easy Reports">
+      <p class="cc-desc">See the true health of your business with profitability, cashflow and BAS reports.</p>
+      <span class="cc-price">Free<small> for every account</small></span>
+    </button>
+  </div>
+  <div class="calc-bar">
+    <div class="cb-left"><span class="cb-lbl">Your Easy stack</span><span class="cb-total"><span id="calcTotal">$14.95</span>/month</span></div>
+    <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+  </div>
+</section>
 
 <!-- Advisor: what a real client pays, using verified prices only (no competitor comparison, no invented savings) -->
 <section class="section" id="pricing">
@@ -727,6 +790,20 @@ function openModule(id){
   var cta=document.getElementById('hdrCta'),hero=document.querySelector('.mhero');
   if(!cta||!hero||!('IntersectionObserver' in window)){if(cta)cta.classList.add('show');return;}
   new IntersectionObserver(function(es){es.forEach(function(e){cta.classList.toggle('show',!e.isIntersecting);});},{threshold:0}).observe(hero);
+})();
+
+/* calculator: toggle module cards on/off, live monthly total (Reports adds $0) */
+(function(){
+  var cards=[].slice.call(document.querySelectorAll('.calc-card'));if(!cards.length)return;
+  var out=document.getElementById('calcTotal');if(!out)return;
+  function update(){
+    var t=0;cards.forEach(function(c){if(c.classList.contains('sel'))t+=parseFloat(c.dataset.price)||0;});
+    out.textContent=(t===0)?'$0':'$'+t.toFixed(2);
+  }
+  cards.forEach(function(c){c.addEventListener('click',function(){
+    var sel=c.classList.toggle('sel');c.setAttribute('aria-pressed',sel?'true':'false');update();
+  });});
+  update();
 })();
 
 /* timed Book a demo, bottom-right after 8s, once per visit */
