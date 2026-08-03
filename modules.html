@@ -877,7 +877,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     var sub=R.filter(function(_,k){return k%cols===ci;}); /* distinct subset per column, each quote once across the wall */
     var h=sub.map(card).join('');
     tr.innerHTML=h+h; /* duplicate for a seamless loop */
-    tr.style.animationDuration=(48+ci*10)+'s';
+    tr.style.animationDuration=(26+ci*6)+'s';
     tr.style.animationDelay=(-(ci*7))+'s';
     col.appendChild(tr);el.appendChild(col);
   }
