@@ -636,21 +636,27 @@
   .cmp-price .cur{color:var(--blue)}
   .cmp-rival-name{font-family:var(--font-head);font-weight:900;font-size:18px;color:var(--ink)}
   .cmp-badge{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--green-deep);background:var(--green-tint);padding:5px 10px;border-radius:999px}
-  .cmp-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:130px}
-  .cmp-save{text-align:center;line-height:1.3}
+  .cmp-badge-alt{color:var(--muted);background:var(--grey)}
+  .cmp-promo{font-size:12px;color:var(--muted);line-height:1.4;margin:2px 0 0;max-width:200px}
+  .cmp-plan-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .cmp-plan-tabs .cmp-tab{font-size:12px;padding:7px 13px}
+  .cmp-vs{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:90px}
   .cmp-vs-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .cmp-note{max-width:760px;margin:22px auto 0;text-align:center;font-family:var(--font-head);font-weight:800;font-size:clamp(16px,1.9vw,19px);line-height:1.4;color:var(--ink)}
   .cmp-feats{margin-top:22px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-  .cmp-feat{display:grid;grid-template-columns:1fr auto;gap:10px;padding:13px 18px;font-size:14px;align-items:center}
-  .cmp-feat:nth-child(odd){background:#F7F9FC}
+  .cmp-feat{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;padding:13px 18px;font-size:14px;align-items:center}
+  .cmp-feat:nth-child(even){background:#F7F9FC}
   .cmp-feat>span:first-child{font-weight:600;color:var(--ink)}
-  .cmp-eba-y{color:var(--green-deep);font-weight:800;white-space:nowrap}
-  .cmp-feat-note{margin:16px 0 0;text-align:center}
-  .cmp-src{margin:14px 0 0;text-align:center;font-size:12.5px}
+  .cmp-feat-head{background:var(--ink)!important}
+  .cmp-feat-head>span{color:#fff;font-family:var(--font-head);font-weight:800;font-size:13px}
+  .cmp-eba-y{color:var(--green-deep);font-weight:800}
+  .cmp-rival-v{color:var(--ink);font-weight:600}
+  .cmp-src{margin:14px 0 0;text-align:center;font-size:12.5px;color:var(--muted)}
   /* placeholder marker: unmissable amber, so nothing ships unconfirmed */
-  .ph{background:#FFF3D6;border:1px dashed #E3A008;border-radius:8px;padding:4px 9px;color:#8A5A00;font-weight:700;font-family:"Roboto",system-ui,sans-serif;font-size:12.5px;line-height:1.4}
+  .ph{background:#FFF3D6;border:1px dashed #E3A008;border-radius:8px;padding:4px 9px;color:#8A5A00;font-weight:700;font-family:"Roboto",system-ui,sans-serif;font-size:12px;line-height:1.35;display:inline-block}
   .cmp-anim{animation:cmpin .38s cubic-bezier(.2,.9,.3,1.2)}
   @keyframes cmpin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @media(max-width:720px){.cmp-board{grid-template-columns:1fr}.cmp-vs{flex-direction:row;justify-content:center;min-width:0}.cmp-feat{grid-template-columns:1fr;gap:3px;text-align:center}}
+  @media(max-width:720px){.cmp-board{grid-template-columns:1fr}.cmp-vs{flex-direction:row;justify-content:center;min-width:0}.cmp-feat{grid-template-columns:1.2fr 1fr 1fr;gap:6px;font-size:12.5px;padding:11px 12px}.cmp-feat-head>span{font-size:11px}}
 
   /* footnote: more than payroll (clearly secondary) */
   .foot-note{max-width:720px;margin:0 auto;text-align:center}
@@ -730,40 +736,42 @@
 <!-- 3. PAYROLL COMPARISON (main proof). Competitor prices, savings and inclusions are PLACEHOLDERS pending sign-off. -->
 <section class="section" id="compare">
   <div class="section-head reveal">
-    <p class="eyebrow">How it compares</p>
-    <h2>Small business payroll, at a small business price</h2>
-    <p>Pick a payroll product to see it beside Easy Payslip.</p>
+    <p class="eyebrow">Easy Payslip vs Xero</p>
+    <h2>Just payroll, from $14.95 a month</h2>
+    <p>With Easy Payslip your client buys payroll on its own. Xero has no payroll-only option, so running payroll means paying for a full accounting plan from $78 a month.</p>
   </div>
   <div class="cmp reveal">
-    <div class="cmp-tabs" role="tablist" aria-label="Choose a payroll product to compare">
-      <button class="cmp-tab active" type="button" data-cmp="xero" aria-pressed="true">Xero Payroll</button>
-      <button class="cmp-tab" type="button" data-cmp="myob" aria-pressed="false">MYOB Payroll</button>
-      <button class="cmp-tab" type="button" data-cmp="qb" aria-pressed="false">QuickBooks Payroll</button>
-    </div>
     <div class="cmp-board">
       <div class="cmp-col cmp-eba">
+        <span class="cmp-rival-name">Easy Payslip</span>
         <img src="module-payslip.png" alt="Easy Payslip">
-        <div class="cmp-price"><span class="cur">$14.95</span><small>a month, up to 4 employees</small></div>
-        <span class="cmp-badge">Verified price</span>
+        <div class="cmp-price"><span class="cur">$14.95</span><small>a month, payroll on its own</small></div>
+        <span class="cmp-badge">Payroll only, verified</span>
       </div>
       <div class="cmp-vs">
-        <span class="cmp-save ph" id="cmpSave">[N TIMES CHEAPER THAN XERO - TO CONFIRM]</span>
         <span class="cmp-vs-lbl">vs</span>
       </div>
       <div class="cmp-col cmp-rival" id="cmpRival">
-        <span class="cmp-rival-name" id="cmpName">Xero Payroll</span>
-        <div class="cmp-price ph" id="cmpPrice">[XERO PAYROLL PRICE - TO CONFIRM]</div>
-        <span class="cmp-badge ph">Price to confirm</span>
+        <span class="cmp-rival-name">Xero <span id="cmpPlan">Grow</span></span>
+        <div class="cmp-price"><span id="cmpPrice">$78</span><small>a month, ongoing</small></div>
+        <span class="cmp-badge cmp-badge-alt">Full accounting plan</span>
+        <p class="cmp-promo" id="cmpPromo">$15.60 for the first 3 months, then $78 a month</p>
+        <div class="cmp-plan-tabs" role="tablist" aria-label="Choose a Xero plan">
+          <button class="cmp-tab active" type="button" data-plan="grow" aria-pressed="true">Grow</button>
+          <button class="cmp-tab" type="button" data-plan="comprehensive" aria-pressed="false">Comprehensive</button>
+          <button class="cmp-tab" type="button" data-plan="ultimate" aria-pressed="false">Ultimate</button>
+        </div>
       </div>
     </div>
+    <p class="cmp-note">Pay for payroll, not a whole accounting suite. Xero's cheapest plan that runs payroll is Grow at $78 a month, and there is no payroll-only option.</p>
     <div class="cmp-feats">
-      <div class="cmp-feat"><span>Single Touch Payroll every pay run</span><span class="cmp-eba-y">Included</span></div>
-      <div class="cmp-feat"><span>Payday Super paid with wages</span><span class="cmp-eba-y">Included</span></div>
-      <div class="cmp-feat"><span>Payslips generated and emailed</span><span class="cmp-eba-y">Included</span></div>
-      <div class="cmp-feat"><span>Built for small teams, light setup</span><span class="cmp-eba-y">Included</span></div>
+      <div class="cmp-feat cmp-feat-head"><span>Running payroll</span><span>Easy Payslip</span><span>Xero</span></div>
+      <div class="cmp-feat"><span>Buy payroll on its own</span><span class="cmp-eba-y">Yes</span><span class="cmp-rival-v">No</span></div>
+      <div class="cmp-feat"><span>Cheapest way to run payroll</span><span class="cmp-eba-y">$14.95/mo</span><span class="cmp-rival-v">$78/mo (Grow plan)</span></div>
+      <div class="cmp-feat"><span>Full accounting plan required</span><span class="cmp-eba-y">No</span><span class="cmp-rival-v">Yes</span></div>
+      <div class="cmp-feat"><span>Payroll for a four-employee business</span><span class="cmp-eba-y">Included at $14.95</span><span class="cmp-rival-v ph">[XERO PAYROLL EMPLOYEE CAP PER TIER - TO CONFIRM]</span></div>
     </div>
-    <p class="cmp-feat-note ph" id="cmpFeatNote">[XERO PAYROLL INCLUSIONS AND LIMITS - TO CONFIRM]</p>
-    <p class="cmp-src ph" id="cmpSrc">[Based on published Xero pricing as at DATE - TO CONFIRM]</p>
+    <p class="cmp-src">Based on Xero's published AU pricing as at 3 August 2026. Easy Payslip $14.95 is EBA's own verified price.</p>
     <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
   </div>
 </section>
@@ -878,28 +886,27 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
   new IntersectionObserver(function(es){es.forEach(function(e){cta.classList.toggle('show',!e.isIntersecting);});},{threshold:0}).observe(hero);
 })();
 
-/* payroll comparison: swap the competitor. Every competitor price, saving and inclusion is a PLACEHOLDER
-   pending sign-off. Easy Payslip's $14.95 is the only real price on the page. */
+/* Easy Payslip vs Xero: switch the Xero plan tier. Prices are the client-approved verified AU figures
+   (Grow $78 ongoing, Comprehensive $107, Ultimate $143; Grow shows the honest promo note). The only
+   unverified fact, the per-tier payroll employee cap, is a marked placeholder in the table. */
 (function(){
-  var tabs=[].slice.call(document.querySelectorAll('.cmp-tab'));if(!tabs.length)return;
-  var CMP={
-    xero:{name:'Xero Payroll',price:'[XERO PAYROLL PRICE - TO CONFIRM]',save:'[N TIMES CHEAPER THAN XERO - TO CONFIRM]',feat:'[XERO PAYROLL INCLUSIONS AND LIMITS - TO CONFIRM]',src:'[Based on published Xero pricing as at DATE - TO CONFIRM]'},
-    myob:{name:'MYOB Payroll',price:'[MYOB PAYROLL PRICE - TO CONFIRM]',save:'[N TIMES CHEAPER THAN MYOB - TO CONFIRM]',feat:'[MYOB PAYROLL INCLUSIONS AND LIMITS - TO CONFIRM]',src:'[Based on published MYOB pricing as at DATE - TO CONFIRM]'},
-    qb:{name:'QuickBooks Payroll',price:'[QUICKBOOKS PAYROLL PRICE - TO CONFIRM]',save:'[N TIMES CHEAPER THAN QUICKBOOKS - TO CONFIRM]',feat:'[QUICKBOOKS PAYROLL INCLUSIONS AND LIMITS - TO CONFIRM]',src:'[Based on published QuickBooks pricing as at DATE - TO CONFIRM]'}
+  var tabs=[].slice.call(document.querySelectorAll('.cmp-plan-tabs .cmp-tab'));if(!tabs.length)return;
+  var PLANS={
+    grow:{name:'Grow',price:'$78',promo:'$15.60 for the first 3 months, then $78 a month'},
+    comprehensive:{name:'Comprehensive',price:'$107',promo:''},
+    ultimate:{name:'Ultimate',price:'$143',promo:''}
   };
-  var elName=document.getElementById('cmpName'),elPrice=document.getElementById('cmpPrice'),elSave=document.getElementById('cmpSave'),elFeat=document.getElementById('cmpFeatNote'),elSrc=document.getElementById('cmpSrc'),rival=document.getElementById('cmpRival');
+  var elPlan=document.getElementById('cmpPlan'),elPrice=document.getElementById('cmpPrice'),elPromo=document.getElementById('cmpPromo'),rival=document.getElementById('cmpRival');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function set(key){
-    var d=CMP[key];if(!d)return;
-    if(elName)elName.textContent=d.name;
+    var d=PLANS[key];if(!d)return;
+    if(elPlan)elPlan.textContent=d.name;
     if(elPrice)elPrice.textContent=d.price;
-    if(elSave)elSave.textContent=d.save;
-    if(elFeat)elFeat.textContent=d.feat;
-    if(elSrc)elSrc.textContent=d.src;
-    tabs.forEach(function(t){var on=t.getAttribute('data-cmp')===key;t.classList.toggle('active',on);t.setAttribute('aria-pressed',on?'true':'false');});
-    if(!reduce){[rival,elSave].forEach(function(el){if(!el)return;el.classList.remove('cmp-anim');void el.offsetWidth;el.classList.add('cmp-anim');});}
+    if(elPromo){elPromo.textContent=d.promo;elPromo.style.display=d.promo?'':'none';}
+    tabs.forEach(function(t){var on=t.getAttribute('data-plan')===key;t.classList.toggle('active',on);t.setAttribute('aria-pressed',on?'true':'false');});
+    if(!reduce&&rival){rival.classList.remove('cmp-anim');void rival.offsetWidth;rival.classList.add('cmp-anim');}
   }
-  tabs.forEach(function(t){t.addEventListener('click',function(){set(t.getAttribute('data-cmp'));});});
+  tabs.forEach(function(t){t.addEventListener('click',function(){set(t.getAttribute('data-plan'));});});
 })();
 
 /* timed advisor speech bubbles: slide in as the reader reaches a couple of scroll points, then auto-hide */
