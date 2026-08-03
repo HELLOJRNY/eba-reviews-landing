@@ -448,17 +448,21 @@
   @media(max-width:640px){.all-grid{grid-template-columns:1fr}}
 
   /* ---- timed advisor speech bubbles: slide in from the edges on scroll, dismissible, auto-hide ---- */
-  .qbub{position:fixed;z-index:75;max-width:320px;font-family:"Roboto",system-ui,sans-serif;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 50px rgba(15,26,31,.2);padding:16px 34px 16px 18px;display:flex;gap:12px;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.9,.3,1.2)}
+  /* advisor speech bubbles: same card treatment as the timed "Ready to see it?" pop-up, shaped with a tail */
+  .qbub{position:fixed;z-index:75;max-width:330px;font-family:"Roboto",system-ui,sans-serif;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 40px 20px 22px;display:flex;gap:14px;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.9,.3,1.2)}
+  .qbub::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;border-radius:18px 18px 0 0;background:linear-gradient(90deg,var(--blue),var(--green))}
   .qbub.left{left:22px;bottom:118px;transform:translateX(-26px)}
   .qbub.right{right:22px;bottom:198px;transform:translateX(26px)}
   .qbub.show{opacity:1;transform:none;pointer-events:auto}
-  .qbub .av{flex:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:900;font-size:13.5px;color:#fff;letter-spacing:.02em}
+  .qbub .av{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:900;font-size:14px;color:#fff;letter-spacing:.02em}
   .qbub .qb-body{min-width:0}
-  .qbub p{font-size:13.5px;color:var(--ink);line-height:1.45;margin:0 0 6px}
-  .qbub .nm{font-size:12px;color:var(--muted);font-weight:600}
-  .qbub .qx{position:absolute;top:9px;right:11px;background:none;border:0;font-size:16px;line-height:1;color:var(--muted);cursor:pointer}
-  .qbub::after{content:"";position:absolute;bottom:-7px;width:14px;height:14px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
-  .qbub.left::after{left:28px}.qbub.right::after{right:28px}
+  .qbub p{font-size:15px;color:var(--ink);line-height:1.5;margin:0 0 8px}
+  .qbub .nm{font-family:var(--font-head);font-size:13px;color:var(--ink);font-weight:900;letter-spacing:-.01em}
+  .qbub .qx{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
+  /* tail on the side the bubble slides in from, pointing toward that edge */
+  .qbub::after{content:"";position:absolute;top:50%;margin-top:-7px;width:14px;height:14px;background:#fff}
+  .qbub.left::after{left:-7px;border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+  .qbub.right::after{right:-7px;border-top:1px solid var(--line);border-right:1px solid var(--line);transform:rotate(45deg)}
   @media(max-width:560px){.qbub{left:14px;right:14px;max-width:none}.qbub.left,.qbub.right{bottom:150px;transform:translateY(18px)}}
 
   /* ---- timed CTA ---- */
