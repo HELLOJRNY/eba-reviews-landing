@@ -513,6 +513,8 @@
     .mhero-copy .eyebrow,.mhero-copy h1,.mhero-copy p.sub,.mhero-cta,.hero-fig{animation:none;opacity:1;transform:none}
     .pay-hero{animation:none}
     .pay-hero-card,.pay-hero-card img,.pay-hero-tags li,.pay-hero-price{animation:none;opacity:1;transform:none}
+    .mhero-wall{-webkit-mask-image:none;mask-image:none}
+    .mhw-track,.proof-bg .ptrack{animation:none}
   }
 
   /* hero benefit chips: the advisor payoff, high up */
@@ -637,11 +639,27 @@
   @keyframes cmpin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   @media(max-width:720px){.cmp-board{grid-template-columns:1fr}.cmp-vs{flex-direction:row;justify-content:center;min-width:0}.cmp-feat{grid-template-columns:1.2fr 1fr 1fr;gap:6px;font-size:12.5px;padding:11px 12px}.cmp-feat-head>span{font-size:11px}}
 
-  /* footnote: more than payroll (clearly secondary) */
-  .foot-note{max-width:720px;margin:0 auto;text-align:center}
-  .foot-note p{color:var(--muted);font-size:15px;line-height:1.6;margin:0 0 16px}
-  .foot-logos{display:flex;gap:26px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:.75}
-  .foot-logos img{height:20px;width:auto;max-width:130px;display:block}
+  /* understated one-line "more than payroll" mention just above the footer */
+  .more-line{max-width:760px;margin:0 auto;padding:26px 24px 6px;text-align:center;color:var(--muted);font-size:14px;line-height:1.55}
+
+  /* hero drifting-modules wall: soft ambient background behind the hero content */
+  .mhero-wall{position:absolute;inset:0;z-index:0;display:flex;gap:26px;justify-content:center;padding:0 20px;pointer-events:none;opacity:.55;-webkit-mask-image:radial-gradient(120% 92% at 50% 42%,transparent 0%,transparent 34%,#000 82%);mask-image:radial-gradient(120% 92% at 50% 42%,transparent 0%,transparent 34%,#000 82%)}
+  .mhw-col{flex:1 1 0;max-width:300px;overflow:hidden}
+  .mhw-track{display:flex;flex-direction:column;gap:22px;animation:flow linear infinite;will-change:transform}
+  .mhw-card{display:flex;align-items:center;justify-content:center;height:74px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 26px rgba(15,26,31,.06)}
+  .mhw-card img{height:28px;width:auto;max-width:170px;display:block;opacity:.9}
+  .mhero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,255,255,.62),rgba(255,255,255,.72))}
+
+  /* proof: softly drifting advisor reviews as a dimmed background behind Amy's card */
+  #proof{position:relative;overflow:hidden}
+  .proof-bg{position:absolute;inset:0;z-index:0;display:flex;gap:16px;justify-content:center;padding:20px 14px;pointer-events:none;opacity:.5}
+  .proof-bg .pcol{flex:1 1 0;max-width:300px;overflow:hidden}
+  .proof-bg .ptrack{display:flex;flex-direction:column;gap:16px;animation:flow linear infinite;will-change:transform}
+  .pmini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:0 2px 8px rgba(15,26,31,.05)}
+  .pmini .t{font-size:13px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+  .pmini .nm{font-weight:700;font-size:12px;color:var(--muted)}
+  .proof-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(115% 85% at 50% 46%, rgba(255,255,255,.82) 0%, rgba(255,255,255,.55) 52%, rgba(255,255,255,.4) 100%)}
+  #proof .section-head,#proof .amy{position:relative;z-index:2}
 
   /* payroll proof quote sits above the drifting review background */
 </style>
@@ -656,6 +674,8 @@
 <!-- 1. HERO: payroll hook, Easy Payslip lead visual -->
 <section class="mhero">
   <div class="mhero-motif" aria-hidden="true"></div>
+  <div class="mhero-wall" id="mheroWall" aria-hidden="true"></div>
+  <div class="mhero-veil" aria-hidden="true"></div>
   <div class="mhero-accent" aria-hidden="true"></div>
   <div class="mhero-inner">
     <div class="mhero-copy">
@@ -743,6 +763,8 @@
 
 <!-- 4. PAYROLL PROOF: Robert (payroll customer) then Amy (advisor outcome), drifting reviews behind -->
 <section class="section" id="proof">
+  <div class="proof-bg" id="proofBg" aria-hidden="true"></div>
+  <div class="proof-veil" aria-hidden="true"></div>
   <div class="section-head reveal">
     <h2>Advisors are already making the move</h2>
   </div>
@@ -781,19 +803,7 @@
   <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
 </section>
 
-<!-- 6. FOOTNOTE: more than payroll (clearly secondary) -->
-<section class="section">
-  <div class="foot-note reveal">
-    <p>Easy Business App is more than payroll. Bank feeds, invoicing and reports are there when your clients need them.</p>
-    <div class="foot-logos" aria-hidden="true">
-      <img src="module-banking.png" alt="Easy Bank Feeds">
-      <img src="module-invoicing.png" alt="Easy Invoicing">
-      <img src="module-reports.png" alt="Easy Reports">
-    </div>
-  </div>
-</section>
-
-<!-- 7. CLOSING CTA -->
+<!-- 6. CLOSING CTA -->
 <section class="band">
   <div class="reveal">
     <h2>Get your clients onto the right payroll</h2>
@@ -802,36 +812,10 @@
   </div>
 </section>
 
-<!-- removed: modules cluster / accordion, pick-and-mix calculator and stack animation belong to the modules concept -->
+<p class="more-line">Easy Business App is more than payroll, with bank feeds, invoicing and reports there when your clients need them.</p>
 <footer>Easy Business App. Australian accounting software for micro and small businesses.</footer>
 
 <!-- timed advisor speech bubbles: slide in from the edges at a couple of scroll points -->
-<div class="qbub left" id="bub1" role="complementary" aria-label="Advisor quote">
-  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
-  <span class="av" style="background:#005CFF" aria-hidden="true">BL</span>
-  <div class="qb-body"><p>&ldquo;This is easily the best accounting software I have ever seen. I am stunned at how good it is.&rdquo;</p><div class="nm">Business Lane</div></div>
-</div>
-<div class="qbub right" id="bub2" role="complementary" aria-label="Advisor quote">
-  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
-  <span class="av" style="background:#2BB673" aria-hidden="true">GC</span>
-  <div class="qb-body"><p>&ldquo;Ease of use and quick responses to queries.&rdquo;</p><div class="nm">GC Perry and Co</div></div>
-</div>
-<div class="qbub left" id="bub3" role="complementary" aria-label="Advisor quote">
-  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
-  <span class="av" style="background:#F5325B" aria-hidden="true">RG</span>
-  <div class="qb-body"><p>&ldquo;We highly recommend the Easy Business App. So well designed to make pay runs, payslips and ATO STP tasks so easy and straight forward.&rdquo;</p><div class="nm">Robert, Robert L Granter and Associates</div></div>
-</div>
-<div class="qbub right" id="bub4" role="complementary" aria-label="Advisor quote">
-  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
-  <span class="av" style="background:#C026D3" aria-hidden="true">ZM</span>
-  <div class="qb-body"><p>&ldquo;My clients don't want bells and whistles. They want fast, easy, and affordable. That's what Easy Business App gives them.&rdquo;</p><div class="nm">Zak M, BAS Agent, WA</div></div>
-</div>
-<div class="qbub left" id="bub5" role="complementary" aria-label="Advisor quote">
-  <button class="qx" type="button" aria-label="Dismiss">&times;</button>
-  <span class="av" style="background:#005CFF" aria-hidden="true">DL</span>
-  <div class="qb-body"><p>&ldquo;Friendly and professional customer service via chat solves 99% of issues instantly. Highly recommend to small business owners and accountants alike.&rdquo;</p><div class="nm">David Lee CA</div></div>
-</div>
-
 <!-- timed Book a demo, bottom-right after 8s, once per visit -->
 <div class="timed-cta" id="timedCta" role="complementary" aria-label="Book a demo">
   <button class="tc-close" id="tcClose" aria-label="Dismiss">&times;</button>
@@ -858,14 +842,52 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
   new IntersectionObserver(function(es){es.forEach(function(e){cta.classList.toggle('show',!e.isIntersecting);});},{threshold:0}).observe(hero);
 })();
 
-/* timed advisor speech bubbles: slide in as the reader reaches a couple of scroll points, then auto-hide */
+/* hero drifting-modules wall: soft ambient background behind the hero content (reuses the flow keyframes) */
 (function(){
-  var list=[{el:document.getElementById('bub1'),at:0.20,done:false,t:null},{el:document.getElementById('bub2'),at:0.34,done:false,t:null},{el:document.getElementById('bub3'),at:0.48,done:false,t:null},{el:document.getElementById('bub4'),at:0.63,done:false,t:null},{el:document.getElementById('bub5'),at:0.78,done:false,t:null}];
-  list.forEach(function(b){if(!b.el)return;var x=b.el.querySelector('.qx');if(x)x.addEventListener('click',function(){b.done=true;if(b.t)clearTimeout(b.t);b.el.classList.remove('show');});});
-  function show(b){if(b.done||!b.el)return;b.done=true;b.el.classList.add('show');b.t=setTimeout(function(){b.el.classList.remove('show');},6000);}
-  function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;var p=h>0?window.scrollY/h:0;list.forEach(function(b){if(!b.done&&p>=b.at)show(b);});}
-  window.addEventListener('scroll',onScroll,{passive:true});
-  onScroll();
+  var wall=document.getElementById('mheroWall');if(!wall)return;
+  var LOGOS=['module-payslip.png','module-banking.png','module-invoicing.png','module-reports.png'];
+  function card(src){return '<div class="mhw-card"><img src="'+src+'" alt="" aria-hidden="true"></div>';}
+  var cols=window.innerWidth<720?2:3;
+  for(var ci=0;ci<cols;ci++){
+    var col=document.createElement('div');col.className='mhw-col';
+    var tr=document.createElement('div');tr.className='mhw-track';
+    var order=LOGOS.slice(ci%LOGOS.length).concat(LOGOS.slice(0,ci%LOGOS.length)); /* rotate per column */
+    var run=order.concat(order,order); /* enough cards to fill a tall column */
+    var h=run.map(card).join('');
+    tr.innerHTML=h+h; /* duplicate for a seamless -50% loop */
+    tr.style.animationDuration=(34+ci*9)+'s';
+    if(ci%2===1)tr.style.animationDirection='reverse';
+    col.appendChild(tr);wall.appendChild(col);
+  }
+})();
+
+/* proof: softly drifting advisor reviews behind Amy, dimmed. Each quote used once across the wall,
+   distinct subset per column, slow and out of phase so there is no obvious short loop. */
+(function(){
+  var el=document.getElementById('proofBg');if(!el)return;
+  var R=[
+    {t:"My clients don't want bells and whistles. They want fast, easy, and affordable. That's what Easy Business App gives them.",n:"Zak M, BAS Agent, WA"},
+    {t:"This is easily the best accounting software I have ever seen. I am stunned at how good it is.",n:"Business Lane"},
+    {t:"Ease of use and quick responses to queries.",n:"GC Perry and Co"},
+    {t:"We highly recommend the Easy Business App. So well designed to make pay runs, payslips and ATO STP tasks so easy and straight forward.",n:"Robert, Robert L Granter and Associates"},
+    {t:"Friendly and professional customer service via chat solves 99% of issues instantly. Highly recommend to small business owners and accountants alike.",n:"David Lee CA"},
+    {t:"Easy to navigate.",n:"Cape2Coast Accounting"},
+    {t:"Recommended by CPH Accounting for Payday Super requirements. Seems to be logical to work with.",n:"John Freeman"},
+    {t:"I have recommended you to my accountant. Good simplified methods for sole traders.",n:"Michelle"},
+    {t:"I love it and have recommended it to my accountant for their clients.",n:"Karen"}
+  ];
+  function card(r){return '<div class="pmini"><div class="t">'+esc(r.t)+'</div><div class="nm">'+esc(r.n)+'</div></div>';}
+  var cols=window.innerWidth<720?2:3;
+  for(var ci=0;ci<cols;ci++){
+    var col=document.createElement('div');col.className='pcol';
+    var tr=document.createElement('div');tr.className='ptrack';
+    var sub=R.filter(function(_,k){return k%cols===ci;}); /* distinct subset per column, each quote once across the wall */
+    var h=sub.map(card).join('');
+    tr.innerHTML=h+h; /* duplicate for a seamless loop */
+    tr.style.animationDuration=(48+ci*10)+'s';
+    tr.style.animationDelay=(-(ci*7))+'s';
+    col.appendChild(tr);el.appendChild(col);
+  }
 })();
 
 /* timed Book a demo, bottom-right after 8s, once per visit */
