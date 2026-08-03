@@ -404,10 +404,16 @@
   .cc-check{position:absolute;top:16px;right:16px;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:#fff;transition:border-color .18s ease,background .18s ease}
   .calc-card.sel .cc-check{border-color:var(--c,#005CFF);background:var(--c,#005CFF)}
   .calc-card.sel .cc-check::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  /* Easy Reports: always included and free, shown as a static on state (not a toggle) */
+  .calc-card.cc-included{cursor:default;border-color:color-mix(in srgb,var(--c,#005CFF) 45%,var(--line));background:color-mix(in srgb,var(--c,#005CFF) 5%,#fff)}
+  .calc-card.cc-included:hover{transform:none;box-shadow:0 6px 20px rgba(15,26,31,.06)}
+  .calc-card.cc-included .cc-check{border-color:var(--c,#005CFF);background:var(--c,#005CFF)}
+  .calc-card.cc-included .cc-check::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
   .calc-bar{position:sticky;bottom:14px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:24px;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:18px;padding:20px 28px;box-shadow:0 18px 44px rgba(15,26,31,.26);color:#fff}
   .calc-bar .cb-lbl{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:2px}
   .calc-bar .cb-total{font-family:var(--font-head);font-size:clamp(26px,3vw,34px);font-weight:900;line-height:1.05}
   .calc-bar .cb-total span{color:#fff}
+  .calc-bar .cb-prompt{font-family:var(--font-head);font-size:clamp(19px,2.2vw,24px);font-weight:800;line-height:1.1;color:#fff}
   .calc-bar .cb-note{display:block;font-size:12.5px;font-weight:600;color:var(--band-muted);margin-top:4px;min-height:16px}
   .calc-bar .cb-note:empty{margin-top:0}
   .calc-bar .btn{flex:none}
@@ -684,15 +690,15 @@
       <p class="cc-desc">Super simple bank feeds with AI-powered receipt snapping. Never miss an expense.</p>
       <span class="cc-price">$10.95<small>/mo, free tier available</small></span>
     </button>
-    <button type="button" class="calc-card reveal" data-price="0" style="--c:#C026D3" aria-pressed="false">
+    <div class="calc-card cc-included reveal" style="--c:#C026D3">
       <span class="cc-check" aria-hidden="true"></span>
       <img src="module-reports.png" alt="Easy Reports">
       <p class="cc-desc">See the true health of your business with profitability, cashflow and BAS reports.</p>
-      <span class="cc-price">Free<small> for every account</small></span>
-    </button>
+      <span class="cc-price">Included free<small>with every account</small></span>
+    </div>
   </div>
   <div class="calc-bar">
-    <div class="cb-left"><span class="cb-lbl">Your Easy stack</span><span class="cb-total"><span id="calcTotal">$14.95</span>/month</span><span class="cb-note" id="calcNote"></span></div>
+    <div class="cb-left"><span class="cb-lbl">Your Easy stack</span><span class="cb-total" id="calcTotalWrap"><span id="calcTotal">$14.95</span><span class="cb-per">/month</span></span><span class="cb-prompt" id="calcPrompt" hidden>Select a module to see the price</span><span class="cb-note" id="calcNote"></span></div>
     <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
   </div>
 </section>
@@ -885,26 +891,28 @@ function openModule(id){
   new IntersectionObserver(function(es){es.forEach(function(e){cta.classList.toggle('show',!e.isIntersecting);});},{threshold:0}).observe(hero);
 })();
 
-/* calculator: toggle module cards on/off, live monthly total.
-   Single source of truth = the .sel class, so the tick/border and the total can never drift apart.
-   Easy Reports is always $0. Total is rounded to cents to avoid floating-point residue. */
+/* calculator: only the three PAID module buttons toggle. Easy Reports is always included free
+   (a static card, never a lone selection), so the total = sum of the selected paid modules.
+   With nothing paid selected we show a prompt, never a misleading "$0/month". */
 (function(){
-  var cards=[].slice.call(document.querySelectorAll('#calc .calc-card'));if(!cards.length)return;
-  var out=document.getElementById('calcTotal');if(!out)return;
+  var cards=[].slice.call(document.querySelectorAll('#calc button.calc-card'));if(!cards.length)return;
+  var out=document.getElementById('calcTotal');
+  var totalWrap=document.getElementById('calcTotalWrap');
+  var prompt=document.getElementById('calcPrompt');
   var note=document.getElementById('calcNote');
+  if(!out||!totalWrap||!prompt)return;
   function priceOf(c){var n=parseFloat(c.getAttribute('data-price'));return isNaN(n)?0:n;}
   function update(){
-    var total=0,selected=0,paid=0;
-    cards.forEach(function(c){
-      if(!c.classList.contains('sel'))return;
-      selected++;var p=priceOf(c);total+=p;if(p>0)paid++;
-    });
+    var total=0,selected=0;
+    cards.forEach(function(c){if(c.classList.contains('sel')){selected++;total+=priceOf(c);}});
     total=Math.round(total*100)/100; /* kill floating-point residue, e.g. 25.900000000000002 */
-    out.textContent=(total<0.005)?'$0':'$'+total.toFixed(2);
-    if(note){
-      if(selected===0)note.textContent='Select a module to see the price';
-      else if(paid===0)note.textContent='Easy Reports is free';
-      else note.textContent='';
+    if(selected===0){
+      totalWrap.hidden=true;prompt.hidden=false;
+      if(note)note.textContent='Easy Reports is free for everyone';
+    }else{
+      totalWrap.hidden=false;prompt.hidden=true;
+      out.textContent='$'+total.toFixed(2);
+      if(note)note.textContent='';
     }
   }
   cards.forEach(function(c){c.addEventListener('click',function(){
