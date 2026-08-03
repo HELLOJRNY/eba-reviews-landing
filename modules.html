@@ -414,9 +414,9 @@
   /* visual "build your stack": selected module logos pile up as blocks (same selection state as the ticks and total) */
   .calc-stack{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;margin:36px auto 0;min-height:110px}
   .stack-cap{font-family:var(--font-head);font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
-  .stack-layers{display:flex;flex-direction:column-reverse;align-items:center;width:100%}
-  .stack-layer{max-height:0;margin-top:0;opacity:0;transform:translateY(-16px);overflow:hidden;transition:max-height .42s cubic-bezier(.2,.9,.3,1.3),margin-top .42s ease,opacity .3s ease,transform .42s cubic-bezier(.2,.9,.3,1.3);will-change:max-height,transform,opacity}
-  .stack-layer.in{max-height:72px;margin-top:10px;opacity:1;transform:none}
+  .stack-layers{display:flex;flex-direction:column;align-items:center;width:100%}
+  .stack-layer{max-height:0;margin-top:0;opacity:0;transform:translate(-34px,-12px) rotate(-8deg) scale(.92);transform-origin:left center;overflow:hidden;transition:max-height .46s cubic-bezier(.2,.9,.3,1.35),margin-top .46s ease,opacity .34s ease,transform .5s cubic-bezier(.2,.9,.3,1.35);will-change:max-height,transform,opacity}
+  .stack-layer.in{max-height:74px;margin-top:10px;opacity:1;transform:none}
   .sl-plate{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;width:252px;max-width:86vw;height:52px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--c,#005CFF);border-radius:14px;box-shadow:0 10px 22px rgba(15,26,31,.10)}
   .sl-plate img{height:24px;width:auto;max-width:158px;display:block}
   .sl-free{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:var(--font-head);font-size:11px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--green-deep)}
@@ -712,10 +712,10 @@
   <div class="calc-stack" id="calcStack" aria-hidden="true">
     <p class="stack-cap">Your stack</p>
     <div class="stack-layers" id="stackLayers">
-      <div class="stack-layer in" data-for="reports"><div class="sl-plate" style="--c:#C026D3"><img src="module-reports.png" alt=""><span class="sl-free">Free</span></div></div>
-      <div class="stack-layer" data-for="bank"><div class="sl-plate" style="--c:#005CFF"><img src="module-banking.png" alt=""></div></div>
+      <div class="stack-layer" data-for="reports"><div class="sl-plate" style="--c:#C026D3"><img src="module-reports.png" alt=""><span class="sl-free">Free</span></div></div>
       <div class="stack-layer" data-for="invoicing"><div class="sl-plate" style="--c:#2BB673"><img src="module-invoicing.png" alt=""></div></div>
-      <div class="stack-layer in" data-for="payslip"><div class="sl-plate" style="--c:#F5325B"><img src="module-payslip.png" alt=""></div></div>
+      <div class="stack-layer" data-for="bank"><div class="sl-plate" style="--c:#005CFF"><img src="module-banking.png" alt=""></div></div>
+      <div class="stack-layer" data-for="payslip"><div class="sl-plate" style="--c:#F5325B"><img src="module-payslip.png" alt=""></div></div>
     </div>
     <div class="stack-base" aria-hidden="true"></div>
   </div>
@@ -954,16 +954,40 @@ function openModule(id){
     }
     syncStack();
   }
-  /* visual stack: a module block is stacked when its card is selected (paid) or always-included (Reports) */
+  /* visual stack: a module block is stacked when its card is selected (paid) or always-included (Reports).
+     Same source of truth as the ticks and the total, so they can never drift. The stack stays hidden until
+     the section scrolls into view, then auto-assembles once; after that every click syncs it live. */
   var stackLayers=document.getElementById('stackLayers');
+  var calcStack=document.getElementById('calcStack');
+  var assembled=false;
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function inStack(c){return c.classList.contains('sel')||c.classList.contains('cc-included');}
   function syncStack(){
-    if(!stackLayers)return;
+    if(!stackLayers||!assembled)return; /* hold off until the intro assembly has run */
     [].slice.call(document.querySelectorAll('#calc .calc-card')).forEach(function(c){
       var mod=c.getAttribute('data-mod');if(!mod)return;
-      var stacked=c.classList.contains('sel')||c.classList.contains('cc-included');
       var layer=stackLayers.querySelector('[data-for="'+mod+'"]');
-      if(layer)layer.classList.toggle('in',stacked);
+      if(layer)layer.classList.toggle('in',inStack(c));
     });
+  }
+  /* one-time scroll-triggered assembly: roll the in-stack modules in, one after another, a beat apart,
+     leading with Easy Payslip (the base), then Bank Feeds, Invoicing, Reports */
+  function assemble(){
+    if(assembled)return;assembled=true;
+    if(reduceMotion){syncStack();return;} /* reduced motion: appear already stacked, no roll-in */
+    var order=['payslip','bank','invoicing','reports'],step=0;
+    order.forEach(function(mod){
+      var card=document.querySelector('#calc .calc-card[data-mod="'+mod+'"]');if(!card||!inStack(card))return;
+      var layer=stackLayers.querySelector('[data-for="'+mod+'"]');if(!layer)return;
+      var delay=step*240;step++;
+      setTimeout(function(){layer.classList.add('in');},delay);
+    });
+  }
+  if(stackLayers&&calcStack){
+    if('IntersectionObserver' in window){
+      var sio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){assemble();sio.disconnect();}});},{threshold:.35});
+      sio.observe(calcStack);
+    }else{assemble();}
   }
   cards.forEach(function(c){c.addEventListener('click',function(){
     var sel=c.classList.toggle('sel');c.setAttribute('aria-pressed',sel?'true':'false');update();
