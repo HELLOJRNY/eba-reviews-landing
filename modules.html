@@ -614,6 +614,7 @@
   .cmp-price{font-family:var(--font-head);font-weight:900;font-size:clamp(24px,3vw,34px);color:var(--ink);line-height:1.05}
   .cmp-price small{display:block;font-family:"Roboto",system-ui,sans-serif;font-weight:600;font-size:12px;color:var(--muted);margin-top:5px}
   .cmp-price .cur{color:var(--blue)}
+  .cmp-desc{margin:10px 0 0;font-size:14.5px;color:var(--muted);line-height:1.45;max-width:26ch}
   .cmp-rival-name{font-family:var(--font-head);font-weight:900;font-size:18px;color:var(--ink)}
   .cmp-badge{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--green-deep);background:var(--green-tint);padding:5px 10px;border-radius:999px}
   .cmp-badge-alt{color:var(--muted);background:var(--grey)}
@@ -729,35 +730,27 @@
 <!-- 3. PAYROLL COMPARISON (main proof). Competitor prices, savings and inclusions are PLACEHOLDERS pending sign-off. -->
 <section class="section" id="compare">
   <div class="section-head reveal">
-    <h2>Pay for payroll, not a whole accounting suite</h2>
-    <p>Easy Payslip is payroll on its own. Xero only sells payroll inside a full accounting plan.</p>
+    <h2>Pay for payroll, not a whole accounting plan</h2>
   </div>
   <div class="cmp reveal">
     <div class="cmp-board">
       <div class="cmp-col cmp-eba">
         <img src="module-payslip.png" alt="Easy Payslip">
-        <div class="cmp-price"><span class="cur">$14.95</span><small>a month, payroll on its own, up to four employees</small></div>
-        <span class="cmp-badge">Payroll only</span>
+        <div class="cmp-price"><span class="cur">$14.95</span><small>a month</small></div>
+        <p class="cmp-desc">Payroll on its own, up to four employees</p>
       </div>
       <div class="cmp-vs">
         <span class="cmp-vs-lbl">vs</span>
       </div>
       <div class="cmp-col cmp-rival">
         <span class="cmp-rival-name">Xero</span>
-        <div class="cmp-price"><span>$78</span><small>a month ongoing, full accounting plan</small></div>
-        <span class="cmp-badge cmp-badge-alt">Bundled in an accounting plan</span>
-        <p class="cmp-promo">Xero advertises $15.60 for the first 3 months, then $78 a month.</p>
+        <div class="cmp-price"><span>$78</span><small>a month</small></div>
+        <p class="cmp-desc">Only available inside a full accounting plan</p>
       </div>
     </div>
-    <p class="cmp-note">With Easy Payslip, your client buys payroll. With Xero, there is no payroll-only option, so a client pays for a whole accounting plan from $78 a month just to run a pay run.</p>
-    <div class="cmp-feats">
-      <div class="cmp-feat cmp-feat-head"><span>Running payroll</span><span>Easy Payslip</span><span>Xero</span></div>
-      <div class="cmp-feat"><span>Buy payroll on its own</span><span class="cmp-eba-y">Yes</span><span class="cmp-rival-v">No</span></div>
-      <div class="cmp-feat"><span>Monthly cost to get payroll</span><span class="cmp-eba-y">$14.95 (payroll only)</span><span class="cmp-rival-v">$78 (full accounting plan)</span></div>
-      <div class="cmp-feat"><span>Full accounting plan required</span><span class="cmp-eba-y">No</span><span class="cmp-rival-v">Yes</span></div>
-    </div>
-    <p class="cmp-src">Based on Xero's published Australian pricing as at 3 August 2026.</p>
+    <p class="cmp-note">With Easy Payslip your client buys payroll. With Xero there is no payroll-only option, so they pay for a whole accounting plan from $78 a month just to run a pay run.</p>
     <div class="section-cta reveal"><a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a></div>
+    <p class="cmp-src">Xero advertises $15.60 for the first three months, then $78 a month. Based on Xero's published Australian pricing as at 3 August 2026.</p>
   </div>
 </section>
 
