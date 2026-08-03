@@ -493,6 +493,7 @@
     .mrev{transition:none}
     .timed-cta,.header-cta{transition:none}
     .qbub,.qbub.left,.qbub.right{transform:none}.qbub{transition:opacity .4s ease}
+    .proof-bg .ptrack{animation:none}
   }
 
   /* hero benefit chips: the advisor payoff, high up */
@@ -511,6 +512,18 @@
   .amy-who .nm{font-weight:800;color:var(--ink);font-size:16px}
   .amy-who .rl{color:var(--muted);font-size:14px}
   @media(max-width:640px){.amy{grid-template-columns:1fr;text-align:center;padding:30px 24px;justify-items:center}}
+
+  /* The Proof: softly drifting advisor reviews as dimmed background texture (same flow mechanism as the reviews page) */
+  #proof{position:relative;overflow:hidden}
+  .proof-bg{position:absolute;inset:0;z-index:0;display:flex;gap:16px;justify-content:center;padding:20px 14px;pointer-events:none;opacity:.4}
+  .proof-bg .pcol{flex:1 1 0;max-width:300px;overflow:hidden}
+  .proof-bg .ptrack{display:flex;flex-direction:column;gap:16px;animation:flow linear infinite;will-change:transform}
+  .pmini{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:0 2px 8px rgba(15,26,31,.05)}
+  .pmini .t{font-size:13px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+  .pmini .nm{font-weight:700;font-size:12px;color:var(--muted)}
+  /* white veil, strongest through the middle, so the drift stays a faint texture and Amy's card reads sharp */
+  .proof-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(115% 85% at 50% 46%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.7) 52%, rgba(255,255,255,.5) 100%)}
+  #proof .section-head,#proof .amy{position:relative;z-index:2}
 
 
   /* migration cards */
@@ -757,6 +770,8 @@
 
 <!-- 5. PROOF / PAYOFF: an advisor has already made the move (placed after cost + low-risk, before the recap) -->
 <section class="section" id="proof">
+  <div class="proof-bg" id="proofBg" aria-hidden="true"></div>
+  <div class="proof-veil" aria-hidden="true"></div>
   <div class="section-head reveal">
     <p class="eyebrow">The proof</p>
     <h2>Advisors have already made the move</h2>
@@ -945,6 +960,37 @@ function openModule(id){
   var t=setTimeout(function(){el.classList.add('show');},8000);
   function dismiss(){el.classList.remove('show');if(t)clearTimeout(t);try{sessionStorage.setItem('eba-mod-demo','1');}catch(e){}}
   document.getElementById('tcClose').addEventListener('click',dismiss);
+})();
+
+/* The Proof: softly drifting advisor reviews behind Amy's card (same flow mechanism as the reviews page,
+   but dimmed and layered behind the content). Verified quotes only; quote plus name, no stars. */
+(function(){
+  var el=document.getElementById('proofBg');if(!el)return;
+  var R=[
+    {t:"My clients don't want bells and whistles. They want fast, easy, and affordable. That's what Easy Business App gives them.",n:"Zak M, BAS Agent, WA"},
+    {t:"We highly recommend the Easy Business App. So well designed to make pay runs, payslips and ATO STP tasks so easy and straight forward.",n:"Robert, Robert L Granter and Associates"},
+    {t:"This is easily the best accounting software I have ever seen. I am stunned at how good it is.",n:"Business Lane"},
+    {t:"Ease of use and quick responses to queries.",n:"GC Perry and Co"},
+    {t:"Easy to navigate.",n:"Cape2Coast Accounting"},
+    {t:"Friendly and professional customer service via chat solves 99% of issues instantly. Highly recommend to small business owners and accountants alike.",n:"David Lee CA"},
+    {t:"Recommended by CPH Accounting for Payday Super requirements. Seems to be logical to work with.",n:"John Freeman"},
+    {t:"I have recommended you to my accountant. Good simplified methods for sole traders.",n:"Michelle"},
+    {t:"I love it and have recommended it to my accountant for their clients.",n:"Karen"},
+    {t:"Recommended by my accountant.",n:""}
+  ];
+  function card(r){return '<div class="pmini"><div class="t">'+esc(r.t)+'</div>'+(r.n?'<div class="nm">'+esc(r.n)+'</div>':'')+'</div>';}
+  var cols=window.innerWidth<720?2:(window.innerWidth<1100?3:4);
+  for(var ci=0;ci<cols;ci++){
+    var col=document.createElement('div');col.className='pcol';
+    var tr=document.createElement('div');tr.className='ptrack';
+    var stride=(ci*3)%R.length;                       /* rotate each column so neighbours differ */
+    var order=R.slice(stride).concat(R.slice(0,stride));
+    var h=order.map(card).join('');
+    tr.innerHTML=h+h;                                 /* duplicate for a seamless loop */
+    tr.style.animationDuration=(46+ci*11)+'s';        /* slow, and a different speed per column */
+    tr.style.animationDelay=(-(ci*8))+'s';            /* out of phase so the repeat is not obvious */
+    col.appendChild(tr);el.appendChild(col);
+  }
 })();
 </script>
 </body>
