@@ -408,6 +408,8 @@
   .calc-bar .cb-lbl{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:2px}
   .calc-bar .cb-total{font-family:var(--font-head);font-size:clamp(26px,3vw,34px);font-weight:900;line-height:1.05}
   .calc-bar .cb-total span{color:#fff}
+  .calc-bar .cb-note{display:block;font-size:12.5px;font-weight:600;color:var(--band-muted);margin-top:4px;min-height:16px}
+  .calc-bar .cb-note:empty{margin-top:0}
   .calc-bar .btn{flex:none}
   @media(max-width:720px){.calc-grid{grid-template-columns:1fr}.cc-desc{min-height:0}.calc-bar{justify-content:center;text-align:center}}
 
@@ -690,7 +692,7 @@
     </button>
   </div>
   <div class="calc-bar">
-    <div class="cb-left"><span class="cb-lbl">Your Easy stack</span><span class="cb-total"><span id="calcTotal">$14.95</span>/month</span></div>
+    <div class="cb-left"><span class="cb-lbl">Your Easy stack</span><span class="cb-total"><span id="calcTotal">$14.95</span>/month</span><span class="cb-note" id="calcNote"></span></div>
     <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
   </div>
 </section>
@@ -884,13 +886,27 @@ function openModule(id){
   new IntersectionObserver(function(es){es.forEach(function(e){cta.classList.toggle('show',!e.isIntersecting);});},{threshold:0}).observe(hero);
 })();
 
-/* calculator: toggle module cards on/off, live monthly total (Reports adds $0) */
+/* calculator: toggle module cards on/off, live monthly total.
+   Single source of truth = the .sel class, so the tick/border and the total can never drift apart.
+   Easy Reports is always $0. Total is rounded to cents to avoid floating-point residue. */
 (function(){
-  var cards=[].slice.call(document.querySelectorAll('.calc-card'));if(!cards.length)return;
+  var cards=[].slice.call(document.querySelectorAll('#calc .calc-card'));if(!cards.length)return;
   var out=document.getElementById('calcTotal');if(!out)return;
+  var note=document.getElementById('calcNote');
+  function priceOf(c){var n=parseFloat(c.getAttribute('data-price'));return isNaN(n)?0:n;}
   function update(){
-    var t=0;cards.forEach(function(c){if(c.classList.contains('sel'))t+=parseFloat(c.dataset.price)||0;});
-    out.textContent=(t===0)?'$0':'$'+t.toFixed(2);
+    var total=0,selected=0,paid=0;
+    cards.forEach(function(c){
+      if(!c.classList.contains('sel'))return;
+      selected++;var p=priceOf(c);total+=p;if(p>0)paid++;
+    });
+    total=Math.round(total*100)/100; /* kill floating-point residue, e.g. 25.900000000000002 */
+    out.textContent=(total<0.005)?'$0':'$'+total.toFixed(2);
+    if(note){
+      if(selected===0)note.textContent='Select a module to see the price';
+      else if(paid===0)note.textContent='Easy Reports is free';
+      else note.textContent='';
+    }
   }
   cards.forEach(function(c){c.addEventListener('click',function(){
     var sel=c.classList.toggle('sel');c.setAttribute('aria-pressed',sel?'true':'false');update();
