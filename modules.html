@@ -510,6 +510,11 @@
     .qbub,.qbub.left,.qbub.right{transform:none}.qbub{transition:opacity .4s ease}
     .stack-layer{transition:none;transform:none}
     .proof-bg .ptrack{animation:none}
+    .mhero::before{animation:none}
+    .mhero-copy .eyebrow,.mhero-copy h1,.mhero-copy p.sub,.mhero-cta,.hero-fig{animation:none;opacity:1;transform:none}
+    .pay-hero{animation:none}
+    .pay-hero-card,.pay-hero-card img,.pay-hero-tags li,.pay-hero-price{animation:none;opacity:1;transform:none}
+    .pay-orb,.pay-orb.o2,.pay-orb.o3{animation:none;opacity:1;transform:none}
   }
 
   /* hero benefit chips: the advisor payoff, high up */
@@ -562,6 +567,40 @@
   .pay-hero-tags li::before{content:"";position:absolute;left:15px;top:50%;margin-top:-5px;width:10px;height:10px;border-radius:50%;background:var(--blue)}
   .pay-hero-price{display:block;font-family:var(--font-head);font-weight:900;font-size:24px;color:var(--ink)}
   .pay-hero-price small{display:block;font-family:"Roboto",system-ui,sans-serif;font-weight:600;font-size:12.5px;color:var(--muted);margin-top:4px}
+
+  /* ===== hero motion: one language, gentle entrances on load then a soft continuous idle ===== */
+  /* background: a soft shifting glow on the existing radial blob (motif keeps drifting too) */
+  .mhero::before{animation:heroGlow 16s ease-in-out infinite}
+  /* copy: staggered rise-in on load */
+  .mhero-copy .eyebrow{animation:heroRise .7s cubic-bezier(.2,.9,.3,1.2) both}
+  .mhero-copy h1{animation:heroRise .7s cubic-bezier(.2,.9,.3,1.2) .08s both}
+  .mhero-copy p.sub{animation:heroRise .7s cubic-bezier(.2,.9,.3,1.2) .16s both}
+  .mhero-cta{animation:heroRise .7s cubic-bezier(.2,.9,.3,1.2) .24s both}
+  .hero-fig{display:inline-block;animation:heroFig .6s cubic-bezier(.2,.9,.3,1.5) .85s both}
+  /* payroll visual: confident entrance, gentle continuous float, focal logo pulse */
+  .pay-hero{position:relative;animation:heroFloat 6.5s ease-in-out infinite}
+  .pay-hero-card{position:relative;z-index:1;animation:heroPop .85s cubic-bezier(.2,.9,.3,1.3) both}
+  .pay-hero-card img{animation:heroLogoPulse 4.8s ease-in-out 1.1s infinite}
+  .pay-hero-tags li{animation:heroRise .55s ease both}
+  .pay-hero-tags li:nth-child(1){animation-delay:.55s}
+  .pay-hero-tags li:nth-child(2){animation-delay:.66s}
+  .pay-hero-tags li:nth-child(3){animation-delay:.77s}
+  .pay-hero-price{animation:heroRise .6s cubic-bezier(.2,.9,.3,1.4) .9s both}
+  /* supporting module logos: secondary, slower, drifting behind the payroll card */
+  .pay-orb{position:absolute;z-index:0;width:62px;height:62px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 30px rgba(15,26,31,.10);opacity:0;animation:orbFade .8s ease .7s both,orbFloat 10s ease-in-out infinite}
+  .pay-orb img{height:19px;width:auto;max-width:120px;display:block;opacity:.9}
+  .pay-orb.o1{top:3%;left:2%}
+  .pay-orb.o2{bottom:5%;right:0;animation:orbFade .8s ease .9s both,orbFloat 11.5s ease-in-out -3s infinite}
+  .pay-orb.o3{top:48%;right:5%;animation:orbFade .8s ease 1.1s both,orbFloat 13s ease-in-out -6s infinite}
+  @keyframes heroRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes heroPop{0%{opacity:0;transform:scale(.92) translateY(12px)}60%{opacity:1}100%{opacity:1;transform:none}}
+  @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes heroLogoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  @keyframes heroFig{0%{opacity:0;transform:scale(.7)}70%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:none}}
+  @keyframes orbFade{from{opacity:0}to{opacity:1}}
+  @keyframes orbFloat{0%,100%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-15px) rotate(2.5deg)}}
+  @keyframes heroGlow{0%,100%{transform:translate(0,0) scale(1);opacity:1}50%{transform:translate(-3%,2.5%) scale(1.06);opacity:.82}}
+  @media(max-width:560px){.pay-orb{width:48px;height:48px}.pay-orb img{height:15px}}
 
   /* product + inclusions */
   .prod{display:grid;grid-template-columns:300px 1fr;gap:36px;align-items:center;max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 20px 50px rgba(15,26,31,.10);padding:38px 40px}
@@ -637,14 +676,17 @@
   <div class="mhero-inner">
     <div class="mhero-copy">
       <p class="eyebrow">Payroll for accountants and bookkeepers</p>
-      <h1>The right <span class="txt-blue">payroll</span> for your <span class="txt-blue">micro and small</span> business clients</h1>
-      <p class="sub">Proper payroll for small teams. Single Touch Payroll, Payday Super and payslips, sorted. From $14.95 a month for a four-employee business.</p>
+      <h1>Proper payroll for small teams, from <span class="txt-blue hero-fig">$14.95</span> a month</h1>
+      <p class="sub">Single Touch Payroll, Payday Super and payslips, built for micro and small businesses. A full pay run for a four-employee business, sorted.</p>
       <div class="mhero-cta">
         <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
         <a class="btn btn-ghost" href="#compare">See how it compares</a>
       </div>
     </div>
     <div class="pay-hero" aria-hidden="true">
+      <span class="pay-orb o1"><img src="module-banking.png" alt=""></span>
+      <span class="pay-orb o2"><img src="module-invoicing.png" alt=""></span>
+      <span class="pay-orb o3"><img src="module-reports.png" alt=""></span>
       <div class="pay-hero-card">
         <img src="module-payslip.png" alt="Easy Payslip">
         <ul class="pay-hero-tags">
