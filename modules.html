@@ -334,10 +334,12 @@
   .mhero-motif{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(motif-tile.png) 0 0/188px repeat;opacity:.045;animation:motifdrift 52s linear infinite;-webkit-mask-image:radial-gradient(130% 105% at 72% 38%,#000 20%,transparent 82%);mask-image:radial-gradient(130% 105% at 72% 38%,#000 20%,transparent 82%)}
   @keyframes motifdrift{from{background-position:0 0}to{background-position:188px 300px}}
   .mhero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;max-width:1240px;margin:0 auto;padding:56px 40px 60px;min-height:70vh}
+  .mhero-copy{text-align:center}
+  .mhero-copy .ez{white-space:nowrap} /* keep each "easy [word]" pair on one line */
   .mhero-copy .eyebrow{margin-bottom:16px}
   .mhero-copy h1{font-family:var(--font-head);font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--ink);font-size:clamp(34px,4.2vw,54px);margin-bottom:20px}
-  .mhero-copy p.sub{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:52ch;line-height:1.6;margin-bottom:24px}
-  .mhero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .mhero-copy p.sub{font-size:clamp(16px,1.7vw,19px);color:var(--muted);max-width:52ch;line-height:1.6;margin:0 auto 24px}
+  .mhero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
   .mhero-cta .btn{font-size:17px;padding:16px 34px}
 
   /* ---- HERO VISUAL: rolling module cards, two columns drifting in opposite directions ---- */
@@ -494,7 +496,7 @@
   }
 
   /* hero benefit chips: the advisor payoff, high up */
-  .hero-wins{list-style:none;display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 28px;padding:0}
+  .hero-wins{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;margin:0 0 28px;padding:0}
   .hero-wins li{font-size:14px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;position:relative;padding-left:30px}
   .hero-wins li::before{content:"";position:absolute;left:12px;top:50%;width:9px;height:9px;margin-top:-4px;border-radius:50%;background:var(--green)}
   @media(max-width:860px){.hero-wins{justify-content:center}}
@@ -535,7 +537,7 @@
   <div class="mhero-inner">
     <div class="mhero-copy">
       <p class="eyebrow">For accountants and bookkeepers</p>
-      <h1><span class="brand-line" style="display:block">Easy Business App.</span><span class="txt-blue">Easy</span> modules, <span class="txt-blue">easy</span> price, <span class="txt-blue">easy</span> switch.</h1>
+      <h1><span class="brand-line" style="display:block">Easy Business App.</span><span class="easy-line" style="display:block"><span class="ez"><span class="txt-blue">Easy</span>&nbsp;modules,</span> <span class="ez"><span class="txt-blue">easy</span>&nbsp;price,</span> <span class="ez"><span class="txt-blue">easy</span>&nbsp;switch.</span></span></h1>
       <p class="sub">Built and priced for micro and small businesses. Your clients pick the modules they need and pay for nothing else. No lock-in, no annual contracts.</p>
       <ul class="hero-wins" aria-label="What this means for you">
         <li>Cleaner data</li>
