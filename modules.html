@@ -493,8 +493,22 @@
   .sv-modal.show .sv-modal-card{transform:none}
   .sv-modal-x{position:absolute;top:14px;right:14px;background:var(--grey);border:0;width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;color:var(--ink);z-index:2}
   .sv-modal .sv-hero{padding:6px 0 18px}
-  .sv-modal .sv-toggle-wrap{margin-bottom:18px}
+  .sv-modal .sv-toggle-wrap{margin-bottom:0}
   .sv-modal .sv-comp{background:transparent;border:0;box-shadow:none;padding:0;gap:18px}
+  /* one plain supporting contrast line */
+  .sv-contrast{text-align:center;max-width:46ch;margin:0 auto 18px;font-size:clamp(16px,2.1vw,18px);line-height:1.55;color:var(--ink)}
+  .sv-contrast .sv-y{font-family:var(--font-head);font-weight:900;color:var(--ink)}
+  .sv-contrast .sv-z{font-family:var(--font-head);font-weight:900;color:var(--green-deep)}
+  /* optional full breakdown, collapsed by default */
+  .sv-details{margin:20px 0 0;text-align:center}
+  .sv-details>summary{cursor:pointer;display:inline-block;font-size:14px;font-weight:700;color:var(--blue);text-decoration:underline;list-style:none}
+  .sv-details>summary::-webkit-details-marker{display:none}
+  .sv-details>summary::marker{content:""}
+  .sv-details .sv-comp{margin-top:18px;text-align:left}
+  /* disclaimers and book a demo as small, secondary print */
+  .sv-fine{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+  .sv-fine .sv-note{font-size:12px;margin:0 0 6px}
+  .sv-fine .sv-cta-line{font-size:12.5px;color:var(--muted);margin:8px auto 0}
   .tc-text{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
   .timed-cta .btn{font-size:15px;padding:12px 22px}
 
@@ -970,16 +984,22 @@
       <span class="sv-hero-amt" id="svSave">$0</span>
       <span class="sv-hero-per" id="svSavePer">a year</span>
     </div>
+    <p class="sv-contrast">Your payroll clients cost about <span class="sv-y" id="svOthers">$0</span> <span id="svOthersPer">a year</span> on other platforms. On Easy Payslip, just <span class="sv-z" id="svEba">$0</span>.</p>
     <div class="sv-toggle-wrap">
       <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
         <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
         <button type="button" class="sv-per" data-per="month" aria-pressed="false">Per month</button>
       </div>
     </div>
-    <div class="sv-comp" id="svComp"></div>
-    <p class="sv-note">Based on the most typical equivalent payroll plans, excluding introductory promotional offers. Every business is different.</p>
-    <p class="sv-note">Prices last updated 4 May 2026.</p>
-    <p class="sv-cta-line">For a personalised comparison based on your specific client mix, <a href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">book a demo</a> and we will run the numbers for you.</p>
+    <details class="sv-details">
+      <summary>See the full breakdown</summary>
+      <div class="sv-comp" id="svComp"></div>
+    </details>
+    <div class="sv-fine">
+      <p class="sv-note">Based on the most typical equivalent payroll plans, excluding introductory promotional offers. Every business is different.</p>
+      <p class="sv-note">Prices last updated 4 May 2026.</p>
+      <p class="sv-cta-line">For a personalised comparison based on your specific client mix, <a href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">book a demo</a> and we will run the numbers for you.</p>
+    </div>
   </div>
 </div>
 
@@ -1091,7 +1111,8 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
   };
   var clientsEl=document.getElementById('svClients'),clientsOut=document.getElementById('svClientsOut'),
       saveEl=document.getElementById('svSave'),savePerEl=document.getElementById('svSavePer'),
-      compEl=document.getElementById('svComp');
+      othersEl=document.getElementById('svOthers'),othersPerEl=document.getElementById('svOthersPer'),
+      ebaTotalEl=document.getElementById('svEba'),compEl=document.getElementById('svComp');
   if(!clientsEl||!compEl)return;
   var band='4',per='year',currentSave=0;
   function money(n){return '$'+Math.round(n).toLocaleString('en-AU');}
@@ -1109,15 +1130,19 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     var eba=p.eba*mult;
     var costs=p.comp.map(function(c){return c[1]*mult;});
     var maxCost=Math.max.apply(null,costs.concat([eba]));
-    var maxSave=0;
+    var maxSave=0,others=0;
     var bars=bar('Easy Payslip',eba,maxCost,'Best value',true);
     p.comp.forEach(function(c,i){
-      var cost=costs[i],diff=cost-eba;if(diff>maxSave)maxSave=diff;
+      var cost=costs[i],diff=cost-eba;if(diff>maxSave)maxSave=diff;if(cost>others)others=cost;
       bars+=bar(c[0],cost,maxCost,'You save <strong>'+money(diff)+'</strong>',false);
     });
     compEl.innerHTML=bars;
+    /* hero: the one big saving. Supporting line: others cost about Y, Easy Payslip costs Z */
     if(saveEl)saveEl.textContent=money(maxSave);
     if(savePerEl)savePerEl.textContent='a '+perWord;
+    if(othersEl)othersEl.textContent=money(others);
+    if(ebaTotalEl)ebaTotalEl.textContent=money(eba);
+    if(othersPerEl)othersPerEl.textContent='a '+perWord;
     /* track the top ANNUAL saving so the modal only opens when there is a positive saving */
     var annualMult=clients*12,annualSave=0;
     p.comp.forEach(function(c){var d=(c[1]-p.eba)*annualMult;if(d>annualSave)annualSave=d;});
