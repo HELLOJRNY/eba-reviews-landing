@@ -846,7 +846,7 @@
 <section class="section" id="save">
   <div class="section-head reveal">
     <h2>See what your payroll clients could save</h2>
-    <p>Model your payroll clients and compare Easy Payslip against Xero, MYOB and QuickBooks on a payroll-only basis.</p>
+    <p>Model your payroll clients and compare Easy Business App against Xero, MYOB and QuickBooks on a payroll-only basis.</p>
   </div>
   <div class="sv reveal">
     <div class="sv-controls">
@@ -984,7 +984,7 @@
       <span class="sv-hero-amt" id="svSave">$0</span>
       <span class="sv-hero-per" id="svSavePer">a year</span>
     </div>
-    <p class="sv-contrast">Your payroll clients cost about <span class="sv-y" id="svOthers">$0</span> <span id="svOthersPer">a year</span> on other platforms. On Easy Payslip, just <span class="sv-z" id="svEba">$0</span>.</p>
+    <p class="sv-contrast">Your payroll clients cost about <span class="sv-y" id="svOthers">$0</span> <span id="svOthersPer">a year</span> on other platforms. On Easy Business App, just <span class="sv-z" id="svEba">$0</span>.</p>
     <div class="sv-toggle-wrap">
       <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
         <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
@@ -1131,7 +1131,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     var costs=p.comp.map(function(c){return c[1]*mult;});
     var maxCost=Math.max.apply(null,costs.concat([eba]));
     var maxSave=0,others=0;
-    var bars=bar('Easy Payslip',eba,maxCost,'Best value',true);
+    var bars=bar('Easy Business App',eba,maxCost,'Best value',true);
     p.comp.forEach(function(c,i){
       var cost=costs[i],diff=cost-eba;if(diff>maxSave)maxSave=diff;if(cost>others)others=cost;
       bars+=bar(c[0],cost,maxCost,'You save <strong>'+money(diff)+'</strong>',false);
