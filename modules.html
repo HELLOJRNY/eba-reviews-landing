@@ -482,6 +482,15 @@
   .timed-cta.show{opacity:1;transform:none;pointer-events:auto}
   .tc-close{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
   .tc-title{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin:2px 0 6px}
+  /* savings CTA popup (bottom-left, so it does not clash with the bottom-right timed CTA) */
+  .sv-pop{position:fixed;left:22px;bottom:22px;z-index:80;max-width:340px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 24px 20px;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;overflow:hidden}
+  .sv-pop::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--green),var(--blue))}
+  .sv-pop.show{opacity:1;transform:none;pointer-events:auto}
+  .sv-pop-x{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
+  .sv-pop-title{font-family:var(--font-head);font-size:16px;font-weight:800;color:var(--ink);line-height:1.35;margin:2px 30px 14px 0}
+  .sv-pop-title strong{color:var(--green-deep)}
+  .sv-pop .btn{font-size:15px;padding:12px 22px}
+  @media(max-width:560px){.sv-pop{left:14px;right:14px;max-width:none}}
   .tc-text{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
   .timed-cta .btn{font-size:15px;padding:12px 22px}
 
@@ -517,6 +526,7 @@
     .mhw-track,.proof-bg .ptrack{animation:none}
     .es-addon,.sv-band{transition:none}
     .sv-bar-fill{transition:none}
+    .sv-pop,.sv-pop.show{transform:none}
   }
 
   /* hero benefit chips: the advisor payoff, high up */
@@ -964,6 +974,13 @@
   <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
 </div>
 
+<!-- savings CTA: slides in near the calculator once the advisor settles on a saving figure -->
+<div class="sv-pop" id="svPop" role="complementary" aria-label="Your payroll saving">
+  <button class="sv-pop-x" type="button" id="svPopX" aria-label="Dismiss">&times;</button>
+  <p class="sv-pop-title">You could save <strong id="svPopAmt">$0</strong> a year by switching to Easy Business App</p>
+  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+</div>
+
 <script>
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -1073,7 +1090,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
       saveEl=document.getElementById('svSave'),savePerEl=document.getElementById('svSavePer'),
       compEl=document.getElementById('svComp');
   if(!clientsEl||!compEl)return;
-  var band='4',per='year';
+  var band='4',per='year',currentSave=0;
   function money(n){return '$'+Math.round(n).toLocaleString('en-AU');}
   function bar(name,cost,maxCost,sub,isEba){
     var w=maxCost>0?Math.max(4,Math.round(cost/maxCost*100)):0;
@@ -1098,12 +1115,35 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     compEl.innerHTML=bars;
     if(saveEl)saveEl.textContent=money(maxSave);
     if(savePerEl)savePerEl.textContent='a '+perWord;
+    /* the popup always shows the top ANNUAL saving, matching the calculator's annual figure */
+    var annualMult=clients*12,annualSave=0;
+    p.comp.forEach(function(c){var d=(c[1]-p.eba)*annualMult;if(d>annualSave)annualSave=d;});
+    currentSave=annualSave;
+    if(popAmtEl)popAmtEl.textContent=money(currentSave);
   }
-  clientsEl.addEventListener('input',update);
+  /* savings CTA popup: appears only after the advisor settles (debounce), reflects the current saving,
+     hides while adjusting, and stays dismissed until a fresh change re-arms it */
+  var popEl=document.getElementById('svPop'),popAmtEl=document.getElementById('svPopAmt'),popX=document.getElementById('svPopX');
+  var popTimer=null,popDismissed=false;
+  function hidePop(){if(popEl)popEl.classList.remove('show');}
+  function schedulePop(){
+    if(!popEl)return;
+    if(popTimer)clearTimeout(popTimer);
+    hidePop();
+    popTimer=setTimeout(function(){
+      if(popDismissed||currentSave<=0)return;
+      if(popAmtEl)popAmtEl.textContent=money(currentSave);
+      popEl.classList.add('show');
+    },1800);
+  }
+  function onSettle(){popDismissed=false;schedulePop();}
+  if(popX)popX.addEventListener('click',function(){popDismissed=true;if(popTimer)clearTimeout(popTimer);hidePop();});
+
+  clientsEl.addEventListener('input',function(){update();onSettle();});
   [].slice.call(root.querySelectorAll('.sv-band')).forEach(function(b){b.addEventListener('click',function(){
     band=b.getAttribute('data-band');
     root.querySelectorAll('.sv-band').forEach(function(x){var on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false');});
-    update();
+    update();onSettle();
   });});
   [].slice.call(root.querySelectorAll('.sv-per')).forEach(function(b){b.addEventListener('click',function(){
     per=b.getAttribute('data-per');
