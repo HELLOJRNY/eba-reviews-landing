@@ -688,38 +688,37 @@
   .es-bar-lbl{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:2px}
 
   /* ---- payroll savings calculator ---- */
-  .sv{max-width:920px;margin:0 auto}
-  .sv-controls{display:grid;grid-template-columns:1fr 1fr;gap:22px 30px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 28px;box-shadow:0 10px 30px rgba(15,26,31,.06);align-items:start}
-  .sv-field label,.sv-field .sv-lbl{display:block;font-weight:700;font-size:14px;color:var(--ink);margin-bottom:12px}
-  .sv-slider-row{display:flex;align-items:center;gap:16px}
-  .sv-slider-row input[type=range]{flex:1;accent-color:var(--blue);height:6px;cursor:pointer}
-  .sv-slider-row output{font-family:var(--font-head);font-weight:900;font-size:22px;color:var(--blue);min-width:2.6ch;text-align:right}
-  .sv-bands{display:flex;gap:8px;flex-wrap:wrap}
-  .sv-band{font-family:var(--font-head);font-weight:800;font-size:14px;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease}
+  .sv{max-width:860px;margin:0 auto}
+  .sv-controls{display:grid;gap:24px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 28px;box-shadow:0 10px 30px rgba(15,26,31,.06)}
+  .sv-field label,.sv-field .sv-lbl{display:block;font-weight:700;font-size:15px;color:var(--ink);margin-bottom:14px}
+  .sv-field label strong{color:var(--blue);font-weight:900}
+  .sv-field input[type=range]{width:100%;accent-color:var(--blue);height:6px;cursor:pointer}
+  .sv-bands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .sv-band{display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:13.5px;line-height:1.25;padding:15px 12px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;text-align:center;transition:background .16s ease,color .16s ease,border-color .16s ease}
   .sv-band:hover{border-color:var(--ink);color:var(--ink)}
-  .sv-band.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .sv-toggle{grid-column:1 / -1;display:flex;gap:6px;justify-content:center;background:var(--grey);border-radius:999px;padding:4px;width:fit-content;margin:0 auto}
-  .sv-per{font-weight:700;font-size:13.5px;padding:8px 18px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+  .sv-band.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 10px 24px color-mix(in srgb,var(--blue) 24%,transparent)}
+  .sv-toggle-wrap{display:flex;justify-content:center}
+  .sv-toggle{display:inline-flex;gap:6px;background:var(--grey);border-radius:999px;padding:4px}
+  .sv-per{font-weight:700;font-size:13.5px;padding:9px 22px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer}
   .sv-per.active{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(15,26,31,.10)}
-  .sv-headline{text-align:center;margin:28px auto 22px;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:20px;padding:28px 24px;box-shadow:0 18px 44px rgba(15,26,31,.26);color:#fff}
-  .sv-head-lbl{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:6px}
-  .sv-head-amt{display:block;font-family:var(--font-head);font-weight:900;font-size:clamp(38px,7vw,60px);line-height:1;color:#fff}
+  .sv-result{margin-top:22px}
+  .sv-headline{text-align:center;background:linear-gradient(135deg,#1B2733,#0F1A1F);border-radius:20px;padding:32px 24px 26px;box-shadow:0 18px 44px rgba(15,26,31,.26);color:#fff}
+  .sv-head-lbl{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);font-weight:700;margin-bottom:8px}
+  .sv-head-amt{display:block;font-family:var(--font-head);font-weight:900;font-size:clamp(42px,8vw,66px);line-height:1;color:#fff}
   .sv-head-per{display:block;margin-top:6px;font-size:14px;color:var(--band-muted);font-weight:600}
-  .sv-rows{max-width:640px;margin:0 auto}
-  .sv-comp{display:grid;gap:10px;margin-top:10px}
-  .sv-row{display:grid;grid-template-columns:1fr auto minmax(8ch,auto);gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
-  .sv-row img{height:22px;width:auto;max-width:140px;display:block}
-  .sv-row .sv-name{font-family:var(--font-head);font-weight:800;font-size:16px;color:var(--ink)}
-  .sv-cost{font-family:var(--font-head);font-weight:900;font-size:18px;color:var(--ink);text-align:right;white-space:nowrap}
-  .sv-diff{font-size:13px;font-weight:700;text-align:right;white-space:nowrap}
-  .sv-diff.up{color:#B23A48}
-  .sv-eba{border:2px solid var(--blue);box-shadow:0 12px 30px color-mix(in srgb,var(--blue) 14%,rgba(15,26,31,.08))}
-  .sv-eba .sv-cost{color:var(--blue)}
-  .sv-best{color:var(--blue);font-weight:800}
-  .sv-note{text-align:center;font-size:12.5px;color:var(--muted);margin:14px auto 0;max-width:72ch;line-height:1.5}
-  .sv-cta-line{text-align:center;font-size:14px;color:var(--ink);margin:16px auto 0;max-width:66ch;line-height:1.55}
+  .sv-head-ref{display:block;margin-top:18px;padding-top:15px;border-top:1px solid rgba(255,255,255,.14);font-size:14px;color:#E7ECF2}
+  .sv-head-ref strong{color:#fff;font-weight:800}
+  .sv-comp{display:grid;gap:10px;margin-top:14px}
+  .sv-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+  .sv-name{font-family:var(--font-head);font-weight:800;font-size:16px;color:var(--ink)}
+  .sv-fig{display:flex;flex-direction:column;gap:2px;text-align:right}
+  .sv-fig-lbl{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .sv-fig-val{font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--ink)}
+  .sv-fig-save .sv-fig-val{color:var(--green-deep)}
+  .sv-note{text-align:center;font-size:12.5px;color:var(--muted);margin:16px auto 0;max-width:72ch;line-height:1.5}
+  .sv-cta-line{text-align:center;font-size:14px;color:var(--ink);margin:18px auto 0;max-width:66ch;line-height:1.55}
   .sv-cta-line a{color:var(--blue);font-weight:700;text-decoration:underline}
-  @media(max-width:720px){.sv-controls{grid-template-columns:1fr}.sv-row{grid-template-columns:1fr auto;gap:4px 12px}.sv-row .sv-diff{grid-column:2;justify-self:end}}
+  @media(max-width:720px){.sv-bands{grid-template-columns:1fr 1fr}.sv-row{grid-template-columns:1fr 1fr;gap:8px 12px}.sv-name{grid-column:1/-1}.sv-fig{text-align:left}.sv-fig-save{text-align:right}}
   .es-total{font-family:var(--font-head);font-size:clamp(26px,3vw,34px);font-weight:900;line-height:1.05}
   .es-total span{color:#fff}
   .es-bar .btn{flex:none}
@@ -825,36 +824,31 @@
   <div class="sv reveal">
     <div class="sv-controls">
       <div class="sv-field">
-        <label for="svClients">Payroll clients</label>
-        <div class="sv-slider-row">
-          <input type="range" id="svClients" min="1" max="100" value="10" step="1" aria-describedby="svClientsOut">
-          <output id="svClientsOut" for="svClients">10</output>
-        </div>
+        <label for="svClients">Number of payroll clients: <strong id="svClientsOut">10</strong></label>
+        <input type="range" id="svClients" min="1" max="100" value="10" step="1" aria-describedby="svClientsOut">
       </div>
       <div class="sv-field">
-        <span class="sv-lbl" id="svBandLbl">Employees per client</span>
+        <span class="sv-lbl" id="svBandLbl">Typical payroll size per client</span>
         <div class="sv-bands" role="group" aria-labelledby="svBandLbl">
-          <button type="button" class="sv-band" data-band="1" aria-pressed="false">1</button>
-          <button type="button" class="sv-band" data-band="2" aria-pressed="false">2</button>
-          <button type="button" class="sv-band active" data-band="4" aria-pressed="true">4</button>
-          <button type="button" class="sv-band" data-band="15" aria-pressed="false">Up to 15</button>
+          <button type="button" class="sv-band" data-band="1" aria-pressed="false">1 employee</button>
+          <button type="button" class="sv-band" data-band="2" aria-pressed="false">2 employees</button>
+          <button type="button" class="sv-band active" data-band="4" aria-pressed="true">4 employees</button>
+          <button type="button" class="sv-band" data-band="15" aria-pressed="false">Larger team plus contractor super</button>
         </div>
       </div>
-      <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
-        <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
-        <button type="button" class="sv-per" data-per="month" aria-pressed="false">Per month</button>
+      <div class="sv-toggle-wrap">
+        <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
+          <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
+          <button type="button" class="sv-per" data-per="month" aria-pressed="false">Per month</button>
+        </div>
       </div>
     </div>
-    <div class="sv-headline">
-      <span class="sv-head-lbl">You could save up to</span>
-      <span class="sv-head-amt" id="svSave">$0</span>
-      <span class="sv-head-per" id="svSavePer">per year</span>
-    </div>
-    <div class="sv-rows">
-      <div class="sv-row sv-eba">
-        <img src="module-payslip.png" alt="Easy Payslip">
-        <span class="sv-cost" id="svEbaCost">$0</span>
-        <span class="sv-diff sv-best">Lowest cost</span>
+    <div class="sv-result">
+      <div class="sv-headline">
+        <span class="sv-head-lbl">You could save up to</span>
+        <span class="sv-head-amt" id="svSave">$0</span>
+        <span class="sv-head-per" id="svSavePer">per year</span>
+        <span class="sv-head-ref">Your cost with Easy Payslip: <strong id="svEbaCost">$0</strong> <span id="svEbaPer">per year</span></span>
       </div>
       <div class="sv-comp" id="svComp"></div>
     </div>
@@ -1074,7 +1068,8 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
   };
   var clientsEl=document.getElementById('svClients'),clientsOut=document.getElementById('svClientsOut'),
       saveEl=document.getElementById('svSave'),savePerEl=document.getElementById('svSavePer'),
-      ebaCostEl=document.getElementById('svEbaCost'),compEl=document.getElementById('svComp');
+      ebaCostEl=document.getElementById('svEbaCost'),ebaPerEl=document.getElementById('svEbaPer'),
+      compEl=document.getElementById('svComp');
   if(!clientsEl||!compEl)return;
   var band='4',per='year';
   function money(n){return '$'+Math.round(n).toLocaleString('en-AU');}
@@ -1082,16 +1077,20 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     var clients=parseInt(clientsEl.value,10)||0;
     if(clientsOut)clientsOut.textContent=clients;
     var p=PRICE[band],mult=clients*(per==='year'?12:1);
+    var perWord=(per==='year'?'year':'month'),costLbl=(per==='year'?'Annual cost':'Monthly cost');
     var eba=p.eba*mult;
     if(ebaCostEl)ebaCostEl.textContent=money(eba);
+    if(ebaPerEl)ebaPerEl.textContent='per '+perWord;
     var maxSave=0,rows='';
     p.comp.forEach(function(c){
       var cost=c[1]*mult,diff=cost-eba;if(diff>maxSave)maxSave=diff;
-      rows+='<div class="sv-row"><span class="sv-name">'+c[0]+'</span><span class="sv-cost">'+money(cost)+'</span><span class="sv-diff up">+'+money(diff)+'</span></div>';
+      rows+='<div class="sv-row"><span class="sv-name">'+c[0]+'</span>'+
+        '<span class="sv-fig"><span class="sv-fig-lbl">'+costLbl+'</span><span class="sv-fig-val">'+money(cost)+'</span></span>'+
+        '<span class="sv-fig sv-fig-save"><span class="sv-fig-lbl">You save</span><span class="sv-fig-val">'+money(diff)+'</span></span></div>';
     });
     compEl.innerHTML=rows;
     if(saveEl)saveEl.textContent=money(maxSave);
-    if(savePerEl)savePerEl.textContent='per '+(per==='year'?'year':'month');
+    if(savePerEl)savePerEl.textContent='per '+perWord;
   }
   clientsEl.addEventListener('input',update);
   [].slice.call(root.querySelectorAll('.sv-band')).forEach(function(b){b.addEventListener('click',function(){
