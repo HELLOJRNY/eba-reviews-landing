@@ -482,15 +482,19 @@
   .timed-cta.show{opacity:1;transform:none;pointer-events:auto}
   .tc-close{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
   .tc-title{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin:2px 0 6px}
-  /* savings CTA popup (bottom-left, so it does not clash with the bottom-right timed CTA) */
-  .sv-pop{position:fixed;left:22px;bottom:22px;z-index:80;max-width:340px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 54px rgba(15,26,31,.24);padding:22px 24px 20px;opacity:0;transform:translateY(22px);pointer-events:none;transition:opacity .4s ease,transform .4s ease;overflow:hidden}
-  .sv-pop::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--green),var(--blue))}
-  .sv-pop.show{opacity:1;transform:none;pointer-events:auto}
-  .sv-pop-x{position:absolute;top:12px;right:12px;background:var(--grey);border:0;width:28px;height:28px;border-radius:50%;font-size:16px;line-height:1;cursor:pointer;color:var(--ink)}
-  .sv-pop-title{font-family:var(--font-head);font-size:16px;font-weight:800;color:var(--ink);line-height:1.35;margin:2px 30px 14px 0}
-  .sv-pop-title strong{color:var(--green-deep)}
-  .sv-pop .btn{font-size:15px;padding:12px 22px}
-  @media(max-width:560px){.sv-pop{left:14px;right:14px;max-width:none}}
+  /* result modal: centred card over a blurred, dimmed backdrop */
+  .sv-cta-row{text-align:center;padding-top:4px}
+  .sv-prompt{font-size:14px;color:var(--muted);margin:0 0 14px}
+  #svOpen{font-size:16px;padding:14px 32px}
+  .sv-modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility .3s ease}
+  .sv-modal.show{opacity:1;visibility:visible;pointer-events:auto}
+  .sv-modal-back{position:absolute;inset:0;background:rgba(15,26,31,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .sv-modal-card{position:relative;z-index:1;width:100%;max-width:520px;max-height:90vh;overflow:auto;background:#fff;border-radius:22px;box-shadow:0 40px 90px rgba(15,26,31,.4);padding:34px 32px 28px;transform:translateY(16px) scale(.98);transition:transform .3s cubic-bezier(.2,.9,.3,1.2)}
+  .sv-modal.show .sv-modal-card{transform:none}
+  .sv-modal-x{position:absolute;top:14px;right:14px;background:var(--grey);border:0;width:32px;height:32px;border-radius:50%;font-size:18px;line-height:1;cursor:pointer;color:var(--ink);z-index:2}
+  .sv-modal .sv-hero{padding:6px 0 18px}
+  .sv-modal .sv-toggle-wrap{margin-bottom:18px}
+  .sv-modal .sv-comp{background:transparent;border:0;box-shadow:none;padding:0;gap:18px}
   .tc-text{font-size:14px;color:var(--muted);line-height:1.45;margin:0 0 14px}
   .timed-cta .btn{font-size:15px;padding:12px 22px}
 
@@ -526,7 +530,7 @@
     .mhw-track,.proof-bg .ptrack{animation:none}
     .es-addon,.sv-band{transition:none}
     .sv-bar-fill{transition:none}
-    .sv-pop,.sv-pop.show{transform:none}
+    .sv-modal-card{transform:none;transition:none}
   }
 
   /* hero benefit chips: the advisor payoff, high up */
@@ -838,7 +842,7 @@
   <div class="sv reveal">
     <div class="sv-controls">
       <div class="sv-field">
-        <label for="svClients">Number of payroll clients: <strong id="svClientsOut">10</strong></label>
+        <label for="svClients">How many payroll clients do you have? <strong id="svClientsOut">10</strong></label>
         <input type="range" id="svClients" min="1" max="100" value="10" step="1" aria-describedby="svClientsOut">
       </div>
       <div class="sv-field">
@@ -850,24 +854,11 @@
           <button type="button" class="sv-band" data-band="15" aria-pressed="false">Larger team plus contractor super</button>
         </div>
       </div>
-      <div class="sv-toggle-wrap">
-        <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
-          <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
-          <button type="button" class="sv-per" data-per="month" aria-pressed="false">Per month</button>
-        </div>
+      <div class="sv-cta-row">
+        <p class="sv-prompt">Set your numbers to see your saving.</p>
+        <button type="button" class="btn btn-primary" id="svOpen">See your saving</button>
       </div>
     </div>
-    <div class="sv-result">
-      <div class="sv-hero">
-        <span class="sv-hero-lbl">Save up to</span>
-        <span class="sv-hero-amt" id="svSave">$0</span>
-        <span class="sv-hero-per" id="svSavePer">a year</span>
-      </div>
-      <div class="sv-comp" id="svComp"></div>
-    </div>
-    <p class="sv-note">Based on the most typical equivalent payroll plans, excluding introductory promotional offers. Every business is different.</p>
-    <p class="sv-note">Prices last updated 4 May 2026.</p>
-    <p class="sv-cta-line">For a personalised comparison based on your specific client mix, <a href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">book a demo</a> and we will run the numbers for you.</p>
   </div>
 </section>
 
@@ -975,10 +966,26 @@
 </div>
 
 <!-- savings CTA: slides in near the calculator once the advisor settles on a saving figure -->
-<div class="sv-pop" id="svPop" role="complementary" aria-label="Your payroll saving">
-  <button class="sv-pop-x" type="button" id="svPopX" aria-label="Dismiss">&times;</button>
-  <p class="sv-pop-title">You could save <strong id="svPopAmt">$0</strong> a year by switching to Easy Business App</p>
-  <a class="btn btn-primary" href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">Book a demo</a>
+<div class="sv-modal" id="svModal" role="dialog" aria-modal="true" aria-label="Your payroll saving">
+  <div class="sv-modal-back" id="svModalBack"></div>
+  <div class="sv-modal-card">
+    <button class="sv-modal-x" type="button" id="svModalX" aria-label="Close">&times;</button>
+    <div class="sv-hero">
+      <span class="sv-hero-lbl">Save up to</span>
+      <span class="sv-hero-amt" id="svSave">$0</span>
+      <span class="sv-hero-per" id="svSavePer">a year</span>
+    </div>
+    <div class="sv-toggle-wrap">
+      <div class="sv-toggle" role="group" aria-label="Show costs per year or per month">
+        <button type="button" class="sv-per active" data-per="year" aria-pressed="true">Per year</button>
+        <button type="button" class="sv-per" data-per="month" aria-pressed="false">Per month</button>
+      </div>
+    </div>
+    <div class="sv-comp" id="svComp"></div>
+    <p class="sv-note">Based on the most typical equivalent payroll plans, excluding introductory promotional offers. Every business is different.</p>
+    <p class="sv-note">Prices last updated 4 May 2026.</p>
+    <p class="sv-cta-line">For a personalised comparison based on your specific client mix, <a href="https://meetings.hubspot.com/grajah/demo" target="_blank" rel="noopener noreferrer">book a demo</a> and we will run the numbers for you.</p>
+  </div>
 </div>
 
 <script>
@@ -1115,39 +1122,42 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
     compEl.innerHTML=bars;
     if(saveEl)saveEl.textContent=money(maxSave);
     if(savePerEl)savePerEl.textContent='a '+perWord;
-    /* the popup always shows the top ANNUAL saving, matching the calculator's annual figure */
+    /* track the top ANNUAL saving so the modal only opens when there is a positive saving */
     var annualMult=clients*12,annualSave=0;
     p.comp.forEach(function(c){var d=(c[1]-p.eba)*annualMult;if(d>annualSave)annualSave=d;});
     currentSave=annualSave;
-    if(popAmtEl)popAmtEl.textContent=money(currentSave);
   }
-  /* savings CTA popup: appears only after the advisor settles (debounce), reflects the current saving,
-     hides while adjusting, and stays dismissed until a fresh change re-arms it */
-  var popEl=document.getElementById('svPop'),popAmtEl=document.getElementById('svPopAmt'),popX=document.getElementById('svPopX');
-  var popTimer=null,popDismissed=false;
-  function hidePop(){if(popEl)popEl.classList.remove('show');}
-  function schedulePop(){
-    if(!popEl)return;
-    if(popTimer)clearTimeout(popTimer);
-    hidePop();
-    popTimer=setTimeout(function(){
-      if(popDismissed||currentSave<=0)return;
-      if(popAmtEl)popAmtEl.textContent=money(currentSave);
-      popEl.classList.add('show');
-    },1800);
+  /* result modal: opens after the advisor settles for ~2s (debounce), only after they have interacted,
+     only when there is a positive saving. Dismissible (close, click-outside, Escape). After a dismissal it
+     does not re-pop until a NEW change settles again. The "See your saving" button reopens it any time. */
+  var modalEl=document.getElementById('svModal'),modalX=document.getElementById('svModalX'),
+      modalBack=document.getElementById('svModalBack'),openBtn=document.getElementById('svOpen');
+  var settleTimer=null,armed=false;
+  function openModal(){if(!modalEl||currentSave<=0)return;modalEl.classList.add('show');if(modalX)modalX.focus();}
+  function closeModal(){if(modalEl)modalEl.classList.remove('show');}
+  function dismiss(){armed=false;if(settleTimer)clearTimeout(settleTimer);closeModal();}
+  function scheduleModal(){
+    if(!modalEl)return;
+    if(settleTimer)clearTimeout(settleTimer);
+    settleTimer=setTimeout(function(){if(armed&&currentSave>0){armed=false;openModal();}},2000);
   }
-  function onSettle(){popDismissed=false;schedulePop();}
-  if(popX)popX.addEventListener('click',function(){popDismissed=true;if(popTimer)clearTimeout(popTimer);hidePop();});
+  function onChange(){armed=true;scheduleModal();} /* a real input change arms and restarts the debounce */
+  if(modalX)modalX.addEventListener('click',dismiss);
+  if(modalBack)modalBack.addEventListener('click',dismiss);
+  if(openBtn)openBtn.addEventListener('click',function(){openModal();});
+  document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.key==='Esc')&&modalEl&&modalEl.classList.contains('show'))dismiss();});
 
-  clientsEl.addEventListener('input',function(){update();onSettle();});
+  clientsEl.addEventListener('input',function(){update();onChange();});
   [].slice.call(root.querySelectorAll('.sv-band')).forEach(function(b){b.addEventListener('click',function(){
     band=b.getAttribute('data-band');
     root.querySelectorAll('.sv-band').forEach(function(x){var on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false');});
-    update();onSettle();
+    update();onChange();
   });});
-  [].slice.call(root.querySelectorAll('.sv-per')).forEach(function(b){b.addEventListener('click',function(){
+  /* the monthly/annual toggle lives inside the modal: it just re-renders the open result, no debounce */
+  var perBtns=modalEl?[].slice.call(modalEl.querySelectorAll('.sv-per')):[];
+  perBtns.forEach(function(b){b.addEventListener('click',function(){
     per=b.getAttribute('data-per');
-    root.querySelectorAll('.sv-per').forEach(function(x){var on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false');});
+    perBtns.forEach(function(x){var on=x===b;x.classList.toggle('active',on);x.setAttribute('aria-pressed',on?'true':'false');});
     update();
   });});
   update();
